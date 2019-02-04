@@ -1,13 +1,14 @@
 body 
 {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
 }
 
 .header
 {
-    padding: 80px;  /* padding */
+    padding: 5px;  /* padding */
     text-align: center; /* center the text */
-    background:#1abc9c; /* green background */
+    background:#2f3a47; /* green background */
     color: white; /* text colour */
 }
 
@@ -55,29 +56,39 @@ body
     box-sizing: border-box;
 }
 
-/* Column container */
-.row 
+#worldmap
+{
+    /* background-color: black; */
+    width: 100%;
+}
+
+.flex-container
 {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
 }
 
-/* Create two unequal columns that sits next to each other */
-/* Sidebar/left column */
-.side 
+.flex-container
 {
-    flex: 30%; /* Set the width of the sidebar */
-    background-color: #f1f1f1; /* Grey background color */
-    padding: 20px; /* Some padding */
+    padding: 2%;
+    background-color: aquamarine;
 }
 
-/* Main column */
-.main 
+.flex-container > div
 {
-    flex: 70%; /* Set the width of the main content */
-    background-color: white; /* White background color */
-    padding: 20px; /* Some padding */
+    /* background-color: black; */
+    width: 32%;
+    
+    margin: 10px;
+    text-align: center;
 }
+
+.flex-container img
+{
+    width: 100%;
+}
+
 
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 700px) 
