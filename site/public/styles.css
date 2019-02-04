@@ -2,6 +2,8 @@ body
 {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
+    background-image: url(cat.jpg);
+    background-attachment: fixed;
 }
 
 .header
@@ -56,32 +58,45 @@ body
     box-sizing: border-box;
 }
 
+#world-map-div
+{
+    /* border: 0; */
+    /* margin: 0; */
+    /* width: 100%; */
+    /* margin-bottom:0px; */
+    /* display: block; */
+}
+
+/* this is the map */
 #worldmap
 {
     /* background-color: black; */
+    /* margin: 0; */
     width: 100%;
+    /* border: ; */
+    
 }
 
 .flex-container
 {
+    /* margin: 0; */
+    /* border: 0; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-}
-
-.flex-container
-{
-    padding: 2%;
+    padding: 0.3%;
     background-color: aquamarine;
+    justify-content: center;
+    vertical-align: top;
 }
 
 .flex-container > div
 {
     /* background-color: black; */
     width: 32%;
-    
     margin: 10px;
     text-align: center;
+    padding: 0.3%;
 }
 
 .flex-container img
@@ -111,7 +126,7 @@ body
 
 .footer 
 {
-    padding: 20px; /* Some padding */
+    padding: 10px; /* Some padding */
     text-align: center; /* Center text*/
     background: #ddd; /* Grey background */
 }
