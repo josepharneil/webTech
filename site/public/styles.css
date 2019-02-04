@@ -7,11 +7,15 @@ body
     background-size: 100%;
 }
 
+
 .header
 {
     padding: 5px;  /* padding */
     text-align: center; /* center the text */
-    background:#2f3a47; /* green background */
+    /* background:#2f3a47;  */
+    background-image: url(sky.png);
+    background-size: 100%;
+    background-position-y: 8%;
     color: white; /* text colour */
 }
 
@@ -117,6 +121,16 @@ body
     width: 100%;
 }
 
+.blur-image
+{
+    filter: blur(2px);
+
+    /* border-style: solid;
+    border-width: 12px;
+    border-color: black;
+     */
+}
+
 
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 700px) 
@@ -144,3 +158,16 @@ body
     background: #ddd; /* Grey background */
 }
 
+.quote
+{
+    width: 100%;
+    background-color: darkgrey;
+    padding: 0.1%;
+}
+
+.quote h1
+{
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+}
