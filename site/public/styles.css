@@ -4,27 +4,68 @@ body
     margin: 0;
     background-image: url(cat.jpg);
     background-attachment: fixed;
+    background-position-y: 40vw;
     background-size: 100%;
 }
 
+/* BEGIN HEADER */
 
 .header
 {
-    padding: 5px;  /* padding */
+    padding: 2px;  /* padding */
     text-align: center; /* center the text */
     /* background:#2f3a47;  */
-    background-image: url(sky.png);
-    background-size: 100%;
-    background-position-y: 8%;
+    /* background-image: url(sky.png); */
+    /* background-size: 100%; */
+    /* background-position-y: 8%; */
     color: white; /* text colour */
+    display: flex;
+    /* flex-direction: row; */
+    /* justify-content: flex-end; */
+}
+
+.header img
+{
+    float: left;
+    width: 100%;
+    justify-content: left;
+    /* height: 8.25%; */
 }
 
 /* Increase the font size of the h1 element */
 .header h1
 {
-    font-size: 40px;
+    /* font-size: 40px; */
+    font-size: 4vw; 
+    margin: 0.5vw;
 }
 
+.flex-container-header
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 12.5%;
+    /* justify-content: right; */
+    float: right;
+    /* padding: 0.3%; */
+    /* justify-content: center; */
+    /* vertical-align: top; */
+}
+
+.flex-container-header h1
+{
+    font-size: 1vw;
+    /* text-align: center; */
+    justify-content: center;
+    padding: 2%;
+    /* width: 100%; */
+    /* vertical-align: middle; */
+}
+
+
+
+/* END HEADER */
 
 /* Style the top navigation bar */
 .navbar 
@@ -103,6 +144,7 @@ body
     padding: 1px;
     border-top-style: solid;
     border-top-width: 2px;
+    font-size: 1.2vw;
 }
 
 
@@ -137,6 +179,24 @@ body
     width: 100%;
 }
 
+.flex-container-recent h1
+{
+    font-size: 2vw; 
+    word-wrap: break-word;
+}
+
+
+#locations-title
+{
+    background-color: aquamarine;
+    padding: 1px;
+}
+
+#locations-title h1
+{
+    text-align: center;
+    font-size: 2vw; 
+}
 
 
 .flex-container-locations
@@ -196,17 +256,12 @@ body
     }
 } */
 
-.footer 
-{
-    padding: 10px; /* Some padding */
-    text-align: center; /* Center text*/
-    background: #ddd; /* Grey background */
-}
+
 
 .quote
 {
     width: 100%;
-    background-color: darkgrey;
+    /* background-color: darkgrey; */
     padding: 0.1%;
 }
 
@@ -215,4 +270,12 @@ body
     text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-style: italic;
+}
+
+.footer 
+{
+    padding: 10px; /* Some padding */
+    text-align: center; /* Center text*/
+    width: 100%;
+    background: grey; /* Grey background */
 }
