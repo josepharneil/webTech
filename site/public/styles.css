@@ -94,7 +94,52 @@ body
     /* border: ; */
 }
 
-.flex-container
+
+/* recent title */
+#recent-title
+{
+    background-color: white;
+    text-align: center;
+    padding: 1px;
+    border-top-style: solid;
+    border-top-width: 2px;
+}
+
+
+/* recent */
+.flex-container-recent
+{
+    /* margin: 0; */
+    /* border: 0; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0.3%;
+    background-color: white;
+    justify-content: center;
+    vertical-align: top;
+}
+
+.flex-container-recent > div
+{
+    /* background-color: black; */
+    width: 24%;
+    margin: 10px;
+    text-align: center;
+    padding: 0.3%;
+    /* border-color: black; */
+    /* border-style: solid; */
+    /* border-width: 2px; */
+}
+
+.flex-container-recent img
+{
+    width: 100%;
+}
+
+
+
+.flex-container-locations
 {
     /* margin: 0; */
     /* border: 0; */
@@ -107,7 +152,7 @@ body
     vertical-align: top;
 }
 
-.flex-container > div
+.flex-container-locations > div
 {
     /* background-color: black; */
     width: 32%;
@@ -116,23 +161,23 @@ body
     padding: 0.3%;
 }
 
-.flex-container img
+.flex-container-locations img
 {
     width: 100%;
 }
 
-.blur-image
+/* .blur-image
 {
-    filter: blur(2px);
-
-    /* border-style: solid;
+    filter: blur(3px);
+    overflow: hidden;
+    border-style: solid;
     border-width: 12px;
     border-color: black;
-     */
-}
+    
+} */
 
 
-/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other
 @media screen and (max-width: 700px) 
 {
     .row
@@ -149,7 +194,7 @@ body
         float: none;
         width: 100%;
     }
-}
+} */
 
 .footer 
 {
