@@ -27,10 +27,19 @@
     background-color: #5995DA;
     height: 80px;
 }
-  
+
 .header 
 {
     background-color: #B2D6FF;
+    height: auto;
+    justify-content: inherit;
+    align-items: inherit;
+}
+  
+.photo img 
+{
+    width: 100%;
+    display: block;
 }
   
 .content 
@@ -60,6 +69,16 @@
 }
 
 
+/* .illustration 
+{
+    width: 100%;
+} */
+
+.illustration img
+{
+    width: 100%;
+    display: block;
+}
 
   
 /* Mobile Styles */

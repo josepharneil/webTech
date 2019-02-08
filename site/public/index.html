@@ -18,11 +18,33 @@ lang="en-GB" xml:lang="en-GB">
   <div class='section menu'></div>
 
   <div class='section header'>
-    <img src='images/header.svg'/> 
+    <!-- <img src='images/header.svg'/>  -->
+    <div class='photo'>
+      <picture>
+          <source media='(min-width: 401px)'
+                  srcset='images/photo-big.jpg'/>
+          <source media='(max-width: 400px)'
+                  srcset='images/photo-tall.jpg'/>
+          <img src='images/photo-small.jpg'/>
+      </picture>
+      <!-- <img  src='images/photo-small.jpg'
+            srcset='images/photo-big.jpg 2000w, images/photo-small.jpg 1000w'
+            sizes='(min-width: 960px) 960px, 100vw'/>
+            if screen is at least 960px, set image to be 960px wide.
+                ELSE set to 100vw -->
+    </div>
   </div>
 
   <div class='section content'>
-    <img src='images/content.svg'/>
+    <!-- <img src='images/content.svg'/> -->
+    <!-- <img class='illustration' src='images/illustration.svg' style='max-width: 500px'/> -->
+    <div class='illustration'>
+      <img src='images/illustration-small.png' 
+            scrset='images/illustration-small.png 1x,
+                    images/illustration-big.png 2x'
+            style='max-width: 500px'/>
+    </div>
+    
   </div>
 
   <div class='section sign-up'>
