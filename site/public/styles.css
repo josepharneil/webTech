@@ -1,281 +1,36 @@
-body 
-{
-    font-family: Arial, Helvetica, sans-serif;
+/* Set everything to 0 margin, 0 padding, and use border-boxes for box-sizing */
+* {
     margin: 0;
-    background-image: url(cat.jpg);
-    background-attachment: fixed;
-    background-position-y: 40vw;
-    background-size: 100%;
-}
-
-/* BEGIN HEADER */
-
-.header
-{
-    padding: 2px;  /* padding */
-    text-align: center; /* center the text */
-    /* background:#2f3a47;  */
-    /* background-image: url(sky.png); */
-    /* background-size: 100%; */
-    /* background-position-y: 8%; */
-    color: white; /* text colour */
-    display: flex;
-    /* flex-direction: row; */
-    /* justify-content: flex-end; */
-}
-
-.header img
-{
-    float: left;
-    width: 100%;
-    justify-content: left;
-    /* height: 8.25%; */
-}
-
-/* Increase the font size of the h1 element */
-.header h1
-{
-    /* font-size: 40px; */
-    font-size: 4vw; 
-    margin: 0.5vw;
-}
-
-.flex-container-header
-{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 12.5%;
-    /* justify-content: right; */
-    float: right;
-    /* padding: 0.3%; */
-    /* justify-content: center; */
-    /* vertical-align: top; */
-}
-
-.flex-container-header h1
-{
-    font-size: 1vw;
-    /* text-align: center; */
-    justify-content: center;
-    padding: 2%;
-    /* width: 100%; */
-    /* vertical-align: middle; */
-}
-
-
-
-/* END HEADER */
-
-/* Style the top navigation bar */
-.navbar 
-{
-    overflow: hidden; /* Hide overflow */
-    background-color: #333; /* Dark background color */
-}
-
-/* Style the navigation bar links */
-.navbar a
-{
-    float: left; /* Make sure that the links stay side-by-side */
-    display: block; /* Change the display to block, for responsive reasons (see below) */
-    color: white; /* White text color */
-    text-align: center; /* Center the text */
-    padding: 14px 20px; /* Add some padding */
-    text-decoration: none; /* Remove underline */
-}
-
-/* Right-aligned link */
-.navbar a.right 
-{
-    float: right; /* Float a link to the right */
-}
-
-/* Change color on hover/mouse-over */
-.navbar a:hover 
-{
-    background-color: #ddd; /* Grey background color */
-    color: black; /* Black text color */
-}
-
-/* Ensure proper sizing */
-* 
-{
-    box-sizing: border-box;
-}
-
-/* the div */
-#world-container
-{
-    /* border: 0; */
-    /* margin: 0; */
-    width: 100%;
-    /* min-width: 250px; */
-    /* display: inline-block; */
     padding: 0;
-    margin: 0;
-
-    background-color: black;
-    /* margin-bottom:0px; */
-    /* display: block; */
-}
-
-#world-container img
+    box-sizing: border-box;
+  }
+  
+/* Mobile Styles */
+/* When the width of the screen is 400px or less, set colour to red */
+@media only screen and (max-width: 400px) 
 {
-    width: 100%;
-    display: block;
-}
-
-/* this is the map */
-#worldmap
-{
-    /* background-color: black; */
-    /* margin: 0; */
-    width: 100%;
-    /* border: ; */
-}
-
-
-/* recent title */
-#recent-title
-{
-    background-color: white;
-    text-align: center;
-    padding: 1px;
-    border-top-style: solid;
-    border-top-width: 2px;
-    font-size: 1.2vw;
-}
-
-
-/* recent */
-.flex-container-recent
-{
-    /* margin: 0; */
-    /* border: 0; */
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 0.3%;
-    background-color: white;
-    justify-content: center;
-    vertical-align: top;
-}
-
-.flex-container-recent > div
-{
-    /* background-color: black; */
-    width: 24%;
-    margin: 10px;
-    text-align: center;
-    padding: 0.3%;
-    /* border-color: black; */
-    /* border-style: solid; */
-    /* border-width: 2px; */
-}
-
-.flex-container-recent img
-{
-    width: 100%;
-}
-
-.flex-container-recent h1
-{
-    font-size: 2vw; 
-    word-wrap: break-word;
-}
-
-
-#locations-title
-{
-    background-color: aquamarine;
-    padding: 1px;
-}
-
-#locations-title h1
-{
-    text-align: center;
-    font-size: 2vw; 
-}
-
-
-.flex-container-locations
-{
-    /* margin: 0; */
-    /* border: 0; */
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 0.3%;
-    background-color: aquamarine;
-    justify-content: center;
-    vertical-align: top;
-}
-
-.flex-container-locations > div
-{
-    /* background-color: black; */
-    width: 32%;
-    margin: 10px;
-    text-align: center;
-    padding: 0.3%;
-}
-
-.flex-container-locations img
-{
-    width: 100%;
-}
-
-/* .blur-image
-{
-    filter: blur(3px);
-    overflow: hidden;
-    border-style: solid;
-    border-width: 12px;
-    border-color: black;
-    
-} */
-
-
-/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other
-@media screen and (max-width: 700px) 
-{
-    .row
-    { 
-        flex-direction: column;
-    }
-}
-
-/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
-@media screen and (max-width: 400px) 
-{
-    .navbar a 
+    body 
     {
-        float: none;
-        width: 100%;
+      background-color: #F09A9D; /* Red */
     }
-} */
-
-
-
-.quote
-{
-    width: 100%;
-    /* background-color: darkgrey; */
-    padding: 0.1%;
 }
 
-.quote h1
+/* Tablet Styles */
+/* When the width of the screen is between 401 and 906px, set colour to yellow */
+@media only screen and (min-width: 401px) and (max-width: 960px) 
 {
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-style: italic;
+    body 
+    {
+        background-color: #F5CF8E; /* Yellow */
+    }
 }
 
-.footer 
+/* Desktop Styles */
+/* When the width of the screen is greater than 961px, set colour to blue */
+@media only screen and (min-width: 961px) 
 {
-    padding: 10px; /* Some padding */
-    text-align: center; /* Center text*/
-    width: 100%;
-    background: grey; /* Grey background */
+    body 
+    {
+        background-color: #B2D6FF; /* Blue */
+    }
 }

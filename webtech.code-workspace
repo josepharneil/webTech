@@ -1,0 +1,12 @@
+{
+    "folders": [
+		{
+			"path": "site"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"iostream": "cpp"
+		}
+	}
+}
