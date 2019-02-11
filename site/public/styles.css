@@ -1,0 +1,247 @@
+/* Set everything to 0 margin, 0 padding, and use border-boxes for box-sizing */
+* 
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    /* font-family: "Palatino Linotype"; */
+}
+
+.page
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* HEADER */
+.header-container
+{
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+/* .header
+{
+    /* width: 100%;
+} */
+
+
+/* MENU */
+.menu-container
+{
+    background-color: #F09A9D;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 80px; */
+}
+
+.menu
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+}
+
+.menu-item
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    /* vertical-align: middle; */
+    border-bottom-color: black;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+}
+
+
+/* HERO PHOTO */
+.hero-photo-container
+{
+    background-color: #F09A9D;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: 0; */
+}
+
+.hero-photo
+{
+    width: 100%;
+    /* margin: 0 auto; */
+}
+
+.hero-photo img
+{
+    /* height: 100px; */
+    width: 100%;
+    vertical-align: top;
+}
+
+
+/* ABOUT */
+.about-container
+{
+    background-color: #F09A9D;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+    /* padding-top: 2px; */
+}
+
+.about
+{
+    display: flex;
+    flex-direction: vertical;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width:100%;
+}
+
+.about-item
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 80%;
+
+}
+
+.about img
+{
+    margin-top: 20px;
+    width: 50%;
+}
+
+.about p
+{
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+/* RECENTS */
+.recents-container
+{
+    background-color: #5995DA;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.recents
+{
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin-top: 20px;
+}
+
+.recents-item
+{
+    margin-bottom: 20px;
+}
+
+.recents img
+{
+    width: 100%;
+}
+
+/* QUOTE */
+.quote-container
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* .quote
+{
+    
+} */
+
+/* FOOTER */
+.footer-container
+{
+    background-color: rgb(170, 170,  170);
+
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 20px;
+    padding-bottom: 21px;
+}
+
+/* .footer
+{
+
+} */
+
+/* .footer-item
+{
+    
+} */
+
+
+/* MEDIA QUERIES */
+
+/* Mobile Styles */
+/* When the width of the screen is 400px or less, set colour to red */
+@media only screen and (max-width: 400px) 
+{
+    body 
+    {
+      /* background-color: #F09A9D; Red */
+      background-image: url('cat.jpg');
+      background-attachment: fixed;
+      background-position: center;
+      background-size: 100%;
+    }
+}
+
+/* Tablet Styles */
+/* When the width of the screen is between 401 and 906px, set colour to yellow */
+@media only screen and (min-width: 401px) and (max-width: 960px) 
+{
+    body 
+    {
+        background-color: #F5CF8E; /* Yellow */
+    }
+}
+
+/* Desktop Styles */
+/* When the width of the screen is greater than 961px, set colour to blue */
+@media only screen and (min-width: 961px) 
+{
+    body 
+    {
+        background-color: #B2D6FF; /* Blue */
+    }
+}

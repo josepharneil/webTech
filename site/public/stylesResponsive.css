@@ -7,7 +7,7 @@
 }
 
 /* We style the page */
-.page 
+.page
 {
     display: flex;
     flex-wrap: wrap;
@@ -80,7 +80,7 @@
     display: block;
 }
 
-  
+
 /* Mobile Styles */
 /* When the width of the screen is 400px or less, set colour to red */
 @media only screen and (max-width: 400px) 
