@@ -232,12 +232,12 @@
     align-items: center;
     flex-direction: column;
 
-    margin-top: 20px;
+    padding-top: 20px;
 }
 
 .recents-title
 {
-    margin-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 .recents-grid
@@ -248,7 +248,7 @@
     align-items: center;
     flex-direction: column;
 
-    margin-top: 20px;
+    padding-top: 20px;
 }
 
 
@@ -259,11 +259,19 @@
     padding-bottom: 20px;
 }
 
+.recents-item a
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
 
 
 .recents-link
 {
-    margin-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 .recents img
@@ -350,7 +358,7 @@
     body 
     {
       /* background-color: #F09A9D; Red */
-      background-image: url('cat.jpg');
+      background-image: url('images/cat.jpg');
       background-attachment: fixed;
       background-position: center;
       background-size: 100%;
@@ -374,7 +382,7 @@
     /* BODY */
     body 
     {
-        background-image: url('cat.jpg');
+        background-image: url('images/cat.jpg');
         background-attachment: fixed;
         background-position: center;
         background-size: 100%;
@@ -435,11 +443,19 @@
         width: 33%;
         justify-content: center;
         height: auto;
-        padding-bottom: 30px;
+        /* padding-bottom: 30px; */
         
     }
 
-    .recents-item img
+    .recents-item a
+    {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .recents-item a img
     {
         width: 95%;
         height: 95%;
@@ -454,7 +470,7 @@
     /* BODY */
     body 
     {
-        background-image: url('cat.jpg');
+        background-image: url('images/cat.jpg');
         background-attachment: fixed;
         background-position: center;
         background-size: 100%;
@@ -520,16 +536,25 @@
         width: 33%;
         justify-content: center;
         height: auto;
-        padding-bottom: 30px;
+        /* padding-bottom: 30px; */
         
     }
 
-    .recents-item img
+    .recents-item a
+    {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .recents-item a img
     {
         width: 95%;
         height: 95%;
     }
 
+    /* QUOTE */
     .quote
     {
         width: 1000px;
