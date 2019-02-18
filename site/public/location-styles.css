@@ -120,7 +120,7 @@
 /* HERO PHOTO CONTAINER */
 .mobile-hero-photo-container
 {
-    background-color: black;
+    /* background-color: black; */
     width: 100%;
     display: flex;
     justify-content: center;
@@ -190,6 +190,7 @@
     padding-top: 30px;
     /* padding-bottom: 40px; */
     flex-direction: column;
+    background-color: white;
 }
 
 .paragraph
@@ -228,6 +229,7 @@
 /* LANDSCAPE IMAGE */
 .landscape-image-container
 {
+    background-color: white;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -258,6 +260,7 @@
 /* FULL-WIDTH IMAGE */
 .full-width-image-container
 {
+    background-color: white;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -287,6 +290,7 @@
 /* DOUBLE IMAGE */
 .double-image-container
 {
+    background-color: white;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -329,6 +333,7 @@
 /* TRIPLE IMAGE */
 .triple-image-container
 {
+    background-color: white;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -369,6 +374,38 @@
 }
 
 /* IMAGE COLLAGE */
+.collage-container
+{
+    background-color: white; 
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.collage-row
+{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+.collage-column
+{
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 4px;
+}
+
+.collage-column img
+{
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+}
+
 
 
 /* IMAGE CAPTIONS */
@@ -384,7 +421,7 @@
 /* FOOTER */
 .footer-container
 {
-    margin-top: 40px;
+    padding-top: 40px;
     background-color: rgb(170, 170,  170);
 
     display: flex;
@@ -432,6 +469,17 @@
     {
         display: none;
     }
+
+    .mobile-hero-photo-container
+    {
+        background-color: black;
+    }
+
+    .collage-column
+    {
+        flex: 100%;
+        max-width: 100%;
+    }
 }
 
 /* Tablet Styles */
@@ -441,10 +489,14 @@
     /* BODY */
     body 
     {
-        background-image: url('images/cat.jpg');
+        /* background-color: white; */
+        background-image: url('images/tokyo-temp.jpg');
         background-attachment: fixed;
         background-position: center;
-        background-size: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color:gray;
+        background-blend-mode: multiply;
     }
 
     /* HEADER */
@@ -458,6 +510,18 @@
     {
         display: none;
     }
+
+    .mobile-hero-photo img
+    {
+        opacity: 0;
+    }
+
+    .collage-column
+    {
+        flex: 50%;
+        max-width: 50%;
+    }
+
 
 }
 
@@ -468,10 +532,14 @@
     /* BODY */
     body 
     {
-        background-image: url('images/cat.jpg');
+        background-color: white;
+        background-image: url('images/tokyo-temp.jpg');
         background-attachment: fixed;
         background-position: center;
-        background-size: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color:gray;
+        background-blend-mode: multiply;
     }
 
     /* HEADER */
@@ -485,4 +553,10 @@
     {
         display: none;
     }
+
+    .mobile-hero-photo img
+    {
+        opacity: 0;
+    }
+
 }
