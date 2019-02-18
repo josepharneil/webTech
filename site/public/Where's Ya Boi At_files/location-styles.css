@@ -1,0 +1,448 @@
+/* Set everything to 0 margin, 0 padding, and use border-boxes for box-sizing */
+* 
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: lighter;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    /* font-family: "Palatino Linotype"; */
+}
+
+.page
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* HEADER */
+/* MOBILE-HEADER */
+.mobile-header-container
+{
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+/* .mobile-header
+{
+    /* width: 100%;
+} */
+
+/* TABLET/DESKTOP HEADER */
+.header-container
+{
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 80px; */
+    padding: 10px;
+}
+
+.header
+{
+    width: 100%;
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-image
+{
+    width: 100%;
+    flex: 1;
+    padding-left: 10px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.menu-container
+{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 4;
+}
+
+.menu-item
+{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+/* MENU */
+.mobile-menu-container
+{
+    /* background-color: #F09A9D; */
+    background-color: rgba(223, 51, 65, 0.897);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 80px; */
+}
+
+.mobile-menu
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+}
+
+.mobile-menu-item
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    /* vertical-align: middle; */
+    border-bottom-color: black;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+}
+
+
+
+/* HERO PHOTO CONTAINER */
+.mobile-hero-photo-container
+{
+    background-color: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.mobile-hero-photo
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+}
+
+.mobile-hero-photo img
+{
+    /* width: 200%; */
+    width: 100%;
+    height: 700px;
+    object-fit: cover;
+    opacity: 0.5;
+}
+
+.mobile-hero-photo h1
+{
+    color: white;
+    margin: 0;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    font-weight: bold;
+    /* font-family: 'Verdana'; */
+    
+    font-style: italic;
+
+    /* color: #ED2939; */
+}
+
+.mobile-hero-photo h2
+{
+    color: white;
+    margin: 0;
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: lighter;
+    /* font-style: italic; */
+}
+
+/* PARAGRAPH 1 */
+.paragraph-container
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    /* padding-bottom: 40px; */
+    flex-direction: column;
+}
+
+.paragraph
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.intro-text
+{
+    font-weight: lighter;
+    width: 95%;
+    font-size: 120%;
+}
+
+.main-text
+{
+    font-weight: lighter;
+    width: 95%;
+    font-size: 100%;
+}
+
+.subheading-text
+{
+    font-weight: lighter;
+    width: 95%;
+    font-size: 170%;
+    color: #ED2939;
+}
+
+/* IMAGE TYPES */
+.landscape-image-container
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+    /* padding-bottom: 40px; */
+    /* flex-direction: column; */
+}
+
+.landscape-image
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding-top: 40px; */
+    /* padding-bottom: 40px; */
+    flex-direction: column;
+    width: 100%
+}
+
+.landscape-image img
+{
+    width: 90%;
+}
+
+.full-width-image-container
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+    /* padding-bottom: 40px; */
+    /* flex-direction: column; */
+}
+
+.full-width-image
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding-top: 40px; */
+    /* padding-bottom: 40px; */
+    flex-direction: column;
+    width: 100%
+}
+
+.full-width-image img
+{
+    width: 100%;
+}
+
+
+.double-image-container
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.double-image
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.double-image-grid
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.double-image-item
+{
+    /* width: 100%; */
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    /* height: auto; */
+    height: 100px;
+    width: 150px;
+    overflow: hidden;
+}
+
+.double-image-item img
+{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+
+
+
+
+.image-caption
+{
+    /* width: 100%; */
+    padding-top: 5px;
+    font-style: italic;
+    font-size: 80%;
+    color: grey;
+}
+
+/* FOOTER */
+.footer-container
+{
+    margin-top: 40px;
+    background-color: rgb(170, 170,  170);
+
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 20px;
+    padding-bottom: 21px;
+}
+
+/* .footer
+{
+
+} */
+
+/* .footer-item
+{
+    
+} */
+
+
+/* MEDIA QUERIES */
+
+/* Mobile Styles */
+/* When the width of the screen is 400px or less, set colour to red */
+@media only screen and (max-width: 400px) 
+{
+    body 
+    {
+      /* background-color: #F09A9D; Red */
+      /* background-image: url('images/cat.jpg'); */
+      background-color: white;
+      background-attachment: fixed;
+      background-position: center;
+      background-size: 100%;
+    }
+
+    .header-container
+    {
+        display: none;
+    }
+
+    .map-container
+    {
+        display: none;
+    }
+}
+
+/* Tablet Styles */
+/* When the width of the screen is between 401 and 906px, set colour to yellow */
+@media only screen and (min-width: 401px) and (max-width: 960px) 
+{
+    /* BODY */
+    body 
+    {
+        background-image: url('images/cat.jpg');
+        background-attachment: fixed;
+        background-position: center;
+        background-size: 100%;
+    }
+
+    /* HEADER */
+    .mobile-header-container
+    {
+        display: none;
+    }
+
+    /* MENU */
+    .mobile-menu-container
+    {
+        display: none;
+    }
+
+}
+
+/* Desktop Styles */
+/* When the width of the screen is greater than 961px, set colour to blue */
+@media only screen and (min-width: 961px) 
+{
+    /* BODY */
+    body 
+    {
+        background-image: url('images/cat.jpg');
+        background-attachment: fixed;
+        background-position: center;
+        background-size: 100%;
+    }
+
+    /* HEADER */
+    .mobile-header-container
+    {
+        display: none;
+    }
+
+    /* MENU */
+    .mobile-menu-container
+    {
+        display: none;
+    }
+}
