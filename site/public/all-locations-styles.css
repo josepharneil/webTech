@@ -1,0 +1,175 @@
+/* Set everything to 0 margin, 0 padding, and use border-boxes for box-sizing */
+* 
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: lighter;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    /* font-family: "Palatino Linotype"; */
+}
+
+a:link
+{
+    color: black;
+    text-decoration: none;
+}
+
+a:visited
+{
+    color: black;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: black;
+    text-decoration: none;
+}
+
+a:active
+{
+    color: black;
+    text-decoration: none;
+}
+
+.page
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* HEADER */
+/* MOBILE-HEADER */
+.mobile-header-container
+{
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+/* MENU */
+.mobile-menu-container
+{
+    /* background-color: #F09A9D; */
+    background-color: rgba(223, 51, 65, 0.897);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 80px; */
+}
+
+.mobile-menu
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+}
+
+.mobile-menu-item
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    /* vertical-align: middle; */
+    border-bottom-color: black;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion 
+{
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+  
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover 
+{
+background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel 
+{
+padding: 0 18px;
+background-color: white;
+width: 100%;
+/* display: none; */
+overflow: hidden;
+}
+
+.accordion-container{
+    width:100%;
+}
+
+/* Mobile Styles */
+/* When the width of the screen is 400px or less, set colour to red */
+@media only screen and (max-width: 400px) 
+{
+    body 
+    {
+      /* background-color: #F09A9D; Red */
+      /* background-image: url('images/cat.jpg'); */
+      background-color: white;
+      background-attachment: fixed;
+      background-position: center;
+      background-size: 100%;
+    }
+
+}
+
+
+/* Tablet Styles */
+/* When the width of the screen is between 401 and 906px, set colour to yellow */
+@media only screen and (min-width: 401px) and (max-width: 960px) 
+{
+    /* BODY */
+    body 
+    {
+        /* background-color: white; */
+        background-image: url('images/tokyo-temp.jpg');
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color:gray;
+        background-blend-mode: multiply;
+    }
+}
+
+/* Desktop Styles */
+/* When the width of the screen is greater than 961px, set colour to blue */
+@media only screen and (min-width: 961px) 
+{
+    /* BODY */
+    body 
+    {
+        background-color: white;
+        background-image: url('images/tokyo-temp.jpg');
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color:gray;
+        background-blend-mode: multiply;
+    }
+}
