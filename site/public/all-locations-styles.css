@@ -40,6 +40,78 @@ a:active
     flex-wrap: wrap;
 }
 
+/* TABLET/DESKTOP HEADER */
+.header-container
+{
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 80px; */
+    /* padding: 10px; */
+    height: 60px;
+}
+
+.header
+{
+    width: 100%;
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+    align-items: center;
+    /* height: 100%; */
+    height: 60px;
+}
+
+.header-image
+{
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    padding-left: 10px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.header-image img
+{
+    height: 100%;
+    /* align-items: center; */
+}
+
+.menu-container
+{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 4;
+    height: 60px;
+}
+
+.menu-item
+{
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 60px;
+    /* display: flex;    */
+    /* flex-wrap: wrap; */
+    /* height: 80px; */
+    transition: background-color 0.25s ease-out;
+}
+
+.menu-item:hover
+{
+    background-color: lightgrey;
+}
+
+.menu-item h4
+{
+    transform: translate(0, 115%);
+}
+
 /* HEADER */
 /* MOBILE-HEADER */
 .mobile-header-container
@@ -87,39 +159,269 @@ a:active
     border-bottom-width: 2px;
 }
 
+.mobile-hero-photo-container
+{
+    /* background-color: black; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-bottom: 20px; */
+}
+
+.mobile-hero-photo
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+}
+
+.mobile-hero-photo img
+{
+    /* width: 200%; */
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    opacity: 0.75;
+}
+
+.mobile-hero-photo h1
+{
+    color: white;
+    margin: 0;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -40%);
+    font-size: 60px;
+    /* font-size: 5vw; */
+    font-weight: bold;
+    word-wrap: break-word;
+    /* font-family: 'Verdana'; */
+    
+    font-style: italic;
+
+    /* color: #ED2939; */
+}
+
+/* .mobile-hero-photo h2
+{
+    color: white;
+    margin: 0;
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: lighter;
+    /* font-style: italic; 
+} */
+
 /* Style the buttons that are used to open and close the accordion panel */
-.accordion 
+.accordion-container
+{
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.accordion
+{
+    width: 100%;
+}
+
+.accordion-button
 {
     background-color: #eee;
-    color: #444;
     cursor: pointer;
-    padding: 18px;
+    /* padding: 18px;  */
     width: 100%;
-    text-align: left;
+    /* text-align: left; */
     border: none;
     outline: none;
     transition: 0.4s;
+    
+    border-bottom-style: solid;
+    border-bottom-color: #444;
+
+    z-index: 1;
+
+    /* height: 80px; */
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion-button h1
+{
+    color: #444;
+    font-size: 30px;
+    padding: 10px;
+    font-weight: bold;
+    /* font-style: italic; */
+    justify-content: flex-start;
+}
+
+.accordion-button img
+{
+    justify-content: flex-end;
+    align-items: center;
+    height: 2.5vw;
+    padding-right: 60px;
+    /* justify-self: flex-end; */
 }
   
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active, .accordion:hover 
 {
-background-color: #ccc;
+    background-color: #ccc;
 }
 
 /* Style the accordion panel. Note: hidden by default */
 .panel 
 {
-padding: 0 18px;
-background-color: white;
-width: 100%;
-/* display: none; */
-overflow: hidden;
+    /* padding: 0 18px; */
+    background-color: white;
+    width: 100%;
+    /* display: none; */
+    overflow: hidden;
 }
 
-.accordion-container{
-    width:100%;
+.accordion-container
+{
+    width: 100%;
 }
+
+
+.recents-container
+{
+    background-color: white;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.recents
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    /* padding-top: 20px; */
+}
+
+.recents-title
+{
+    padding-bottom: 20px;
+}
+
+.recents-grid
+{
+    display: flex;
+    width: 90%;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+
+.recents-item
+{
+    background-color: black;
+    /* margin-bottom: 20px; */
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+}
+
+.recents-item a
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    z-index: 10;
+}
+
+.recents-item h1
+{
+    color: white;
+    margin: 0;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 95%;
+    transform: translate(-50%, -40%);
+    font-size: 40px;
+    /* font-size: 5vw; */
+    font-weight: bold;
+    word-wrap: break-word;
+    text-align: center;
+    /* font-family: 'Verdana'; */
+    
+    font-style: italic;
+    transition: font-size 1s ease-out;
+
+    /* color: #ED2939; */
+}
+
+.recents-item h1:hover
+{
+    font-size: 50px;
+}
+
+.recents img
+{
+    width: 100%;
+    height: auto;
+    opacity: 0.7;
+    transition: filter 1s ease-out;
+}
+
+.recents img:hover
+{
+    filter: blur(5px);
+}
+
+/* FOOTER */
+.footer-container
+{
+    background-color: rgb(170, 170,  170);
+
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 20px;
+    padding-bottom: 21px;
+}
+
+/* .footer
+{
+
+} */
+
+/* .footer-item
+{
+    
+} */
 
 /* Mobile Styles */
 /* When the width of the screen is 400px or less, set colour to red */
@@ -135,6 +437,32 @@ overflow: hidden;
       background-size: 100%;
     }
 
+    .header-container
+    {
+        display: none;
+    }
+
+    .recents img
+    {
+        transform: translate(0, -30%);
+    }
+
+    .mobile-hero-photo-container
+    {
+        background-color: black;
+    }
+    
+    .accordion-button h1
+    {
+        font-size: 40px;
+    }
+
+    .accordion-button img
+    {
+        padding-right: 20px;
+        height: 35px;
+    }
+
 }
 
 
@@ -146,13 +474,87 @@ overflow: hidden;
     body 
     {
         /* background-color: white; */
-        background-image: url('images/tokyo-temp.jpg');
+        background-image: url('images/all-locations-hero-5.jpg');
         background-attachment: fixed;
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
-        background-color:gray;
+        background-color:lightgray;
         background-blend-mode: multiply;
+    }
+
+    /* RECENTS */
+    .recents-grid
+    {
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        width: 100%;
+        /* max-width: 1600px; */
+        padding-right: 10px;
+        padding-left : 10px;
+        
+    }
+
+    .recents-item
+    {
+        display: flex;
+        width: 24%;
+        justify-content: center;
+        height: auto;
+        /* margin-right: 0.5px; */
+        /* margin-left: 0.5px; */
+        /* padding-bottom: 30px; */
+        
+    }
+
+    .recents-item a
+    {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        /* nm: 10px; */
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .recents-item a img
+    {
+        width: 100%;
+        height: 100%;
+    }
+
+    .recents-item h1
+    {
+        font-size: 25px;
+    }
+
+    .recents-item h1:hover
+    {
+        font-size: 35px;
+    }
+
+    /* HEADER */
+    .mobile-header-container
+    {
+        display: none;
+    }
+
+    /* MENU */
+    .mobile-menu-container
+    {
+        display: none;
+    }
+
+    .mobile-hero-photo img
+    {
+        opacity: 0;
+    }
+
+    .accordion h1
+    {
+        /* padding: 20px; */
     }
 }
 
@@ -164,12 +566,84 @@ overflow: hidden;
     body 
     {
         background-color: white;
-        background-image: url('images/tokyo-temp.jpg');
+        background-image: url('images/all-locations-hero-5.jpg');
         background-attachment: fixed;
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
-        background-color:gray;
+        background-color:lightgray;
         background-blend-mode: multiply;
+    }
+
+    /* HEADER */
+    .mobile-header-container
+    {
+        display: none;
+    }
+
+    /* MENU */
+    .mobile-menu-container
+    {
+        display: none;
+    }
+
+    .mobile-hero-photo img
+    {
+        opacity: 0;
+    }
+
+    .recents-grid
+    {
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        width: 100%;
+        /* max-width: 1400px; */
+        padding-right: 10px;
+        padding-left : 10px;
+    }
+
+    .recents-item
+    {
+        display: flex;
+        width: 24%;
+        justify-content: center;
+        height: auto;
+        /* margin-right: 0.5px; */
+        /* margin-left: 0.5px; */
+        /* padding-bottom: 30px; */
+        
+    }
+
+    .recents-item a
+    {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        /* nm: 10px; */
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .recents-item a img
+    {
+        width: 100%;
+        height: 100%;
+    }
+
+    .accordion-container
+    {
+        padding-top: 20px;
+    }
+    
+    .accordion
+    {
+        /* width: 100%; */
+        max-width: 1400px;
+    }
+    .accordion h1
+    {
+        padding: 20px;
     }
 }
