@@ -391,9 +391,24 @@ a:active
     /* color: #ED2939; */
 }
 
+.recents-item-links
+{
+
+}
+
+.recents-img
+{
+    /* background-color: black; */
+}
+
+.recents-h1
+{
+    /* background-color: black; */
+}
+
 .recents-item h1:hover
 {
-    font-size: 50px;
+    /* font-size: 50px; */
 }
 /* 
 recents-item h2
@@ -427,7 +442,7 @@ recents-item h2
 
 .recents img:hover
 {
-    filter: blur(5px);
+    /* filter: blur(5px); */
 }
 
 /* QUOTE */

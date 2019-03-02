@@ -293,6 +293,7 @@ a:active
     width: 100%;
     /* display: none; */
     overflow: hidden;
+    display:none;
 }
 
 .accordion-container
@@ -454,7 +455,7 @@ a:active
     
     .accordion-button h1
     {
-        font-size: 40px;
+        font-size: 30px;
     }
 
     .accordion-button img
@@ -635,15 +636,24 @@ a:active
     .accordion-container
     {
         padding-top: 20px;
+        padding-bottom: 20px;
     }
     
     .accordion
     {
         /* width: 100%; */
-        max-width: 1400px;
+        max-width: 1200px;
     }
+
+    .accordion-button
+    {
+        height: 60px;
+    }
+
     .accordion h1
     {
-        padding: 20px;
+        /* padding: 20px; */
+        padding-left: 20px;
     }
+
 }
