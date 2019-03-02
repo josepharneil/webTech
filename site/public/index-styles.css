@@ -67,7 +67,9 @@ a:active
     align-items: center;
     /* height: 80px; */
     /* padding: 10px; */
-    height: 60px;
+    height: 40px;
+    position: fixed;
+    z-index: 10;
 }
 
 .header
@@ -78,7 +80,7 @@ a:active
     justify-content: space-between;
     align-items: center;
     /* height: 100%; */
-    height: 60px;
+    height: 40px;
 }
 
 .header-image
@@ -105,18 +107,16 @@ a:active
     justify-content: flex-end;
     align-items: center;
     flex: 4;
-    height: 60px;
+    height: 40px;
 }
 
 .menu-item
 {
     padding-left: 20px;
     padding-right: 20px;
-    height: 60px;
-    /* display: flex;    */
-    /* flex-wrap: wrap; */
-    /* height: 80px; */
+    height: 40px;
     transition: background-color 0.25s ease-out;
+    cursor: pointer;
 }
 
 .menu-item:hover
@@ -126,7 +126,7 @@ a:active
 
 .menu-item h4
 {
-    transform: translate(0, 115%);
+    transform: translate(0, 60%);
 }
 
 
@@ -378,7 +378,7 @@ a:active
     left: 50%;
     width: 95%;
     transform: translate(-50%, -30%);
-    font-size: 40px;
+    /* font-size: 40px; */
     /* font-size: 5vw; */
     font-weight: bold;
     word-wrap: break-word;
@@ -391,20 +391,7 @@ a:active
     /* color: #ED2939; */
 }
 
-.recents-item-links
-{
 
-}
-
-.recents-img
-{
-    /* background-color: black; */
-}
-
-.recents-h1
-{
-    /* background-color: black; */
-}
 
 .recents-item h1:hover
 {
@@ -659,7 +646,7 @@ recents-item h2
 
     .recents-item h1:hover
     {
-        font-size: 35px;
+        /* font-size: 35px; */
     }
 
     .hero-photo h1

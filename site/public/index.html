@@ -9,6 +9,7 @@ lang="en-GB" xml:lang="en-GB">
     <meta name='viewport'
         content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
     <link rel="stylesheet" href="index-styles.css" />
+    html{scroll-behaviour: smooth;}
 </head>
 
 <body>
@@ -34,13 +35,13 @@ lang="en-GB" xml:lang="en-GB">
                 
                 <!-- Menu -->
                 <div class='menu-container'>
-                    <a href='tokyo.html'>
-                        <div class='menu-item'>
+                    <a> <!--href='#about'>-->
+                        <div class='menu-item' id = "about-button">
                             <h4>About</h4>
                         </div>
                     </a>
-                    <a href='tokyo.html'>
-                        <div class='menu-item'>
+                    <a>
+                        <div class='menu-item' id='recents-button'>
                             <h4>Recents</h4>
                         </div>
                     </a>
@@ -49,8 +50,8 @@ lang="en-GB" xml:lang="en-GB">
                             <h4>All Locations</h4>
                         </div>
                     </a>
-                    <a href='tokyo.html'>
-                        <div class='menu-item'>
+                    <a>
+                        <div class='menu-item' id='map-button'>
                             <h4>Map</h4>
                         </div>
                     </a>
@@ -94,7 +95,7 @@ lang="en-GB" xml:lang="en-GB">
 
 
         <!-- ABOUT -->
-        <div class='about-container'>
+        <div class='about-container' id='about'>
             <div class='about'>
                 <!-- <div class='about-title'>
                     <h1>About</h1>
@@ -114,7 +115,7 @@ lang="en-GB" xml:lang="en-GB">
 
 
         <!-- RECENTS -->
-        <div class='recents-container'>
+        <div class='recents-container' id='recents'>
             <div class='recents'>
                 <!-- RECENTS TITLE -->
                 <!-- <div class='recents-title'>
@@ -191,7 +192,7 @@ lang="en-GB" xml:lang="en-GB">
         </div>
 
         <!-- MAP -->
-        <div class='map-container'>
+        <div class='map-container' id='map'>
             <div class='map'>
                 <img src='old/worldMapVector.svg'/>
             </div>
