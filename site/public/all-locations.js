@@ -4,37 +4,82 @@ function start()
 {
     accordion();
     recentsHover();
-    
 
     var eventHandler = function(event)
     {
         recentsHover();
+        closeAccordion();
     }
 
     window.addEventListener('resize', eventHandler, false);
 }
 
+function closeAccordion()
+{
+    var acc = document.getElementsByClassName("accordion-button");
+
+    var mobileMaxWidth = window.matchMedia("(max-width: 401px)");
+    var mobileMinWidth = window.matchMedia("(min-width: 0px)");
+
+    if(mobileMaxWidth.matches && mobileMinWidth.matches)
+    {
+        for (var i = 0; i < acc.length; i++) 
+        {
+            acc[i].classList.toggle("active");
+            var panel = acc[i].nextElementSibling;
+            panel.style.maxHeight = null;
+        }
+    }
+}
+
+var isMenuOpen = false;
+
+function openHamburger(x)
+{
+    x.classList.toggle("change");
+
+    //Find header
+    var mobileMenuContainer = document.getElementById("mobile-menu-container");
+
+    // console.log(mobileMenuContainer);
+    // console.log(mobileMenuContainer);
+
+    // var 
+    // console.log(mobileMenuContainer.style.maxHeight);
+
+    // if(mobileMenuContainer.style.maxHeight == null)
+    if(!isMenuOpen)
+    {
+        mobileMenuContainer.style.maxHeight = "800px";
+        // mobileMenuContainer.style.display = "flex";
+        isMenuOpen = true;
+    }
+    else
+    {
+        mobileMenuContainer.style.maxHeight = null;
+        // mobileMenuContainer.style.display = "none";
+        isMenuOpen = false;
+    }
+}
 
 
 function accordion()
 {
     var acc = document.getElementsByClassName("accordion-button");
-    var i;
-
-    for (i = 0; i < acc.length; i++) 
+    
+    for (var i = 0; i < acc.length; i++) 
     {
-        acc[i].addEventListener("click", function() 
+        acc[i].addEventListener("click", 
+        function() 
         {
             this.classList.toggle("active");
             var panel = this.nextElementSibling;
             if (panel.style.maxHeight)
             {
-                // panel.style.display = "none";
                 panel.style.maxHeight = null;
             } 
             else 
             {
-                // panel.style.display = "block";
                 panel.style.maxHeight = panel.scrollHeight + "px";
             }
         });
