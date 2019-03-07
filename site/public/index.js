@@ -149,8 +149,56 @@ function openHamburger(x)
 //     }
 
 
-var map = new google.maps.Map(document.getElementById('google-map'), 
+// var map = new google.maps.Map(document.getElementById('google-map'), 
+// {
+//     center: {lat: 30, lng: 0},
+//     zoom: 3
+//     map: google.maps.MapTypeId.ROADMAP
+// });
+
+var myLatlng = new google.maps.LatLng(35, 0);
+
+var mapOptions = 
 {
-    center: {lat: 30, lng: 0},
-    zoom: 3
+  zoom: 2,
+  center: myLatlng,
+  mapTypeId: 'hybrid',
+  disableDefaultUI: true,
+  zoomControl: true
+};
+
+var map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
+
+var marker = new google.maps.Marker({
+    position: myLatlng,
+    title:"Hello World!",
+    url: "tokyo.html",
 });
+
+var infoWindow = new google.maps.InfoWindow({
+    content: "boi"
+});
+
+marker.addListener('mouseover', function(){
+    infoWindow.open(map,marker);
+})
+
+marker.addListener('mouseout', function(){
+    infoWindow.close(map,marker);
+})
+
+marker.setMap(map);
+
+google.maps.event.addListener(marker, 'click', function()
+{
+    console.log("clicked");
+    window.location.href = this.url;
+});
+
+var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+var beachMarker = new google.maps.Marker({
+  position: {lat: -33.890, lng: 151.274},
+  map: map,
+  icon: image
+});
+
