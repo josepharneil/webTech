@@ -6,6 +6,7 @@ function start()
     aboutScroll();
     recentsScroll();
     mapScroll();
+    // insertGoogleMap();
 
     var eventHandler = function(event)
     {
@@ -114,3 +115,42 @@ function openHamburger(x)
         isMenuOpen = false;
     }
 }
+
+// function insertGoogleMap()
+// {
+//     var mapProp = 
+//     {
+//         center:new google.maps.LatLng(51.508742,-0.120850),
+//         zoom: 5,
+//     };
+
+//     var map = new google.maps.Map(document.getElementById("google-map"),mapProp);
+// }
+
+// function insertGoogleMap() 
+// {
+//     // The location of Uluru
+//     var uluru = {lat: -25.344, lng: 131.036};
+//     // The map, centered at Uluru
+//     var map = new google.maps.Map
+//     (
+//         document.getElementById('google-map'), {zoom: 4, center: uluru});
+//     // The marker, positioned at Uluru
+//     var marker = new google.maps.Marker({position: uluru, map: map});
+// }
+
+
+// function myMap() {
+//     var mapProp= {
+//         center:new google.maps.LatLng(51.508742,-0.120850),
+//         zoom:5,
+//     };
+//     var map = new google.maps.Map(document.getElementById("google-map"),mapProp);
+//     }
+
+
+var map = new google.maps.Map(document.getElementById('google-map'), 
+{
+    center: {lat: 30, lng: 0},
+    zoom: 3
+});
