@@ -133,11 +133,18 @@ a:active
 /* MENU */
 .mobile-menu-container
 {
+    position: fixed;
+    z-index: 10;
+    margin-top: 40px;
+    /* background-color: #F09A9D; */
     background-color: white;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    max-height: 0px;
+    /* max-height: 0; */
+    /* height: none; */
     /* height: 80px; */
 }
 
@@ -511,7 +518,14 @@ recents-item h2
 {
     
 } */
-
+.mobile-menu-container
+{
+    /* display: none; */
+    display: flex;
+    max-height: 0px;
+    transition: max-height 1s ease-out;
+    overflow: hidden;
+}
 
 /* MEDIA QUERIES */
 
@@ -655,6 +669,76 @@ recents-item h2
         transform: translate(-50%, -60%);
     }
 
+}
+
+/* Hamburger */
+@media only screen and (max-width: 668px) 
+{
+    .menu-container
+    {
+        display: none;
+    }
+
+    .mobile-menu-container
+    {
+        /* display: none; */
+        display: flex;
+        max-height: 0px;
+        transition: max-height 1s ease-out;
+        overflow: hidden;
+    }
+
+
+    .hamburger-container
+    {
+        display: flex;
+        padding-right: 3vw;
+    }
+
+    .hamburger
+    {
+        display: flex;
+    }
+    
+    .hamburger-menu
+    {
+        display: flex;
+    }
+
+    .hamburger-icon-container 
+    {
+        display: inline-block;
+        cursor: pointer;
+      }
+      
+    .hamburger-bar1, .hamburger-bar2, .hamburger-bar3 
+    {
+        width: 35px;
+        height: 5px;
+        background-color: #333;
+        margin: 6px 0;
+        transition: 0.4s;
+    }
+
+    /* Rotate first bar */
+    .change .hamburger-bar1 
+    {
+        -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
+        transform: rotate(-45deg) translate(-9px, 6px) ;
+    }
+  
+    /* Fade out the second bar */
+    .change .hamburger-bar2
+    {
+        opacity: 0;
+    }
+  
+    /* Rotate last bar */
+    .change .hamburger-bar3 
+    {
+        -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
+        transform: rotate(45deg) translate(-8px, -8px) ;
+    }
 }
 
 /* Desktop Styles */
