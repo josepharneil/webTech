@@ -434,6 +434,11 @@ a:active
     width: 90%;
 }
 
+#bottom-paragraph
+{
+    padding-bottom: 40px;
+}
+
 /* QUOTE */
 .quote-container
 {

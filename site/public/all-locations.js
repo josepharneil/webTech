@@ -4,6 +4,7 @@ function start()
 {
     accordion();
     recentsHover();
+    openHamburger();
 
     var eventHandler = function(event)
     {
@@ -32,34 +33,27 @@ function closeAccordion()
     }
 }
 
-var isMenuOpen = false;
-
-function openHamburger(x)
+function openHamburger()
 {
-    x.classList.toggle("change");
+    var ham = document.getElementsByClassName("hamburger-icon-container");
 
-    //Find header
-    var mobileMenuContainer = document.getElementById("mobile-menu-container");
-
-    // console.log(mobileMenuContainer);
-    // console.log(mobileMenuContainer);
-
-    // var 
-    // console.log(mobileMenuContainer.style.maxHeight);
-
-    // if(mobileMenuContainer.style.maxHeight == null)
-    if(!isMenuOpen)
+    ham[0].addEventListener("click",
+    function()
     {
-        mobileMenuContainer.style.maxHeight = "800px";
-        // mobileMenuContainer.style.display = "flex";
-        isMenuOpen = true;
-    }
-    else
-    {
-        mobileMenuContainer.style.maxHeight = null;
-        // mobileMenuContainer.style.display = "none";
-        isMenuOpen = false;
-    }
+        this.classList.toggle("change");
+
+        //Find header
+        var mobileMenuContainer = document.getElementById("mobile-menu-container");
+
+        if(mobileMenuContainer.style.maxHeight != "800px")
+        {
+            mobileMenuContainer.style.maxHeight = "800px";
+        }
+        else
+        {
+            mobileMenuContainer.style.maxHeight = null;
+        }
+    });
 }
 
 

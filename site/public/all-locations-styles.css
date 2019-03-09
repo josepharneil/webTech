@@ -139,7 +139,7 @@ a:active
     display: flex;
     justify-content: center;
     align-items: center;
-    max-height: 0px;
+    max-height: 800px;
     /* max-height: 0; */
     /* height: none; */
     /* height: 80px; */
