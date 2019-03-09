@@ -16,6 +16,37 @@ function start()
     window.addEventListener('resize', eventHandler, false);
 }
 
+//============= Create map =============//
+var mapCentre = new google.maps.LatLng(35, 0);
+
+var mapOptions = 
+{
+  zoom: 2,
+  center: mapCentre,
+  mapTypeId: 'hybrid',
+  disableDefaultUI: true,
+  zoomControl: true,
+  minZoom: 2,
+  maxZoom: 5,
+};
+
+var map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
+
+// Place markers
+CreateMarker(new google.maps.LatLng(36, 140),"tokyo.html","Tokyo");
+CreateMarker(new google.maps.LatLng(22, 104),"tokyo.html","Sapa");
+CreateMarker(new google.maps.LatLng(25, 83),"tokyo.html","Varanasi");
+CreateMarker(new google.maps.LatLng(65, -18),"tokyo.html","Iceland");
+CreateMarker(new google.maps.LatLng(39, -9),"tokyo.html","Lisbon");
+CreateMarker(new google.maps.LatLng(-23, -43),"tokyo.html","Rio de Janeiro");
+CreateMarker(new google.maps.LatLng(37, -120),"tokyo.html","Yosemite");
+CreateMarker(new google.maps.LatLng(-13, -73),"tokyo.html","Machu Pichu");
+
+
+
+
+
+//============= Functions =============//
 function aboutScroll()
 {
     var about = document.getElementById("about-button");
@@ -87,7 +118,6 @@ function recentsHover()
 
 
 var isMenuOpen = false;
-
 function openHamburger(x)
 {
     x.classList.toggle("change");
@@ -116,89 +146,25 @@ function openHamburger(x)
     }
 }
 
-// function insertGoogleMap()
-// {
-//     var mapProp = 
-//     {
-//         center:new google.maps.LatLng(51.508742,-0.120850),
-//         zoom: 5,
-//     };
-
-//     var map = new google.maps.Map(document.getElementById("google-map"),mapProp);
-// }
-
-// function insertGoogleMap() 
-// {
-//     // The location of Uluru
-//     var uluru = {lat: -25.344, lng: 131.036};
-//     // The map, centered at Uluru
-//     var map = new google.maps.Map
-//     (
-//         document.getElementById('google-map'), {zoom: 4, center: uluru});
-//     // The marker, positioned at Uluru
-//     var marker = new google.maps.Marker({position: uluru, map: map});
-// }
-
-
-// function myMap() {
-//     var mapProp= {
-//         center:new google.maps.LatLng(51.508742,-0.120850),
-//         zoom:5,
-//     };
-//     var map = new google.maps.Map(document.getElementById("google-map"),mapProp);
-//     }
-
-
-// var map = new google.maps.Map(document.getElementById('google-map'), 
-// {
-//     center: {lat: 30, lng: 0},
-//     zoom: 3
-//     map: google.maps.MapTypeId.ROADMAP
-// });
-
-var myLatlng = new google.maps.LatLng(35, 0);
-
-var mapOptions = 
+function CreateMarker(latLng, url, hoverText)
 {
-  zoom: 2,
-  center: myLatlng,
-  mapTypeId: 'hybrid',
-  disableDefaultUI: true,
-  zoomControl: true
-};
+    // Create marker
+    var marker = new google.maps.Marker({
+        position: latLng,
+        url: url,
+    });
 
-var map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
+    // Info window
+    var infoWindow = new google.maps.InfoWindow({content: hoverText});
 
-var marker = new google.maps.Marker({
-    position: myLatlng,
-    title:"Hello World!",
-    url: "tokyo.html",
-});
+    // Hover
+    marker.addListener('mouseover', function(){infoWindow.open(map,marker);});
+    marker.addListener('mouseout', function(){infoWindow.close(map,marker);});
 
-var infoWindow = new google.maps.InfoWindow({
-    content: "boi"
-});
+    // Click
+    google.maps.event.addListener(marker, 'click', function()
+    {console.log("clicked");window.location.href = this.url;});
 
-marker.addListener('mouseover', function(){
-    infoWindow.open(map,marker);
-})
-
-marker.addListener('mouseout', function(){
-    infoWindow.close(map,marker);
-})
-
-marker.setMap(map);
-
-google.maps.event.addListener(marker, 'click', function()
-{
-    console.log("clicked");
-    window.location.href = this.url;
-});
-
-var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-var beachMarker = new google.maps.Marker({
-  position: {lat: -33.890, lng: 151.274},
-  map: map,
-  icon: image
-});
-
+    //Set on map
+    marker.setMap(map);
+}
