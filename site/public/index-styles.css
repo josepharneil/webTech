@@ -487,9 +487,9 @@ recents-item h2
 
 #google-map
 {
-    width: 70%;
+    width: 100%;
+    max-width: 1200px;
     height: 700px;
-
 }
 
 /* .map img

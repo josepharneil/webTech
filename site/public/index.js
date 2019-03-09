@@ -43,6 +43,9 @@ CreateMarker(new google.maps.LatLng(37, -120),"tokyo.html","Yosemite");
 CreateMarker(new google.maps.LatLng(-13, -73),"tokyo.html","Machu Pichu");
 
 
+CreateMarker(new google.maps.LatLng(7, 30),"","Boi's location");
+
+
 
 
 
@@ -152,6 +155,30 @@ function CreateMarker(latLng, url, hoverText)
     var marker = new google.maps.Marker({
         position: latLng,
         url: url,
+    });
+
+    // Info window
+    var infoWindow = new google.maps.InfoWindow({content: hoverText});
+
+    // Hover
+    marker.addListener('mouseover', function(){infoWindow.open(map,marker);});
+    marker.addListener('mouseout', function(){infoWindow.close(map,marker);});
+
+    // Click
+    google.maps.event.addListener(marker, 'click', function()
+    {console.log("clicked");window.location.href = this.url;});
+
+    //Set on map
+    marker.setMap(map);
+}
+
+function CreateMarker(latLng, url, hoverText, image)
+{
+    // Create marker
+    var marker = new google.maps.Marker({
+        position: latLng,
+        url: url,
+        icon: image,
     });
 
     // Info window
