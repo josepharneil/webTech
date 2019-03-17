@@ -26,13 +26,15 @@ let OK = 200, NotFound = 404, BadType = 415, Error = 500;
 let types, paths;
 
 // Start the server:
-start();
+start();//Only function called globally, basically main
 
 // Check the site, giving quick feedback if it hasn't been set up properly.
 // Start the http service. Accept only requests from localhost, for security.
 // If successful, the handle function is called for each request.
-async function start() {
-    try {
+async function start() 
+{
+    try //try to start server, else throw an error
+    {
         await fs.access(root);
         await fs.access(root + "/index.html");
         types = defineTypes();
@@ -44,11 +46,16 @@ async function start() {
         if (port != 80) address = address + ":" + port;
         console.log("Server running at", address);
     }
-    catch (err) { console.log(err); process.exit(1); }
+    catch (err) 
+    { 
+        console.log(err); 
+        process.exit(1); 
+    }
 }
 
 // Serve a request by delivering a file.
-async function handle(request, response) {
+async function handle(request, response) 
+{
     let url = request.url;
     if (url.endsWith("/")) url = url + "index.html";
     let ok = await checkPath(url);
@@ -62,8 +69,10 @@ async function handle(request, response) {
 
 // Check if a path is in or can be added to the set of site paths, in order
 // to ensure case-sensitivity.
-async function checkPath(path) {
-    if (! paths.has(path)) {
+async function checkPath(path) 
+{
+    if (! paths.has(path)) 
+    {
         let n = path.lastIndexOf("/", path.length - 2);
         let parent = path.substring(0, n + 1);
         let ok = await checkPath(parent);
@@ -73,10 +82,12 @@ async function checkPath(path) {
 }
 
 // Add the files and subfolders in a folder to the set of site paths.
-async function addContents(folder) {
+async function addContents(folder) 
+{
     let folderBit = 1 << 14;
     let names = await fs.readdir(root + folder);
-    for (let name of names) {
+    for (let name of names) 
+    {
         let path = folder + name;
         let stat = await fs.stat(root + path);
         if ((stat.mode & folderBit) != 0) path = path + "/";
@@ -85,14 +96,16 @@ async function addContents(folder) {
 }
 
 // Find the content type to respond with, or undefined.
-function findType(url) {
+function findType(url) 
+{
     let dot = url.lastIndexOf(".");
     let extension = url.substring(dot + 1);
     return types[extension];
 }
 
 // Deliver the file that has been read in to the browser.
-function deliver(response, type, content) {
+function deliver(response, type, content) 
+{
     let typeHeader = { "Content-Type": type };
     response.writeHead(OK, typeHeader);
     response.write(content);
@@ -100,7 +113,8 @@ function deliver(response, type, content) {
 }
 
 // Give a minimal failure response to the browser
-function fail(response, code, text) {
+function fail(response, code, text) 
+{
     let textTypeHeader = { "Content-Type": "text/plain" };
     response.writeHead(code, textTypeHeader);
     response.write(text, "utf8");
@@ -113,8 +127,10 @@ function fail(response, code, text) {
 // rather than just a global variable, because otherwise the table would have
 // to appear before calling start().  NOTE: add entries as needed or, for a more
 // complete list, install the mime module and adapt the list it provides.
-function defineTypes() {
-    let types = {
+function defineTypes() 
+{
+    let types = 
+    {
         html : "application/xhtml+xml",
         css  : "text/css",
         js   : "application/javascript",
