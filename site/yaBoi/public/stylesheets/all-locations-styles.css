@@ -391,10 +391,10 @@ a:active
     /* color: #ED2939; */
 }
 
-.recents-item h1:hover
+/*.recents-item h1:hover
 {
-    /* font-size: 50px; */
-}
+       font-size: 50px; 
+}*/
 
 .recents img
 {
@@ -404,10 +404,12 @@ a:active
     transition: filter 1s ease-out;
 }
 
+/*
 .recents img:hover
 {
-    /* filter: blur(5px); */
+    /* filter: blur(5px);
 }
+/*
 
 /* FOOTER */
 .footer-container
@@ -592,10 +594,10 @@ a:active
         opacity: 0;
     }
 
-    .accordion h1
+    /*.accordion h1
     {
-        /* padding: 20px; */
-    }
+        /* padding: 20px; 
+    }*/
 
     .hamburger-container
     {
