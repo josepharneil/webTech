@@ -589,6 +589,23 @@ a:active
 
                 }
 
+    .comment-form-container
+    {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+
+        max-width: 1200px;
+    }
+
+        .comment-form
+        {
+
+        }
+            
+
 
 
 
