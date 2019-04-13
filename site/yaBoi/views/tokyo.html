@@ -315,6 +315,18 @@ lang="en-GB" xml:lang="en-GB">
             <!-- Comment Form -->
             <div class='comment-form-container'>
                 <div class='comment-form'>
+                    <!-- action: /tokyo. 
+                         Where the form data is sent to on the server. 
+                         It would contain the server-side scrypt that handles the form data.
+                    -->
+                    <!-- target: self. The default. 
+                         Open in the current window 
+                         (as opposed to a new tab, for example). 
+                    -->
+                    <!-- method: post
+                         Specifies the HTTP method (GET or POST) to be used 
+                         swhen submitting the from data.
+                    -->
                     <form action="/tokyo" target="_self" method="post"/>
                         <div class="comment-form-name"/>
                             <h3>enter name here</h3>
@@ -328,14 +340,6 @@ lang="en-GB" xml:lang="en-GB">
                             <input type="submit" value="Post Comment"/>
                         </div>
                     </form>
-                
-                <!-- <form action="/team_name_url/" method="post"> -->
-                    <!-- <label for="team_name">Leave a comment! </label> -->
-                    
-                    <!-- <input type="text" id="team_name" name="Leave a comment!" value="Type your comment here."> -->
-                    <!-- <input type="text" id="team_name" name="Leave a comment!" value="Type your comment here."> -->
-                    <!-- <input type="submit" value="OK"> -->
-                <!-- </form> -->
                 </div>
             </div>
             <!-- END Comment Form -->
