@@ -602,8 +602,72 @@ a:active
 
         .comment-form
         {
-
+            padding: 10px;
+            border-bottom-style: solid;
+            border-bottom-width: 4px;
+            border-bottom-color: lightgrey;
+            display: flex;
+            flex-wrap: wrap;
+            
+            width: 95%;
         }
+            .comment-form form
+            {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+                .comment-form-name
+                {
+                    width: 100%;
+                    /* padding-bottom: 20px; */
+                }
+
+                    .comment-form-name h3
+                    {
+                        padding-left: 1px;
+                    }
+                
+                    .comment-form-name input
+                    {
+                        width: 20%;
+                        height: 20px;
+                    }
+
+                .comment-form-text
+                {
+                    width: 100%;
+                    padding-bottom: 10px;
+                }
+
+                    .comment-form-text h3
+                    {
+                        padding-left: 1px;
+                    }
+
+                    .comment-form-text input
+                    {
+                        width: 100%;
+                        height: 70px;
+                    }
+
+                .comment-form-submit
+                {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+
+                    .comment-form-submit input
+                    {
+                        width: 20%;
+                        /* align-self: flex-end; */
+                    }
+
+
+
+
             
 
 
