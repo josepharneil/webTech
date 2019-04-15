@@ -103,8 +103,18 @@ async function handle(request, response)//incomingMessage,serverResponse
             let params = qs.parse(bodyString);
             let name = params.name;
             let text = params.text;
-            console.log(name);
-            console.log(text);
+            let date = new Date().toUTCString();
+            // console.log(name);
+            // console.log(text);
+ 
+            let htmlContent = await fs.readFile('./views/tokyo.ejs', 'utf8');
+            let renderedHTML = ejs.render(htmlContent, {myName: name, myText: text, myDate: date}, function(err, data) 
+            {
+                console.log(err || data)
+            });
+
+            response.node.write(renderedHTML);
+            response.node.end();
 
             //redirect back to page
         }
@@ -219,8 +229,8 @@ async function fail(response, code, text)
         console.log(err || data)
     });
     
-    response.write(renderedHTML);
-    response.end();
+    response.node.write(renderedHTML);
+    response.node.end();
 }
 
 
