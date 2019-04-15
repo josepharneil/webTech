@@ -1,9 +1,11 @@
 "use strict"
 
 //============= Import Modules =============//
-let http = require("http");
+// let http = require("http");
 let fs = require("fs").promises;
-let pug = require('pug');
+// let fs = require("q-io/fs");
+let http = require("q-io/http");
+// let pug = require('pug');
 let ejs = require('ejs');
 //============= END Import Modules =============//
 
@@ -35,8 +37,9 @@ async function start()
         paths = new Set();
         paths.add("/");
         //Start the server with listener handle
-        let server = http.createServer(handle);
-        server.listen(port, "localhost");
+        // let server = http.createServer(handle);
+        let server = http.Server(handle);
+        await server.listen(port, "localhost");
         //Define the address
         let address = "http://localhost";
         address = address + ":" + port;
@@ -48,7 +51,7 @@ async function start()
     catch (error)
     {
         //Print the error
-        console.log(err);
+        console.log(error);
         //Exit
         // process.exit(1);
     }
@@ -66,24 +69,49 @@ async function handle(request, response)//incomingMessage,serverResponse
 
         
         let requestedURL = request.url;
-        if (requestedURL == "/" ) 
+        if(requestedURL == "/" )
         {
             requestedURL = "/index.html";
         }
+        
+        //If URL contains ?submit-comment then submit a comment
+        if(await checkIfComment(requestedURL))
+        {
+            //handle comment
+            console.log("made comment");
 
-        errorCode = 404;
-        let ok = await checkPath(requestedURL);
-        if(!ok) {throw "Error 404: URL NotFound"};
-    
-        errorCode = 415;
-        let type = findType(requestedURL);
+            //parse the page we want
+            // ?submit-comment has 15 characters
+            let pageToCommentOn = requestedURL.substring(1,requestedURL.length-20);
+            // console.log(pageToCommentOn);
 
-        //Find the file to respond with
-        let file = root + requestedURL;
-        let content = await fs.readFile(file);
+            // console.log(request);
+            // console.log(request.body);
+            let body = await request.body.read();
+            console.log("Body:", body.toString());
 
-        //Deliver the file as a response
-        deliver(response, type, content);
+
+            //redirect back to page
+        }
+        //Otherwise, deliver a file
+        else
+        {
+            errorCode = 404;
+            // let ok = await checkPath(requestedURL);
+            // if(!ok) {throw "Error 404: URL NotFound"};
+
+            errorCode = 415;
+            let type = findType(requestedURL);
+
+            console.log(requestedURL);
+
+            //Find the file to respond with
+            let file = root + requestedURL;
+            let content = await fs.readFile(file);
+
+            //Deliver the file as a response
+            deliver(response, type, content);
+        }
 
     } 
     catch (error)
@@ -96,6 +124,23 @@ async function handle(request, response)//incomingMessage,serverResponse
 
 
         // process.exit(1);
+    }
+}
+
+//checks if user is submitting a comment
+// ?submit-comment
+async function checkIfComment(url)
+{
+    let n = url.lastIndexOf("?");
+    if(url.substring(n+1) == "submit-comment")
+    {
+        // console.log(url.substring(n));
+        return true;
+    }
+    else
+    {
+        // console.log(url.substring(n));
+        return false;
     }
 }
 
@@ -119,7 +164,7 @@ async function addContents(folder)
 {
     let folderBit = 1 << 14;
     let names = await fs.readdir(root + folder);
-    for (let name of names) 
+    for (let name of names)
     {
         let path = folder + name;
         let stat = await fs.stat(root + path);
@@ -141,7 +186,7 @@ function findType(url)
 function deliver(response, type, content)
 {
     let typeHeader = { "Content-Type": type };
-    console.log(typeHeader);
+    // console.log(typeHeader);
     response.writeHead(OK, typeHeader);
     response.write(content);
     response.end();
