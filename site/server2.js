@@ -17,7 +17,10 @@ function start(port) {
 // Deal with a request.
 async function handle(request, response) {
   let url = request.url;
-  if (url.endsWith("/")) url = url + "index.html";
+  if (url.endsWith("/"))
+  {
+    url = url + "index.html";
+  } 
   if (! url.endsWith(".html")) return fail(response, BadType, "Not .html");
   let file = "./public" + url;
   let content;
