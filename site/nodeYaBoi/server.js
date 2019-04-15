@@ -103,8 +103,8 @@ async function handle(request, response)//incomingMessage,serverResponse
         else
         {
             // errorCode = 404;
-            // let ok = await checkPath(requestedURL);
-            // if(!ok) {throw "Error 404: URL NotFound"};
+            let ok = await checkPath(requestedURL);
+            if(!ok) {throw "Error 404: URL NotFound"};
 
             errorCode = 415;
             let type = findType(requestedURL);
