@@ -12,7 +12,7 @@ async function create()
     try
     {
         db = await sql.open('./db.sqlite');
-        await db.run("create table comments (id,name,text,date,page)");
+        await db.run("create table comments (id integer primary key autoincrement,name,text,date,page)");
         // await db.run("insert into comments values (0,'Joe','','now','tokyo')");
         // await db.run("insert into comments values (1,'Dan','I am Alpha','now','tokyo')");
         // var as = await db.all("select * from comments");

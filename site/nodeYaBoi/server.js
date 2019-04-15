@@ -8,6 +8,7 @@ let http = require("q-io/http");
 // let pug = require('pug');
 let ejs = require('ejs');
 let qs = require("querystring");
+let sql = require("sqlite");
 
 //============= END Import Modules =============//
 
@@ -18,6 +19,8 @@ let root = "./public";
 let OK = 200, NotFound = 404, BadType = 415, Error = 500;
 let types, paths;
 let address = "http://localhost:" + port;
+
+let db;
 
 start();
 //============= END Run Server =============//
@@ -30,6 +33,7 @@ async function start()
     //Try starting server with listener handle
     try
     {
+        db = await sql.open('./database/db.sqlite');
         //Access the root folder ./public
         await fs.access(root);
         //Access index
@@ -104,17 +108,25 @@ async function handle(request, response)//incomingMessage,serverResponse
             let name = params.name;
             let text = params.text;
             let date = new Date().toUTCString();
-            // console.log(name);
-            // console.log(text);
- 
-            let htmlContent = await fs.readFile('./views/tokyo.ejs', 'utf8');
-            let renderedHTML = ejs.render(htmlContent, {myName: name, myText: text, myDate: date}, function(err, data) 
-            {
-                console.log(err || data)
-            }); 
 
-            response.node.write(renderedHTML);
-            response.node.end();
+            // await db.run("insert into comments (name,text,date,page) values ('Joe','textddf','now','tokyo')");
+            //await db.run("insert into comments (name,text,date,page) values ('" + name + "','" + text + "','" + date + "','" + pageToCommentOn + "')");
+            await db.run("insert into comments (name,text,date,page) values ('" + name + "','" + text + "','" + date + "','" + pageToCommentOn + "')");
+            console.log(await db.all("select * from comments"));
+            // console.log(name);
+
+            // console.log(text);
+
+            
+ 
+            // let htmlContent = await fs.readFile('./views/tokyo.ejs', 'utf8');
+            // let renderedHTML = ejs.render(htmlContent, {myName: name, myText: text, myDate: date}, function(err, data) 
+            // {
+            //     console.log(err || data)
+            // }); 
+ 
+            // response.node.write(renderedHTML);
+            // response.node.end(); 
 
             //redirect back to page
         }
