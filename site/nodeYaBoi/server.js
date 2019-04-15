@@ -7,6 +7,8 @@ let fs = require("fs").promises;
 let http = require("q-io/http");
 // let pug = require('pug');
 let ejs = require('ejs');
+let qs = require("querystring");
+
 //============= END Import Modules =============//
 
 //============= Run Server =============//
@@ -94,8 +96,15 @@ async function handle(request, response)//incomingMessage,serverResponse
             // console.log(request);
             // console.log(request.body);
             let body = await request.body.read();
-            console.log("Body:", body.toString());
+            let bodyString = body.toString();
+            // console.log("Body:", body.toString());
+            // name=BOIIII&text=boi
 
+            let params = qs.parse(bodyString);
+            let name = params.name;
+            let text = params.text;
+            console.log(name);
+            console.log(text);
 
             //redirect back to page
         }
