@@ -3,9 +3,8 @@
 //============= Import Modules =============//
 let http = require("http");
 let fs = require("fs").promises;
+let pug = require('pug');
 //============= END Import Modules =============//
-
-
 
 //============= Run Server =============//
 let port = 8080;
@@ -60,9 +59,9 @@ async function handle(request, response)//incomingMessage,serverResponse
     let errorCode;
     try 
     {
-        console.log("Method:", request.method);
-        console.log("URL:", request.url);
-        console.log("Headers:", request.headers);
+        // console.log("Method:", request.method);
+        // console.log("URL:", request.url);
+        // console.log("Headers:", request.headers);
 
         
         let requestedURL = request.url;
@@ -93,6 +92,8 @@ async function handle(request, response)//incomingMessage,serverResponse
         console.log(error);
         //Exit
         return fail(response, errorCode, error.toString());
+
+
         // process.exit(1);
     }
 }
@@ -136,9 +137,10 @@ function findType(url)
 }
 
 // Deliver the file that has been read in to the browser.
-function deliver(response, type, content) 
+function deliver(response, type, content)
 {
     let typeHeader = { "Content-Type": type };
+    console.log(typeHeader);
     response.writeHead(OK, typeHeader);
     response.write(content);
     response.end();
@@ -147,9 +149,18 @@ function deliver(response, type, content)
 // Give a minimal failure response to the browser
 function fail(response, code, text) 
 {
-    let textTypeHeader = { "Content-Type": "text/plain" };
-    response.writeHead(code, textTypeHeader);
-    response.write(text, "utf8");
+    // let textTypeHeader = { "Content-Type": "text/plain" };
+    // response.writeHead(code, textTypeHeader);
+    // console.log
+    // (
+        // pug.renderFile( './views/error.pug', {name:'yeyeye'} )
+    // );
+
+    let file = pug.renderFile( './views/index.pug', {title:'yeyeye'} )
+    response.write(file);
+    // response.write()
+    // response.render('error');
+    // response.write(text, "utf8");
     response.end();
 }
 

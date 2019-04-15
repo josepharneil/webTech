@@ -1,0 +1,183 @@
+doctype html
+html(xmlns='http://www.w3.org/1999/xhtml', lang='en-GB', xml:lang='en-GB')
+  // HEAD
+  head
+    title Where's Ya Boi
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0')
+    link(rel='stylesheet', type='text/css', href='/stylesheets/index-styles.css')
+  body
+    //- | html{scroll-behaviour: smooth;}
+    .page
+      // HEADER
+      // MOBILE-HEADER
+      .mobile-header-container
+        .mobile-header
+          img(src='images/header.svg')
+      // TABLET/DESKTOP HEADER
+      .header-container
+        .header
+          // Logo image
+          .header-image
+            a(href='/')
+              img(src='images/header.svg')
+          // Menu
+          .menu-container
+            a
+              // href='#about'>
+              #about-button.menu-item
+                h4 About
+            a
+              #recents-button.menu-item
+                h4 Recents
+            a(href='/all-locations')
+              .menu-item
+                h4 All Locations
+            a
+              #map-button.menu-item
+                h4 Map
+            a(href='/tokyo')
+              .menu-item
+                h4 Social Media
+          // Hamburger
+          .hamburger-container
+            .hamburger
+              // Icon
+              .hamburger-icon-container
+                .hamburger-bar1
+                .hamburger-bar2
+                .hamburger-bar3
+      // MENU
+      // MOBILE MENU
+      #mobile-menu-container.mobile-menu-container
+        .mobile-menu
+          a(href='#about')
+            .mobile-menu-item
+              h4 About
+          a(href='#recents')
+            .mobile-menu-item
+              h4 Recents
+          a(href='/all-locations')
+            .mobile-menu-item
+              h4 All Locations
+          a(href='')
+            .mobile-menu-item
+              h4 Social Media
+      // HERO PHOTO
+      .hero-photo-container
+        .hero-photo
+          img(src='images/hero-pic-2.jpg')
+          h1 #{title}
+          h2 ya boi goes on tour
+      // ABOUT
+      #about.about-container
+        .about
+          //
+            <div class='about-title'>
+            <h1>About</h1>
+            </div>
+          // Picture
+          .about-content-container
+            .about-picture
+              img(src='images/about-picture-placeholder.png')
+            // About Text
+            .about-text
+              p
+                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ullamcorper consequat gravida. Nulla sit amet lacinia eros. Cras vitae purus eros. Donec massa elit, scelerisque vitae tortor eu, consectetur ultrices urna. Nulla at augue molestie, egestas risus nec, vestibulum enim. Donec convallis nibh non elit blandit interdum.
+      // RECENTS
+      #recents.recents-container
+        .recents
+          // RECENTS TITLE
+          //
+            <div class='recents-title'>
+            <h1>Recent Locations</h1>
+            </div>
+          // RECENTS GRID
+          .recents-grid
+            .recents-item
+              a.recents-item-links(href='/tokyo')
+                img(src='images/skytree-square.jpg ')
+                h1 Tokyo
+            .recents-item
+              a.recents-item-links(href='/tokyo')
+                img(src='images/sapa.jpg')
+                h1 Sapa
+            .recents-item
+              a.recents-item-links(href='/tokyo')
+                img(src='images/Iceland.jpg')
+                h1 Iceland
+            .recents-item
+              a.recents-item-links(href='/tokyo')
+                img.recents-img(src='images/Lisbon2.jpg')
+                h1.recents-h1 Lisbon
+            .recents-item
+              a.recents-item-links(href='/tokyo')
+                img(src='images/machuPichu.jpg')
+                h1 Machu Pichu
+            .recents-item
+              a.recents-item-links(href='/tokyo')
+                img(src='images/yosemite.jpg')
+                h1 Yosemite
+            .recents-item
+              a.recents-item-links(href='/tokyo')
+                img(src='images/Varanasi.jpg')
+                h1 Varanasi
+            .recents-item
+              a.recents-item-links(href='/tokyo')
+                img(src='images/rio.jpg')
+                h1 Rio de Janeiro
+          // RECENTS LINKS
+          .recents-link
+            a(href='/all-locations')
+              h1 View All Locations
+      // QUOTE
+      .quote-container
+        .quote
+          h1
+            | "It's futile It's futile It's futile It's futile It's futile It's futile It's futile It's futile" - Dan
+      // MAP
+      #map.map-container
+        #google-map
+      // FOOTER
+      .footer-container
+        .footer
+          .footer-item
+            h2 Contact info
+            p Email: email@email.com
+            p Phone: 12345678
+            p Fax: 12345678
+    //
+      <script>
+      // Initialize and add the map
+      function initMap()
+      {
+      // The location of Uluru
+      var uluru = {lat: -25.344, lng: 131.036};
+      // The map, centered at Uluru
+      var map = new google.maps.Map(
+      document.getElementById('google-map'), {zoom: 4, center: uluru});
+      // The marker, positioned at Uluru
+      var marker = new google.maps.Marker({position: uluru, map: map});
+      }
+      </script>
+    // <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeD0yDUYMYke0gHd0xlr2qiNG81AD02Ho&amp;callback=initMap"
+    // type="text/javascript"></script>
+    //
+      <script>
+      function myMap()
+      {
+      var mapProp =
+      {
+      center:new google.maps.LatLng(51.508742,-0.120850),
+      zoom:5,
+      };
+      var map = new google.maps.Map(document.getElementById("google-map"),mapProp);
+      }
+      </script>
+    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBeD0yDUYMYke0gHd0xlr2qiNG81AD02Ho')
+    //
+      <script>
+      </script>
+    // <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeD0yDUYMYke0gHd0xlr2qiNG81AD02Ho&amp;callback=myMap"></script>
+    // <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeD0yDUYMYke0gHd0xlr2qiNG81AD02Ho&amp;callback=myMap" type="text/javascript"></script>
+    script(src='javascripts/index.js')
