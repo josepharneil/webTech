@@ -4,6 +4,7 @@
 let http = require("http");
 let fs = require("fs").promises;
 let pug = require('pug');
+let ejs = require('ejs');
 //============= END Import Modules =============//
 
 //============= Run Server =============//
@@ -147,20 +148,16 @@ function deliver(response, type, content)
 }
 
 // Give a minimal failure response to the browser
-function fail(response, code, text) 
+async function fail(response, code, text) 
 {
-    // let textTypeHeader = { "Content-Type": "text/plain" };
-    // response.writeHead(code, textTypeHeader);
-    // console.log
-    // (
-        // pug.renderFile( './views/error.pug', {name:'yeyeye'} )
-    // );
-
-    let file = pug.renderFile( './views/index.pug', {title:'yeyeye'} )
-    response.write(file);
-    // response.write()
-    // response.render('error');
-    // response.write(text, "utf8");
+    // let file = pug.renderFile( './views/index.pug', {title:'yeyeye'} )
+    let htmlContent = await fs.readFile('./views/error.ejs', 'utf8');
+    let renderedHTML = ejs.render(htmlContent, {error: text}, function(err, data) 
+    {
+        console.log(err || data)
+    });
+    
+    response.write(renderedHTML);
     response.end();
 }
 

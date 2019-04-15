@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en-GB" xml:lang="en-GB"> 
+
+<!-- ALL PORTRAIT IMAGES SHOULD BE 4 ACROSS, 5 DOWN -->
+
+<!-- HEAD -->
+<head>
+    <title>Where's Ya Boi</title>
+    <meta charset="UTF-8"/>
+    <meta name='viewport'
+        content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+    <link rel="stylesheet" href="stylesheets/error-styles.css" />
+</head>
+
+<body>
+    <div class='page'>
+        <!-- HEADER -->
+        <!-- MOBILE-HEADER -->
+        <div class='mobile-header-container'>
+            <div class ='mobile-header'>
+                <img src='images/header.svg'/>
+            </div>
+        </div>
+
+        <!-- TABLET/DESKTOP HEADER -->
+        <div class='header-container' id='header-container'>
+            <div class ='header'>
+                <!-- Logo image -->
+                <div class='header-image'>
+                    <a href='/'>
+                        <img src='images/header.svg'/>
+                    </a>
+                </div>
+                
+                <!-- Menu -->
+                <div class='menu-container'>
+                    <a href='/#about'>
+                        <div class='menu-item'>
+                            <h4>About</h4>
+                        </div>
+                    </a>
+                    <a href='/#recents'>
+                        <div class='menu-item'>
+                            <h4>Recents</h4>
+                        </div>
+                    </a>
+                    <a href='/all-locations.html'>
+                        <div class='menu-item'>
+                            <h4>All Locations</h4>
+                        </div>
+                    </a>
+                    <a href='/#map'>
+                        <div class='menu-item'>
+                            <h4>Map</h4>
+                        </div>
+                    </a>
+                    <a href='/tokyo.html'>
+                        <div class='menu-item'>
+                            <h4>Social Media</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Hamburger -->
+                <div class='hamburger-container'>
+                    <div class='hamburger'>
+                        <!-- Icon -->
+                        <div class='hamburger-icon-container'>
+                            <div class='hamburger-bar1'></div>
+                            <div class='hamburger-bar2'></div>
+                            <div class='hamburger-bar3'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENU -->
+        <!-- MOBILE MENU -->
+        <div class='mobile-menu-container' id='mobile-menu-container'>
+            <div class='mobile-menu'>
+                <a href='/#about'>
+                    <div class='mobile-menu-item'>
+                        <h4>About</h4>
+                    </div>
+                </a>
+                <a href='/#recents'>
+                    <div class='mobile-menu-item'>
+                        <h4>Recents</h4>
+                    </div>
+                </a>
+                <a href='/all-locations.html'>
+                    <div class='mobile-menu-item'>
+                        <h4>All Locations</h4>
+                    </div>
+                </a>
+                <a href=''>
+                    <div class='mobile-menu-item'>
+                        <h4>Social Media</h4>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class='error-container'>
+            <div class='error'>
+                <h1>Uh oh... You've lost track of Boi</h1>
+                <h2> <%= error %> </h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class='footer-container'>
+        <div class='footer'>
+            <div class='footer-item'>
+                <h2>Contact info</h2>
+                <p>Email: email@email.com</p>
+                <p>Phone: 12345678</p>
+                <p>Fax: 12345678</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascripts/all-locations.js"></script>
+</body>  
+        
+</html>
