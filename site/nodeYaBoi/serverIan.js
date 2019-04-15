@@ -1,99 +1,75 @@
-"use strict"
+// Run a node.js web server for local development of a static web site. Create a
+// site folder, put server.js in it, create a sub-folder called "public", with
+// at least a file "index.html" in it. Start the server with "node server.js &",
+// and visit the site at the address printed on the console.
+//     The server is designed so that a site will still work if you move it to a
+// different platform, by treating the file system as case-sensitive even when
+// it isn't (as on Windows and some Macs). URLs are then case-sensitive.
+//     All HTML files are assumed to have a .html extension and are delivered as
+// application/xhtml+xml for instant feedback on XHTML errors. Content
+// negotiation is not implemented, so old browsers are not supported. Https is
+// not supported. Add to the list of file types in defineTypes, as necessary.
 
-//============= Import Modules =============//
+// Change the port to the default 80, if there are no permission issues and port
+// 80 isn't already in use. The root folder corresponds to the "/" url.
+let port = 8080;
+let root = "./public"
+
+// Load the library modules, and define the global constants and variables.
+// Load the promises version of fs, so that async/await can be used.
+// See http://en.wikipedia.org/wiki/List_of_HTTP_status_codes.
+// The file types supported are set up in the defineTypes function.
+// The paths variable is a cache of url paths in the site, to check case.
 let http = require("http");
 let fs = require("fs").promises;
-//============= END Import Modules =============//
-
-
-
-//============= Run Server =============//
-let port = 8080;
-let root = "./public";
-
 let OK = 200, NotFound = 404, BadType = 415, Error = 500;
 let types, paths;
 
-start();
-//============= END Run Server =============//
+// Start the server:
+start();//Only function called globally, basically main
 
-
-
-
-async function start()
+// Check the site, giving quick feedback if it hasn't been set up properly.
+// Start the http service. Accept only requests from localhost, for security.
+// If successful, the handle function is called for each request.
+async function start() 
 {
-    //Try starting server with listener handle
-    try
+    try //try to start server, else throw an error
     {
-        //Access the root folder ./public
         await fs.access(root);
-        //Access index
         await fs.access(root + "/index.html");
-        //Define the types globally
         types = defineTypes();
-        //Create a set of paths and add / to it
         paths = new Set();
         paths.add("/");
-        //Start the server with listener handle
-        let server = http.createServer(handle);
-        server.listen(port, "localhost");
-        //Define the address
+        let service = http.createServer(handle);
+        service.listen(port, "localhost");
         let address = "http://localhost";
-        address = address + ":" + port;
-
-        //Print to console the address
+        if (port != 80) address = address + ":" + port;
         console.log("Server running at", address);
     }
-    //Catch any errors that might be thrown
-    catch (error)
-    {
-        //Print the error
-        console.log(err);
-        //Exit
-        // process.exit(1);
+    catch (err) 
+    { 
+        console.log(err); 
+        process.exit(1);
     }
 }
 
-async function handle(request, response)
+// Serve a request by delivering a file.
+async function handle(request, response) 
 {
-    let errorCode;
-    try 
-    {
-        console.log("Method:", request.method);
-        console.log("URL:", request.url);
-        console.log("Headers:", request.headers);
+    let url = request.url;
+    if (url.endsWith("/")) url = url + "index.html";
 
-        
-        let requestedURL = request.url;
-        if (requestedURL == "/" ) 
-        {
-            requestedURL = "/index.html";
-        }
-
-        errorCode = 404;
-        let ok = await checkPath(requestedURL);
-        if(!ok) {throw "Error 404: URL NotFound"};
+    let ok = await checkPath(url);
+    if (! ok) return fail(response, NotFound, "URL not found (check case)");
     
-        errorCode = 415;
-        let type = findType(requestedURL);
+    let type = findType(url);
+    if (type == null) return fail(response, BadType, "File type not supported");
 
-        //Find the file to respond with
-        let file = root + requestedURL;
-        let content = await fs.readFile(file);
-
-        //Deliver the file as a response
-        deliver(response, type, content);
-
-    } 
-    catch (error)
-    {
-        //Print the error
-        console.log("error caught!");
-        console.log(error);
-        //Exit
-        return fail(response, errorCode, error.toString());
-        // process.exit(1);
-    }
+    let file = root + url;
+    
+    let content = await fs.readFile(file);
+    
+    deliver(response, type, content);
 }
 
 // Check if a path is in or can be added to the set of site paths, in order
@@ -110,7 +86,6 @@ async function checkPath(path)
     return paths.has(path);
 }
 
-
 // Add the files and subfolders in a folder to the set of site paths.
 async function addContents(folder) 
 {
@@ -124,7 +99,6 @@ async function addContents(folder)
         paths.add(path);
     }
 }
-
 
 // Find the content type to respond with, or undefined.
 function findType(url) 
@@ -152,10 +126,13 @@ function fail(response, code, text)
     response.end();
 }
 
-
-
-
-function defineTypes() 
+// The most common standard file extensions are supported, and html is
+// delivered as "application/xhtml+xml".  Some common non-standard file
+// extensions are explicitly excluded.  This table is defined using a function
+// rather than just a global variable, because otherwise the table would have
+// to appear before calling start().  NOTE: add entries as needed or, for a more
+// complete list, install the mime module and adapt the list it provides.
+function defineTypes()
 {
     let types = 
     {
