@@ -15,6 +15,7 @@ let root = "./public";
 
 let OK = 200, NotFound = 404, BadType = 415, Error = 500;
 let types, paths;
+let address = "http://localhost:" + port;
 
 start();
 //============= END Run Server =============//
@@ -41,8 +42,8 @@ async function start()
         let server = http.Server(handle);
         await server.listen(port, "localhost");
         //Define the address
-        let address = "http://localhost";
-        address = address + ":" + port;
+        // let address = "http://localhost";
+        // address = address + ":" + port;
 
         //Print to console the address
         console.log("Server running at", address);
@@ -68,7 +69,12 @@ async function handle(request, response)//incomingMessage,serverResponse
         // console.log("Headers:", request.headers);
 
         
-        let requestedURL = request.url;
+        let requestedURL = request.node.url;
+        //remove http://localhost:+port from URL
+        // requestedURL = requestedURL.substring(address.length);
+        // console.log("req url"+requestedURL);
+
+        //if requested URL is / then direct to homepage
         if(requestedURL == "/" )
         {
             requestedURL = "/index.html";
@@ -78,7 +84,7 @@ async function handle(request, response)//incomingMessage,serverResponse
         if(await checkIfComment(requestedURL))
         {
             //handle comment
-            console.log("made comment");
+            // console.log("made comment");
 
             //parse the page we want
             // ?submit-comment has 15 characters
@@ -96,21 +102,23 @@ async function handle(request, response)//incomingMessage,serverResponse
         //Otherwise, deliver a file
         else
         {
-            errorCode = 404;
+            // errorCode = 404;
             // let ok = await checkPath(requestedURL);
             // if(!ok) {throw "Error 404: URL NotFound"};
 
             errorCode = 415;
             let type = findType(requestedURL);
 
-            console.log(requestedURL);
+            // console.log(requestedURL);
 
             //Find the file to respond with
             let file = root + requestedURL;
+            // console.log("file: "+file)
+            
             let content = await fs.readFile(file);
 
             //Deliver the file as a response
-            deliver(response, type, content);
+            await deliver(response, type, content);
         }
 
     } 
@@ -183,13 +191,19 @@ function findType(url)
 }
 
 // Deliver the file that has been read in to the browser.
-function deliver(response, type, content)
+async function deliver(response, type, content)
 {
+    // console.log("entered");
     let typeHeader = { "Content-Type": type };
     // console.log(typeHeader);
-    response.writeHead(OK, typeHeader);
-    response.write(content);
-    response.end();
+    // console.log(typeHeader);
+    // await console.log(response.writeHead(OK, typeHeader));
+    // console.log(response.node);
+
+    // response.write(content);
+    response.node.writeHead(OK, typeHeader);
+    response.node.write(content);
+    response.node.end();
 }
 
 // Give a minimal failure response to the browser

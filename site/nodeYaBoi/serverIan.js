@@ -66,6 +66,7 @@ async function handle(request, response)
     if (type == null) return fail(response, BadType, "File type not supported");
 
     let file = root + url;
+    console.log(file);
     
     let content = await fs.readFile(file);
     
