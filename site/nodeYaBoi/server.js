@@ -193,14 +193,8 @@ function findType(url)
 // Deliver the file that has been read in to the browser.
 async function deliver(response, type, content)
 {
-    // console.log("entered");
     let typeHeader = { "Content-Type": type };
-    // console.log(typeHeader);
-    // console.log(typeHeader);
-    // await console.log(response.writeHead(OK, typeHeader));
-    // console.log(response.node);
 
-    // response.write(content);
     response.node.writeHead(OK, typeHeader);
     response.node.write(content);
     response.node.end();
