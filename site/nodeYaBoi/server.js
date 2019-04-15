@@ -111,7 +111,7 @@ async function handle(request, response)//incomingMessage,serverResponse
             let renderedHTML = ejs.render(htmlContent, {myName: name, myText: text, myDate: date}, function(err, data) 
             {
                 console.log(err || data)
-            });
+            }); 
 
             response.node.write(renderedHTML);
             response.node.end();
