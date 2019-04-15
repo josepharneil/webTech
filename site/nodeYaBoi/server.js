@@ -19,7 +19,7 @@ start();
 
 
 
-
+//Effectively main
 async function start()
 {
     //Try starting server with listener handle
@@ -54,6 +54,7 @@ async function start()
     }
 }
 
+//Request listener
 async function handle(request, response)
 {
     let errorCode;

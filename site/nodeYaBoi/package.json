@@ -12,5 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^1.18.11"
+  },
+  "dependencies": {
+    "sqlite": "^3.0.3"
   }
 }
