@@ -280,22 +280,6 @@ lang="en-GB" xml:lang="en-GB">
                 </div>
             </div>
             <!-- END Comments Title -->
-
-            <!-- Example of a comment -->
-            <div class='comment-container'>
-                <div class='comment'>
-                    <div class='comment-name'>
-                        <p>Boi's Mum and #1 Fan!</p>
-                    </div>
-                    <div class='comment-text'>
-                        <p>I love you, son! Filler_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_text</p>
-                    </div>
-                    <div class='comment-date'>
-                        <p>12/04/19: 19:48 (GMT)</p>
-                    </div>
-                </div>
-            </div>
-            <!-- END Example of a comment -->
   
              <!-- Example of a comment -->
             <div class='comment-container'>
@@ -313,21 +297,24 @@ lang="en-GB" xml:lang="en-GB">
             </div>
             <!-- END Example of a comment -->
 
-            <!-- Example of a comment -->
-            <div class='comment-container'>
-                <div class='comment'>
-                    <div class='comment-name'>
-                        <p> <%= myName %> </p>
-                    </div>
-                    <div class='comment-text'>
-                        <p> <%= myText %> </p>
-                    </div>
-                    <div class='comment-date'>
-                        <p> <%= myDate %> </p>
+            <!-- For each comment -->
+            <% for(let i = 0; i < comments.length; i++) 
+            { %>
+                <div class='comment-container'>
+                    <div class='comment'>
+                        <div class='comment-name'>
+                            <p> <%= comments[i].name %> </p>
+                        </div>
+                        <div class='comment-text'>
+                            <p> <%= comments[i].text %> </p>
+                        </div>
+                        <div class='comment-date'>
+                            <p> <%= comments[i].date %> </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- END Example of a comment -->
+        <% } %>
+            <!-- END For each comment -->
 
             <!-- Comment Form -->
             <div class='comment-form-container'>
@@ -363,13 +350,6 @@ lang="en-GB" xml:lang="en-GB">
         </div>
         <!-- END Feedback Container -->
 
-                        <div class='comment-form-submit'>
-                            <input type="submit" value="Post Comment"/>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- END Comment Form -->
         </div>
         <!-- END Feedback Container -->
 

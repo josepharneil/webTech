@@ -112,13 +112,12 @@ async function handle(request, response)//incomingMessage,serverResponse
             // await db.run("insert into comments (name,text,date,page) values ('Joe','textddf','now','tokyo')");
             //await db.run("insert into comments (name,text,date,page) values ('" + name + "','" + text + "','" + date + "','" + pageToCommentOn + "')");
             await db.run("insert into comments (name,text,date,page) values ('" + name + "','" + text + "','" + date + "','" + pageToCommentOn + "')");
-            console.log(await db.all("select * from comments"));
+            //console.log(await db.all("select * from comments where page = '"+pageToCommentOn + "'"));
             // console.log(name);
 
             // console.log(text);
 
             
- 
             // let htmlContent = await fs.readFile('./views/tokyo.ejs', 'utf8');
             // let renderedHTML = ejs.render(htmlContent, {myName: name, myText: text, myDate: date}, function(err, data) 
             // {
@@ -129,6 +128,7 @@ async function handle(request, response)//incomingMessage,serverResponse
             // response.node.end(); 
 
             //redirect back to page
+            
         }
         //Otherwise, deliver a file
         else
@@ -148,8 +148,26 @@ async function handle(request, response)//incomingMessage,serverResponse
             
             let content = await fs.readFile(file);
 
-            //Deliver the file as a response
-            await deliver(response, type, content);
+            //If dynamic location page
+            if(requestedURL == '/tokyo.html')
+            {
+                // await render()
+                let comments = await db.all("select * from comments where page = 'tokyo'")
+                let htmlContent = await fs.readFile('./views/tokyo.ejs', 'utf8');
+                let renderedHTML = ejs.render(htmlContent, {comments:comments}, function(err, data) 
+                {
+                    console.log(err || data)
+                }); 
+
+                response.node.write(renderedHTML);
+                response.node.end(); 
+            }
+            //Else, deliver a static file
+            else
+            {
+                //Deliver the file as a response
+                await deliver(response, type, content);
+            }
         }
 
     } 
