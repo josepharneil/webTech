@@ -20,6 +20,8 @@ let OK = 200, NotFound = 404, BadType = 415, Error = 500;
 let types, paths;
 let address = "http://localhost:" + port;
 
+let locationPages;
+
 let db;
 
 start();
@@ -40,6 +42,7 @@ async function start()
         await fs.access(root + "/index.html");
         //Define the types globally
         types = defineTypes();
+        locationPages = defineLocationPages();
         //Create a set of paths and add / to it
         paths = new Set();
         paths.add("/");
@@ -109,25 +112,19 @@ async function handle(request, response)//incomingMessage,serverResponse
             let text = params.text;
             let date = new Date().toUTCString();
 
-            // await db.run("insert into comments (name,text,date,page) values ('Joe','textddf','now','tokyo')");
-            //await db.run("insert into comments (name,text,date,page) values ('" + name + "','" + text + "','" + date + "','" + pageToCommentOn + "')");
+            //add comment to database
             await db.run("insert into comments (name,text,date,page) values ('" + name + "','" + text + "','" + date + "','" + pageToCommentOn + "')");
-            //console.log(await db.all("select * from comments where page = '"+pageToCommentOn + "'"));
-            // console.log(name);
-
-            // console.log(text);
-
             
-            // let htmlContent = await fs.readFile('./views/tokyo.ejs', 'utf8');
-            // let renderedHTML = ejs.render(htmlContent, {myName: name, myText: text, myDate: date}, function(err, data) 
-            // {
-            //     console.log(err || data)
-            // }); 
- 
-            // response.node.write(renderedHTML);
-            // response.node.end(); 
+            //reload page
+            let comments = await db.all("select * from comments where page = '" + pageToCommentOn + "'")
+            let htmlContent = await fs.readFile('./views/'+pageToCommentOn+'.ejs', 'utf8');
+            let renderedHTML = ejs.render(htmlContent, {comments:comments}, function(err, data) 
+            {
+                console.log(err || data)
+            }); 
 
-            //redirect back to page
+            response.node.write(renderedHTML);
+            response.node.end(); 
             
         }
         //Otherwise, deliver a file
@@ -148,12 +145,15 @@ async function handle(request, response)//incomingMessage,serverResponse
             
             let content = await fs.readFile(file);
 
-            //If dynamic location page
-            if(requestedURL == '/tokyo.html')
+            //If dynamic location pages
+            
+            //'/tokyo.html'
+            if(locationPages.includes(requestedURL.substring(1)))
             {
+                let pageName = requestedURL.substring(1,requestedURL.length-4);
                 // await render()
-                let comments = await db.all("select * from comments where page = 'tokyo'")
-                let htmlContent = await fs.readFile('./views/tokyo.ejs', 'utf8');
+                let comments = await db.all("select * from comments where page = '"+pageName+"'")
+                let htmlContent = await fs.readFile('./views/'+pageName+'.ejs', 'utf8');
                 let renderedHTML = ejs.render(htmlContent, {comments:comments}, function(err, data) 
                 {
                     console.log(err || data)
@@ -261,6 +261,17 @@ async function fail(response, code, text)
     
     response.node.write(renderedHTML);
     response.node.end();
+}
+
+
+
+function defineLocationPages()
+{
+    let locationPages = 
+    [
+        "tokyo.html"
+    ];
+    return locationPages;
 }
 
 

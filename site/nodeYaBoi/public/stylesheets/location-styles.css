@@ -659,6 +659,7 @@ a:active
                         border-width: 2px;
                         border-color: lightgray;
                         font-size: 110%;
+                        resize:none;
                     }
 
                 .comment-form-submit
