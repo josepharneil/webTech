@@ -9,6 +9,8 @@ let http = require("q-io/http");
 let ejs = require('ejs');
 let qs = require("querystring");
 let sql = require("sqlite");
+// let crypto = require('crypto');
+// let tls = require('tls');
 
 //============= END Import Modules =============//
 
@@ -35,6 +37,14 @@ async function start()
     //Try starting server with listener handle
     try
     {
+
+        ////CRYPTO/////
+        // var privateKey = await fs.readFile('./crypto/privatekey.pem').toString();
+        // var certificate = await fs.readFile('./crypto/certificate.pem').toString();
+        // var credentials = await tls.createSecureContext({key: privateKey, cert: certificate});
+        //////////////
+
+
         db = await sql.open('./database/db.sqlite');
         //Access the root folder ./public
         await fs.access(root);
@@ -49,6 +59,7 @@ async function start()
         //Start the server with listener handle
         // let server = http.createServer(handle);
         let server = http.Server(handle);
+        // server.setSecure(credentials);
         await server.listen(port, "localhost");
         //Define the address
         // let address = "http://localhost";
