@@ -90,7 +90,7 @@ async function handle(request, response)//incomingMessage,serverResponse
 
         
         let requestedURL = request.node.url;
-        console.log("original request URL:" + requestedURL);
+        // console.log("original request URL:" + requestedURL);
         //remove http://localhost:+port from URL
         // requestedURL = requestedURL.substring(address.length);
         // console.log("req url"+requestedURL);
@@ -287,14 +287,32 @@ async function handle(request, response)//incomingMessage,serverResponse
             }
             //============= END LOCATION PAGE DYNAMIC FILE DELIVERY =============//
 
+            //dynamically deliver main page so we can show logged in user
+            else if(requestedURL == "/index.html")
+            {
+                let pageName = requestedURL.substring(1,requestedURL.length-5);
+                let htmlContent = await fs.readFile('./views/'+pageName+'.ejs', 'utf8');
 
+                //if logged in (using cookies)
+                //  render with name in place of signup/login
+                //else:
+                let renderedHTML = ejs.render(htmlContent, {signuplogin:"Signup/Login"}, function(err, data) 
+                {
+                    console.log(err || data)
+                });
+
+                response.node.write(renderedHTML);
+                response.node.end();
+                //Deliver the file as a response
+                // await deliver(response, type, content);
+            }
             //============= END DYNAMIC FILE DELIVERY =============//
+
 
             //============= STATIC FILE DELIVERY =============//
             //Else, deliver a static file
             else
             {
-                //Deliver the file as a response
                 await deliver(response, type, content);
             }
             //============= END STATIC FILE DELIVERY =============//
