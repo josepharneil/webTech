@@ -134,9 +134,69 @@ async function handle(request, response)//incomingMessage,serverResponse
                 console.log(err || data)
             }); 
 
+            console.log(requestedURL);
+
+            response.node.writeHead(302,  {Location: "/"+pageToCommentOn+".html#footer-container"})
             response.node.write(renderedHTML);
+            
+        
+            // response.node.writeHead("Location:"+ "http://" + request.node.headers['host'] + '/tokyo.html');
             response.node.end(); 
             
+        }
+        //If URL contains ?submit-signup, then submit a signup
+        else if(await checkIfSignUp(requestedURL))
+        {
+            //Read the submitted post body
+            let body = await request.body.read();
+            let bodyString = body.toString();
+
+            //Extract the parameters of the signup
+            let params = qs.parse(bodyString);
+            let name = params.name;
+            let email = params.email;
+            let password = params.password;
+            
+            //Check for email uniqueness in database
+            let checkUnique = await db.all("select * from users where email = '" + email + "'");
+            //if not unique, reload page with ejs view of "! not unique email !"
+            if(checkUnique.length != 0)
+            {
+
+            }
+            else
+            {
+                //if unique, continue signup
+                await db.run("insert into users (name,email,password) values ('" + name + "','" + email + "','" + password + "')");
+                console.log(await db.all("select * from users"));
+            }
+        }
+        //If URL contains ?submit-login, then submit a signup
+        else if(await checkIfLogIn(requestedURL))
+        {
+            //Read the submitted post body
+            let body = await request.body.read();
+            let bodyString = body.toString();
+
+            //Extract the parameters of the signup
+            let params = qs.parse(bodyString);
+            let email = params.email;
+            let password = params.password;
+            
+            //Check for email uniqueness in database
+            let checkUser = await db.all("select * from users where email = '" + email + "' and password = '" + password + "'");
+            //if not unique, reload page with ejs view of "! not unique email !"
+            if(checkUser.length == 0)
+            {
+                //redirect invalid email or password
+                console.log("invalid email or pword");
+            }
+            //if valid email and password
+            else
+            {
+                //login (cookies etc.)
+                console.log("successfully logged in");
+            }
         }
         //Otherwise, deliver a file
         else
@@ -172,7 +232,7 @@ async function handle(request, response)//incomingMessage,serverResponse
                 }); 
 
                 response.node.write(renderedHTML);
-                response.node.end(); 
+                response.node.end();
             }
             //Else, deliver a static file
             else
@@ -202,6 +262,36 @@ async function checkIfComment(url)
 {
     let n = url.lastIndexOf("?");
     if(url.substring(n+1) == "submit-comment")
+    {
+        // console.log(url.substring(n));
+        return true;
+    }
+    else
+    {
+        // console.log(url.substring(n));
+        return false;
+    }
+}
+
+async function checkIfLogIn(url)
+{
+    let n = url.lastIndexOf("?");
+    if(url.substring(n+1) == "submit-login")
+    {
+        // console.log(url.substring(n));
+        return true;
+    }
+    else
+    {
+        // console.log(url.substring(n));
+        return false;
+    }
+}
+
+async function checkIfSignUp(url)
+{
+    let n = url.lastIndexOf("?");
+    if(url.substring(n+1) == "submit-signup")
     {
         // console.log(url.substring(n));
         return true;

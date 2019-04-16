@@ -272,7 +272,7 @@ lang="en-GB" xml:lang="en-GB">
         </div>
 
         <!-- Feedback Container -->
-        <div class='feedback-container' id='feedback-container'>
+        <div class='feedback-container'>
             <!-- Comments Title -->
             <div class='comment-section-title-container'>
                 <div class='comment-section-title'>
@@ -281,20 +281,52 @@ lang="en-GB" xml:lang="en-GB">
             </div>
             <!-- END Comments Title -->
 
+            <!-- Example of a comment -->
+            <div class='comment-container'>
+                <div class='comment'>
+                    <div class='comment-name'>
+                        <p>Boi's Mum and #1 Fan!</p>
+                    </div>
+                    <div class='comment-text'>
+                        <p>I love you, son! Filler_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_textFiller_text</p>
+                    </div>
+                    <div class='comment-date'>
+                        <p>12/04/19: 19:48 (GMT)</p>
+                    </div>
+                </div>
+            </div>
+            <!-- END Example of a comment -->
+
+            <!-- Example of a comment -->
+            <div class='comment-container'>
+                <div class='comment'>
+                    <div class='comment-name'>
+                        <p>Ya Boi - Admin</p>
+                    </div>
+                    <div class='comment-text'>
+                        <p>Go away Mum!</p>
+                    </div>
+                    <div class='comment-date'>
+                        <p>12/04/19: 19:49 (GMT)</p>
+                    </div>
+                </div>
+            </div>
+            <!-- END Example of a comment -->
+
             <!-- Comment Form -->
             <div class='comment-form-container'>
                 <div class='comment-form'>
                     <!-- action: /tokyo. 
-                            Where the form data is sent to on the server. 
-                            It would contain the server-side scrypt that handles the form data.
+                         Where the form data is sent to on the server. 
+                         It would contain the server-side scrypt that handles the form data.
                     -->
                     <!-- target: self. The default. 
-                            Open in the current window 
-                            (as opposed to a new tab, for example). 
+                         Open in the current window 
+                         (as opposed to a new tab, for example). 
                     -->
                     <!-- method: post
-                            Specifies the HTTP method (GET or POST) to be used 
-                            when submitting the from data.
+                         Specifies the HTTP method (GET or POST) to be used 
+                         when submitting the from data.
                     -->
                     <form action="/tokyo.html?submit-comment" target="_Self" method="post">
                         <div class="comment-form-name">
@@ -312,51 +344,11 @@ lang="en-GB" xml:lang="en-GB">
                 </div>
             </div>
             <!-- END Comment Form -->
-  
-             <!-- Example of a comment -->
-            <!-- <div class='comment-container'>
-                <div class='comment'>
-                    <div class='comment-name'>
-                        <p>Ya Boi - Admin</p>
-                    </div>
-                    <div class='comment-text'>
-                        <p>Go away Mum!</p>
-                    </div>
-                    <div class='comment-date'>
-                        <p>12/04/19: 19:49 (GMT)</p>
-                    </div>
-                </div>
-            </div> -->
-            <!-- END Example of a comment -->
-
-            <!-- For each comment -->
-            <% for(let i = 0; i < comments.length; i++) 
-            { %>
-                <div class='comment-container'>
-                    <div class='comment'>
-                        <div class='comment-name'>
-                            <p> <%= comments[i].name %> </p>
-                        </div>
-                        <div class='comment-text'>
-                            <p> <%= comments[i].text %> </p>
-                        </div>
-                        <div class='comment-date'>
-                            <p> <%= comments[i].date %> </p>
-                        </div>
-                    </div>
-                </div>
-        <% } %>
-            <!-- END For each comment -->
-
-
-        </div>
-        <!-- END Feedback Container -->
-
         </div>
         <!-- END Feedback Container -->
 
         <!-- FOOTER -->
-        <div class='footer-container' id="footer-container">
+        <div class='footer-container'>
             <div class='footer'>
                 <div class='footer-item'>
                     <h2>Contact info</h2>
