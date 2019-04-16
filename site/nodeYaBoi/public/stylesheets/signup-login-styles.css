@@ -357,6 +357,7 @@ a:active
 
                         .signup-form-name input
                         {
+                            padding-left: 8px;
                             width: 80%;
                             height: 40px;
                             border-style: solid;
@@ -380,6 +381,7 @@ a:active
 
                         .signup-form-email input
                         {
+                            padding-left: 8px;
                             width: 80%;
                             height: 40px;
                             border-style: solid;
@@ -404,6 +406,7 @@ a:active
 
                         .signup-form-password input
                         {
+                            padding-left: 8px;
                             width: 80%;
                             height: 40px;
                             border-style: solid;
@@ -428,6 +431,17 @@ a:active
                             border-width: 1.5px;
                             border-color: gray;
                             background-color: lightgray;
+                        }
+
+                    .signup-form-error
+                    {
+                        color: red;
+                        width: 100%;
+                    }
+                    
+                        .signup-form-error h3
+                        {
+                            text-align: center;
                         }
 
 
@@ -536,6 +550,7 @@ a:active
 
                         .login-form-email input
                         {
+                            padding-left: 8px;
                             width: 80%;
                             height: 40px;
                             border-style: solid;
@@ -560,6 +575,7 @@ a:active
 
                         .login-form-password input
                         {
+                            padding-left: 8px;
                             width: 80%;
                             height: 40px;
                             border-style: solid;
@@ -584,6 +600,16 @@ a:active
                             border-width: 1.5px;
                             border-color: gray;
                             background-color: lightgray;
+                        }
+
+                    .login-form-error
+                    {
+                        color: red;
+                    }
+
+                        .login-form-error h3
+                        {
+                            text-align: center;
                         }
 
 
@@ -662,7 +688,7 @@ a:active
                 height: 100%;
                 margin-right: 0px;
                 margin-bottom: 1.5px;
-                padding-bottom: 60px;
+                padding-bottom: 160px;
             }
 
                 .signup-form-container

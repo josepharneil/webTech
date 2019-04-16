@@ -90,6 +90,7 @@ async function handle(request, response)//incomingMessage,serverResponse
 
         
         let requestedURL = request.node.url;
+        console.log("original request URL:" + requestedURL);
         //remove http://localhost:+port from URL
         // requestedURL = requestedURL.substring(address.length);
         // console.log("req url"+requestedURL);
@@ -100,6 +101,7 @@ async function handle(request, response)//incomingMessage,serverResponse
             requestedURL = "/index.html";
         }
         
+        //============= SUBMIT COMMENT =============//
         //If URL contains ?submit-comment then submit a comment
         if(await checkIfComment(requestedURL))
         {
@@ -134,9 +136,11 @@ async function handle(request, response)//incomingMessage,serverResponse
                 console.log(err || data)
             }); 
 
-            console.log(requestedURL);
+            // console.log(requestedURL);
 
-            response.node.writeHead(302,  {Location: "/"+pageToCommentOn+".html#footer-container"})
+            //Redirect to the footer (the bottom of the page)
+            response.node.writeHead(302,  {Location: "/"+pageToCommentOn+".html#footer-container"});
+
             response.node.write(renderedHTML);
             
         
@@ -144,6 +148,9 @@ async function handle(request, response)//incomingMessage,serverResponse
             response.node.end(); 
             
         }
+        //============= END SUBMIT COMMENT =============//
+
+        //============= SUBMIT SIGNUP =============//
         //If URL contains ?submit-signup, then submit a signup
         else if(await checkIfSignUp(requestedURL))
         {
@@ -162,18 +169,42 @@ async function handle(request, response)//incomingMessage,serverResponse
             //if not unique, reload page with ejs view of "! not unique email !"
             if(checkUnique.length != 0)
             {
+                //non valid email
 
+                //redirect to signup container
+                //response.node.writeHead(302,  {Location: "/signup-login.html#signup-container"});
+                
+                let htmlContent = await fs.readFile('./views/signup-login.ejs', 'utf8');
+                // console.log(htmlContent);
+                let renderedHTML = await ejs.render(htmlContent, {signuperrormessage:"There is already an account associated with this email.",loginerrormessage:""}, function(err, data) 
+                {
+                    console.log(err || data)
+                }); 
+                // console.log(renderedHTML);
+
+                //redirect to login container
+                // response.node.writeHead(302,  {Location: "/signup-login.html#login-container"});
+                // console.log(response.node.write(renderedHTML));
+                response.node.write(renderedHTML);
+                response.node.end()
             }
             else
             {
                 //if unique, continue signup
                 await db.run("insert into users (name,email,password) values ('" + name + "','" + email + "','" + password + "')");
                 console.log(await db.all("select * from users"));
+
+                //redirect to signup container
+                // response.node.writeHead(302,  {Location: "/signup-login.html#signup-container"});
             }
         }
+        //============= END SUBMIT SIGNUP =============//
+
+        //============= SUBMIT LOGIN =============//
         //If URL contains ?submit-login, then submit a signup
         else if(await checkIfLogIn(requestedURL))
         {
+            // console.log(requestedURL);
             //Read the submitted post body
             let body = await request.body.read();
             let bodyString = body.toString();
@@ -190,6 +221,20 @@ async function handle(request, response)//incomingMessage,serverResponse
             {
                 //redirect invalid email or password
                 console.log("invalid email or pword");
+
+                let htmlContent = await fs.readFile('./views/signup-login.ejs', 'utf8');
+                // console.log(htmlContent);
+                let renderedHTML = await ejs.render(htmlContent, {signuperrormessage: "",loginerrormessage:"An account does not exist with the submitted email and password."}, function(err, data) 
+                {
+                    console.log(err || data)
+                }); 
+                // console.log(renderedHTML);
+
+                //redirect to login container
+                // response.node.writeHead(302,  {Location: "/signup-login.html#login-container"});
+                // console.log(response.node.write(renderedHTML));
+                response.node.write(renderedHTML);
+                response.node.end()
             }
             //if valid email and password
             else
@@ -198,6 +243,9 @@ async function handle(request, response)//incomingMessage,serverResponse
                 console.log("successfully logged in");
             }
         }
+        //============= END SUBMIT LOGIN =============//
+
+        //============= FILE DELIVERY =============//
         //Otherwise, deliver a file
         else
         {
@@ -219,7 +267,10 @@ async function handle(request, response)//incomingMessage,serverResponse
             //If dynamic location pages
             
             //'/tokyo.html'
+            //============= DYNAMIC FILE DELIVERY =============//
 
+
+            //============= LOCATION PAGE DYNAMIC FILE DELIVERY =============//
             if(locationPages.includes(requestedURL.substring(1)))
             {
                 let pageName = requestedURL.substring(1,requestedURL.length-5);
@@ -234,13 +285,21 @@ async function handle(request, response)//incomingMessage,serverResponse
                 response.node.write(renderedHTML);
                 response.node.end();
             }
+            //============= END LOCATION PAGE DYNAMIC FILE DELIVERY =============//
+
+
+            //============= END DYNAMIC FILE DELIVERY =============//
+
+            //============= STATIC FILE DELIVERY =============//
             //Else, deliver a static file
             else
             {
                 //Deliver the file as a response
                 await deliver(response, type, content);
             }
+            //============= END STATIC FILE DELIVERY =============//
         }
+        //============= END FILE DELIVERY =============//
 
     } 
     catch (error)
