@@ -148,9 +148,10 @@ async function handle(request, response)//incomingMessage,serverResponse
             //If dynamic location pages
             
             //'/tokyo.html'
+
             if(locationPages.includes(requestedURL.substring(1)))
             {
-                let pageName = requestedURL.substring(1,requestedURL.length-4);
+                let pageName = requestedURL.substring(1,requestedURL.length-5);
                 // await render()
                 let comments = await db.all("select * from comments where page = '"+pageName+"'")
                 let htmlContent = await fs.readFile('./views/'+pageName+'.ejs', 'utf8');
