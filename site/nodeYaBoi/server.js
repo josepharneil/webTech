@@ -1,10 +1,11 @@
 "use strict"
 
 //============= Import Modules =============//
-// let http = require("http");
+let http = require("http");
+// let http = require("q-io/http");
 let fs = require("fs").promises;
 // let fs = require("q-io/fs");
-let http = require("q-io/http");
+
 // let pug = require('pug');
 let ejs = require('ejs');
 let qs = require("querystring");
@@ -57,8 +58,8 @@ async function start()
         paths = new Set();
         paths.add("/");
         //Start the server with listener handle
-        // let server = http.createServer(handle);
-        let server = http.Server(handle);
+        let server = http.createServer(handle);
+        // let server = http.Server(handle);
         // server.setSecure(credentials);
         await server.listen(port, "localhost");
         //Define the address
@@ -89,7 +90,8 @@ async function handle(request, response)//incomingMessage,serverResponse
         // console.log("Headers:", request.headers);
 
         
-        let requestedURL = request.node.url;
+        // let requestedURL = request.node.url;
+        let requestedURL = request.url;
         // console.log("original request URL:" + requestedURL);
         //remove http://localhost:+port from URL
         // requestedURL = requestedURL.substring(address.length);
@@ -111,23 +113,30 @@ async function handle(request, response)//incomingMessage,serverResponse
             //parse the page we want
             // ?submit-comment has 15 characters
             let pageToCommentOn = requestedURL.substring(1,requestedURL.length-20);
-            // console.log(pageToCommentOn);
 
-            // console.log(request);
-            // console.log(request.body);
-            let body = await request.body.read();
-            let bodyString = body.toString();
-            // console.log("Body:", body.toString());
-            // name=BOIIII&text=boi
 
-            let params = qs.parse(bodyString);
-            let name = params.name;
-            let text = params.text;
-            let date = new Date().toUTCString();
+            //Callback-style read body
+            var body = '';
+            var params;
+            var name;
+            var text;
+            request.on('data', async function (data) 
+            {
+                body += data;
+            });
+            request.on('end', async function () 
+            {
+    
+                params = await qs.parse(body);
+                name = params.name;
+                text = params.text;
+                let date = new Date().toUTCString();
 
-            //add comment to database
-            await db.run("insert into comments (name,text,date,page) values ('" + name + "','" + text + "','" + date + "','" + pageToCommentOn + "')");
-            
+                //add comment to database
+                await db.run("insert into comments (name,text,date,page) values ('" + name + "','" + text + "','" + date + "','" + pageToCommentOn + "')");
+        
+            });
+
             //reload page
             let comments = await db.all("select * from comments where page = '" + pageToCommentOn + "'")
             let htmlContent = await fs.readFile('./views/'+pageToCommentOn+'.ejs', 'utf8');
@@ -139,13 +148,16 @@ async function handle(request, response)//incomingMessage,serverResponse
             // console.log(requestedURL);
 
             //Redirect to the footer (the bottom of the page)
-            response.node.writeHead(302,  {Location: "/"+pageToCommentOn+".html#footer-container"});
+            // response.node.writeHead(302,  {Location: "/"+pageToCommentOn+".html#footer-container"});
+            response.writeHead(302,  {Location: "/"+pageToCommentOn+".html#footer-container"});
 
-            response.node.write(renderedHTML);
+            // response.node.write(renderedHTML);
+            response.write(renderedHTML);
             
         
             // response.node.writeHead("Location:"+ "http://" + request.node.headers['host'] + '/tokyo.html');
-            response.node.end(); 
+            // response.node.end();
+            response.end();
             
         }
         //============= END SUBMIT COMMENT =============//
@@ -185,8 +197,11 @@ async function handle(request, response)//incomingMessage,serverResponse
                 //redirect to login container
                 // response.node.writeHead(302,  {Location: "/signup-login.html#login-container"});
                 // console.log(response.node.write(renderedHTML));
-                response.node.write(renderedHTML);
-                response.node.end()
+                response.write(renderedHTML);
+                response.end()
+
+                // response.node.write(renderedHTML);
+                // response.node.end()
             }
             else
             {
@@ -233,8 +248,10 @@ async function handle(request, response)//incomingMessage,serverResponse
                 //redirect to login container
                 // response.node.writeHead(302,  {Location: "/signup-login.html#login-container"});
                 // console.log(response.node.write(renderedHTML));
-                response.node.write(renderedHTML);
-                response.node.end()
+                // response.node.write(renderedHTML);
+                // response.node.end()
+                response.write(renderedHTML);
+                response.end()
             }
             //if valid email and password
             else
@@ -282,8 +299,10 @@ async function handle(request, response)//incomingMessage,serverResponse
                     console.log(err || data)
                 }); 
 
-                response.node.write(renderedHTML);
-                response.node.end();
+                // response.node.write(renderedHTML);
+                // response.node.end();
+                response.write(renderedHTML);
+                response.end();
             }
             //============= END LOCATION PAGE DYNAMIC FILE DELIVERY =============//
 
@@ -301,8 +320,10 @@ async function handle(request, response)//incomingMessage,serverResponse
                     console.log(err || data)
                 });
 
-                response.node.write(renderedHTML);
-                response.node.end();
+                // response.node.write(renderedHTML);
+                // response.node.end();
+                response.write(renderedHTML);
+                response.end();
                 //Deliver the file as a response
                 // await deliver(response, type, content);
             }
@@ -423,9 +444,12 @@ async function deliver(response, type, content)
 {
     let typeHeader = { "Content-Type": type };
 
-    response.node.writeHead(OK, typeHeader);
-    response.node.write(content);
-    response.node.end();
+    // response.node.writeHead(OK, typeHeader);
+    // response.node.write(content);
+    // response.node.end();
+    response.writeHead(OK, typeHeader);
+    response.write(content);
+    response.end();
 }
 
 // Give a minimal failure response to the browser
@@ -438,8 +462,8 @@ async function fail(response, code, text)
         console.log(err || data)
     });
     
-    response.node.write(renderedHTML);
-    response.node.end();
+    response.write(renderedHTML);
+    response.end();
 }
 
 
