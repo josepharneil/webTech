@@ -1,7 +1,8 @@
 "use strict"
 
 //============= Import Modules =============//
-let http = require("http");
+// let http = require('http');
+let https = require('https');
 // let http = require("q-io/http");
 let fs = require("fs").promises;
 // let fs = require("q-io/fs");
@@ -16,18 +17,20 @@ let crypto = require('crypto');
 //============= END Import Modules =============//
 
 //============= Run Server =============//
-let port = 8080;
+let port = 8443;
 let root = "./public";
 
 let OK = 200, NotFound = 404, BadType = 415, Error = 500;
 let types, paths;
-let address = "http://localhost:" + port;
+let address = "https://localhost:" + port;
 
 let locationPages;
 
 let db;
 
 var cookieMap = new Map();//{};
+
+let privateKey, certificate;
 
 start();
 //============= END Run Server =============//
@@ -42,8 +45,8 @@ async function start()
     {
 
         ////CRYPTO/////
-        // var privateKey = await fs.readFile('./crypto/privatekey.pem').toString();
-        // var certificate = await fs.readFile('./crypto/certificate.pem').toString();
+        privateKey = await fs.readFile('./crypto/privatekey.pem');
+        certificate = await fs.readFile('./crypto/certificate.pem');
         // var credentials = await tls.createSecureContext({key: privateKey, cert: certificate});
         //////////////
 
@@ -60,7 +63,9 @@ async function start()
         paths = new Set();
         paths.add("/");
         //Start the server with listener handle
-        let server = http.createServer(handle);
+        // let server = http.createServer(handle);
+        const options = {key: privateKey, cert: certificate};
+        let server = https.createServer(options, handle);
         // let server = http.Server(handle);
         // server.setSecure(credentials);
         await server.listen(port, "localhost");
