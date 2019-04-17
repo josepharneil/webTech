@@ -100,11 +100,18 @@ async function handle(request, response)//incomingMessage,serverResponse
 
         let cookie = request.headers.cookie;
         var currentSessionID;
+        var sessionEmail;
+        var sessionUsername;
         if(typeof cookie !== 'undefined')
         {
             let parts = cookie.split("=");
             currentSessionID = parts[1];
-            // console.log(currentSessionID);
+
+            sessionEmail = cookieMap.get(currentSessionID);
+            if (typeof sessionEmail !== 'undefined')
+            {
+                sessionUsername = (await db.all("select * from users where email = '" + sessionEmail + "'"))[0].name;
+            }
         }
         
         // console.log(cookie);
@@ -145,10 +152,24 @@ async function handle(request, response)//incomingMessage,serverResponse
                 //reload page
                 let comments = await db.all("select * from comments where page = '" + pageToCommentOn + "'")
                 let htmlContent = await fs.readFile('./views/'+pageToCommentOn+'.ejs', 'utf8');
-                let renderedHTML = ejs.render(htmlContent, {comments:comments}, function(err, data) 
+
+                var renderedHTML;
+                if(cookieMap.has(currentSessionID))
                 {
-                    console.log(err || data)
-                }); 
+                    renderedHTML = await ejs.render(htmlContent, { signuplogin: "Signed in as: " +sessionUsername,comments:comments }, function(err, data) 
+                    {
+                        console.log(err || data)
+                    });
+                }
+                else
+                {
+                    renderedHTML = await ejs.render(htmlContent, {signuplogin: "Signup/Login",comments:comments}, function(err, data) 
+                    {
+                        console.log(err || data)
+                    });
+                }
+
+
                 //Redirect to the footer (the bottom of the page)
                 response.writeHead(302,  {Location: "/"+pageToCommentOn+".html#footer-container"});
 
@@ -240,8 +261,8 @@ async function handle(request, response)//incomingMessage,serverResponse
                     // console.log(htmlContent);
                     let renderedHTML = await ejs.render(htmlContent, {signuperrormessage: "",loginerrormessage:"An account does not exist with the submitted email and password."}, function(err, data) 
                     {
-                        console.log(err || data)
-                    }); 
+                        console.log(err || data);
+                    });
 
                     //redirect to login container
                     response.write(renderedHTML);
@@ -310,10 +331,27 @@ async function handle(request, response)//incomingMessage,serverResponse
                 // await render()
                 let comments = await db.all("select * from comments where page = '"+pageName+"'")
                 let htmlContent = await fs.readFile('./views/'+pageName+'.ejs', 'utf8');
-                let renderedHTML = ejs.render(htmlContent, {comments:comments}, function(err, data) 
+
+                var renderedHTML;
+                if(cookieMap.has(currentSessionID))
                 {
-                    console.log(err || data)
-                }); 
+                    renderedHTML = await ejs.render(htmlContent, { signuplogin: "Signed in as: " +sessionUsername,comments:comments }, function(err, data) 
+                    {
+                        console.log(err || data)
+                    });
+                }
+                else
+                {
+                    renderedHTML = await ejs.render(htmlContent, {signuplogin: "Signup/Login",comments:comments}, function(err, data) 
+                    {
+                        console.log(err || data)
+                    });
+                }
+
+                // let renderedHTML = await ejs.render(htmlContent, {comments:comments}, function(err, data) 
+                // {
+                //     console.log(err || data)
+                // }); 
 
                 response.write(renderedHTML);
                 response.end();
@@ -321,7 +359,7 @@ async function handle(request, response)//incomingMessage,serverResponse
             //============= END LOCATION PAGE DYNAMIC FILE DELIVERY =============//
 
             //dynamically deliver main page so we can show logged in user
-            else if(requestedURL == "/index.html")
+            else if(requestedURL == "/index.html" || requestedURL == "/all-locations.html")
             {
                 let pageName = requestedURL.substring(1,requestedURL.length-5);
                 let htmlContent = await fs.readFile('./views/'+pageName+'.ejs', 'utf8');
@@ -329,11 +367,7 @@ async function handle(request, response)//incomingMessage,serverResponse
                 //if logged in
                 if(cookieMap.has(currentSessionID))
                 {
-                    // console.log("found coookie");
-
-                    let email = cookieMap.get(currentSessionID);
-                    let username = (await db.all("select * from users where email = '" + email + "'"))[0].name;
-                    let renderedHTML = ejs.render(htmlContent, {signuplogin: "Signed in as: " +username }, function(err, data) 
+                    let renderedHTML = await ejs.render(htmlContent, {signuplogin: "Signed in as: " +sessionUsername }, function(err, data) 
                     {
                         console.log(err || data)
                     });
@@ -344,13 +378,27 @@ async function handle(request, response)//incomingMessage,serverResponse
                 else
                 {
                     //else:
-                    let renderedHTML = ejs.render(htmlContent, {signuplogin:"Signup/Login"}, function(err, data) 
+                    let renderedHTML = await ejs.render(htmlContent, {signuplogin:"Signup/Login"}, function(err, data) 
                     {
                         console.log(err || data)
                     });
 
                     response.write(renderedHTML);
                     response.end();
+                }
+            }
+
+            else if(requestedURL == "/signup-login.html")
+            {
+                //If logged in, redirect
+                if(cookieMap.has(currentSessionID))
+                {
+                    response.writeHead(302,  {Location: "/index.html"});
+                    response.end();
+                }
+                else
+                {
+                    await deliver(response, type, content);
                 }
             }
             //============= END DYNAMIC FILE DELIVERY =============//
@@ -471,7 +519,7 @@ async function fail(response, code, text)
 {
     // let file = pug.renderFile( './views/index.pug', {title:'yeyeye'} )
     let htmlContent = await fs.readFile('./views/error.ejs', 'utf8');
-    let renderedHTML = ejs.render(htmlContent, {error: text}, function(err, data) 
+    let renderedHTML = await ejs.render(htmlContent, {error: text}, function(err, data) 
     {
         console.log(err || data)
     });

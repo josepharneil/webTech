@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en-GB" xml:lang="en-GB"> 
+
+<!-- ALL PORTRAIT IMAGES SHOULD BE 4 ACROSS, 5 DOWN -->
+
+<!-- HEAD -->
+<head>
+    <title>Where's Ya Boi</title>
+    <meta charset="UTF-8"/>
+    <meta name='viewport'
+        content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+    <link rel="stylesheet" href="stylesheets/all-locations-styles.css" />
+</head>
+
+<body>
+    <div class='page'>
+        <!-- HEADER -->
+        <!-- MOBILE-HEADER -->
+        <div class='mobile-header-container'>
+            <div class ='mobile-header'>
+                <img src='images/header.svg'/>
+            </div>
+        </div>
+
+        <!-- TABLET/DESKTOP HEADER -->
+        <div class='header-container' id='header-container'>
+            <div class ='header'>
+                <!-- Logo image -->
+                <div class='header-image'>
+                    <a href='/'>
+                        <img src='images/header.svg'/>
+                    </a>
+                </div>
+                
+                <!-- Menu -->
+                <div class='menu-container'>
+                    <a href='/#about'>
+                        <div class='menu-item'>
+                            <h4>About</h4>
+                        </div>
+                    </a>
+                    <a href='/#recents'>
+                        <div class='menu-item'>
+                            <h4>Recents</h4>
+                        </div>
+                    </a>
+                    <a href='/all-locations.html'>
+                        <div class='menu-item'>
+                            <h4>All Locations</h4>
+                        </div>
+                    </a>
+                    <a href='/#map'>
+                        <div class='menu-item'>
+                            <h4>Map</h4>
+                        </div>
+                    </a>
+                    <a href='/signup-login.html'>
+                        <div class='menu-item'>
+                            <h4> <%= signuplogin %></h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Hamburger -->
+                <div class='hamburger-container'>
+                    <div class='hamburger'>
+                        <!-- Icon -->
+                        <div class='hamburger-icon-container'>
+                            <div class='hamburger-bar1'></div>
+                            <div class='hamburger-bar2'></div>
+                            <div class='hamburger-bar3'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENU -->
+        <!-- MOBILE MENU -->
+        <div class='mobile-menu-container' id='mobile-menu-container'>
+            <div class='mobile-menu'>
+                <a href='/#about'>
+                    <div class='mobile-menu-item'>
+                        <h4>About</h4>
+                    </div>
+                </a>
+                <a href='/#recents'>
+                    <div class='mobile-menu-item'>
+                        <h4>Recents</h4>
+                    </div>
+                </a>
+                <a href='/all-locations.html'>
+                    <div class='mobile-menu-item'>
+                        <h4>All Locations</h4>
+                    </div>
+                </a>
+                <a href='signup-login.html'>
+                    <div class='mobile-menu-item'>
+                        <h4> <%= signuplogin %></h4>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- HERO PHOTO -->
+        <!-- MOBILE HERO PHOTO -->
+        <div class='mobile-hero-photo-container'>
+            <div class='mobile-hero-photo'>
+                <img src='images/all-locations-hero-5.jpg'/>
+                <h1>All Locations</h1>
+                <!-- <h2>ya boi goes to Japan</h2> -->
+            </div>
+        </div>
+
+
+        <!-- ACCORDION -->
+        <div class = "accordion-container">
+            <div class = "accordion">
+                <button class = "accordion-button">
+                    <h1>Africa</h1>
+                    <img src="images/arrow.svg"/>
+                </button>
+                <div class = "panel">
+                    <div class='recents-container'>
+                        <div class='recents'>
+                            <!-- RECENTS TITLE -->
+                            <!-- <div class='recents-title'>
+                                <h1>Recent Locations</h1>
+                            </div> -->
+                            <!-- RECENTS GRID -->
+                            <div class='recents-grid'>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html' class='recents-item-links'>
+                                        <img src="images/skytree-square.jpg "/>
+                                        <h1>Tokyo</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html' class='recents-item-links'>
+                                        <img src="images/sapa.jpg"/>
+                                        <h1>Sapa</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html' class='recents-item-links'>
+                                        <img src="images/Iceland.jpg"/>
+                                        <h1>Iceland</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html' class='recents-item-links'>
+                                        <img src="images/Lisbon2.jpg"/>
+                                        <h1>Lisbon</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html' class='recents-item-links'>
+                                        <img src="images/machuPichu.jpg"/>
+                                        <h1>Machu Pichu</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html' class='recents-item-links'>
+                                        <img src="images/yosemite.jpg"/>
+                                        <h1>Yosemite</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html' class='recents-item-links'>
+                                        <img src="images/Varanasi.jpg"/>
+                                        <h1>Varanasi</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html' class='recents-item-links'>
+                                        <img src="images/rio.jpg"/>                                
+                                        <h1>Rio de Janeiro</h1>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Panel end -->
+                
+
+                <button class = "accordion-button">
+                    <h1>Asia</h1>
+                    <img src="images/arrow.svg"/>
+                </button>
+                <div class = "panel">
+                    <div class='recents-container'>
+                        <div class='recents'>
+                            <!-- RECENTS TITLE -->
+                            <!-- <div class='recents-title'>
+                                <h1>Recent Locations</h1>
+                            </div> -->
+                            <!-- RECENTS GRID -->
+                            <div class='recents-grid'>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/skytree-square.jpg "/>
+                                        <h1>Tokyo</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/sapa.jpg"/>
+                                        <h1>Sapa</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Iceland.jpg"/>
+                                        <h1>Iceland</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Lisbon1.jpg"/>
+                                        <h1>Lisbon</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/machuPichu.jpg"/>
+                                        <h1>Machu Pichu</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/yosemite.jpg"/>
+                                        <h1>Yosemite</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Varanasi.jpg"/>
+                                        <h1>Varanasi</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/rio.jpg"/>                                
+                                        <h1>Rio de Janeiro</h1>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Panel end -->
+
+
+
+                <button class = "accordion-button">
+                    <h1>Caribbean</h1>
+                    <img src="images/arrow.svg"/>
+                </button>
+                <div class = "panel">
+                    <div class='recents-container'>
+                        <div class='recents'>
+                            <!-- RECENTS TITLE -->
+                            <!-- <div class='recents-title'>
+                                <h1>Recent Locations</h1>
+                            </div> -->
+                            <!-- RECENTS GRID -->
+                            <div class='recents-grid'>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/skytree-square.jpg "/>
+                                        <h1>Tokyo</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/sapa.jpg"/>
+                                        <h1>Sapa</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Iceland.jpg"/>
+                                        <h1>Iceland</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Lisbon1.jpg"/>
+                                        <h1>Lisbon</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/machuPichu.jpg"/>
+                                        <h1>Machu Pichu</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/yosemite.jpg"/>
+                                        <h1>Yosemite</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Varanasi.jpg"/>
+                                        <h1>Varanasi</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/rio.jpg"/>                                
+                                        <h1>Rio de Janeiro</h1>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Panel end -->
+
+                <button class = "accordion-button">
+                    <h1>Central America</h1>
+                    <img src="images/arrow.svg"/>
+                </button>
+                <div class = "panel">
+                    <div class='recents-container'>
+                        <div class='recents'>
+                            <!-- RECENTS TITLE -->
+                            <!-- <div class='recents-title'>
+                                <h1>Recent Locations</h1>
+                            </div> -->
+                            <!-- RECENTS GRID -->
+                            <div class='recents-grid'>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/skytree-square.jpg "/>
+                                        <h1>Tokyo</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/sapa.jpg"/>
+                                        <h1>Sapa</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Iceland.jpg"/>
+                                        <h1>Iceland</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Lisbon1.jpg"/>
+                                        <h1>Lisbon</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/machuPichu.jpg"/>
+                                        <h1>Machu Pichu</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/yosemite.jpg"/>
+                                        <h1>Yosemite</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Varanasi.jpg"/>
+                                        <h1>Varanasi</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/rio.jpg"/>                                
+                                        <h1>Rio de Janeiro</h1>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Panel end -->
+
+                <button class = "accordion-button">
+                    <h1>Europe</h1>
+                    <img src="images/arrow.svg"/>
+                </button>
+                <div class = "panel">
+                    <div class='recents-container'>
+                        <div class='recents'>
+                            <!-- RECENTS TITLE -->
+                            <!-- <div class='recents-title'>
+                                <h1>Recent Locations</h1>
+                            </div> -->
+                            <!-- RECENTS GRID -->
+                            <div class='recents-grid'>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/skytree-square.jpg "/>
+                                        <h1>Tokyo</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/sapa.jpg"/>
+                                        <h1>Sapa</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Iceland.jpg"/>
+                                        <h1>Iceland</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Lisbon1.jpg"/>
+                                        <h1>Lisbon</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/machuPichu.jpg"/>
+                                        <h1>Machu Pichu</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/yosemite.jpg"/>
+                                        <h1>Yosemite</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Varanasi.jpg"/>
+                                        <h1>Varanasi</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/rio.jpg"/>                                
+                                        <h1>Rio de Janeiro</h1>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Panel end -->
+
+                <button class = "accordion-button">
+                    <h1>Middle East</h1>
+                    <img src="images/arrow.svg"/>
+                </button>
+                <div class = "panel">
+                    <div class='recents-container'>
+                        <div class='recents'>
+                            <!-- RECENTS TITLE -->
+                            <!-- <div class='recents-title'>
+                                <h1>Recent Locations</h1>
+                            </div> -->
+                            <!-- RECENTS GRID -->
+                            <div class='recents-grid'>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/skytree-square.jpg "/>
+                                        <h1>Tokyo</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/sapa.jpg"/>
+                                        <h1>Sapa</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Iceland.jpg"/>
+                                        <h1>Iceland</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Lisbon1.jpg"/>
+                                        <h1>Lisbon</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/machuPichu.jpg"/>
+                                        <h1>Machu Pichu</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/yosemite.jpg"/>
+                                        <h1>Yosemite</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Varanasi.jpg"/>
+                                        <h1>Varanasi</h1>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Panel end -->
+
+                <button class = "accordion-button">
+                    <h1>North America</h1>
+                    <img src="images/arrow.svg"/>
+                </button>
+                <div class = "panel">
+                    <div class='recents-container'>
+                        <div class='recents'>
+                            <!-- RECENTS TITLE -->
+                            <!-- <div class='recents-title'>
+                                <h1>Recent Locations</h1>
+                            </div> -->
+                            <!-- RECENTS GRID -->
+                            <div class='recents-grid'>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/skytree-square.jpg "/>
+                                        <h1>Tokyo</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/sapa.jpg"/>
+                                        <h1>Sapa</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Iceland.jpg"/>
+                                        <h1>Iceland</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Lisbon1.jpg"/>
+                                        <h1>Lisbon</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/machuPichu.jpg"/>
+                                        <h1>Machu Pichu</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/yosemite.jpg"/>
+                                        <h1>Yosemite</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Varanasi.jpg"/>
+                                        <h1>Varanasi</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/rio.jpg"/>                                
+                                        <h1>Rio de Janeiro</h1>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Panel end -->
+
+                <button class = "accordion-button">
+                    <h1>Oceania</h1>
+                    <img src="images/arrow.svg"/>
+                </button>
+                <div class = "panel">
+                    <div class='recents-container'>
+                        <div class='recents'>
+                            <!-- RECENTS TITLE -->
+                            <!-- <div class='recents-title'>
+                                <h1>Recent Locations</h1>
+                            </div> -->
+                            <!-- RECENTS GRID -->
+                            <div class='recents-grid'>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/skytree-square.jpg "/>
+                                        <h1>Tokyo</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/sapa.jpg"/>
+                                        <h1>Sapa</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Iceland.jpg"/>
+                                        <h1>Iceland</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Lisbon1.jpg"/>
+                                        <h1>Lisbon</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/machuPichu.jpg"/>
+                                        <h1>Machu Pichu</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/yosemite.jpg"/>
+                                        <h1>Yosemite</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Varanasi.jpg"/>
+                                        <h1>Varanasi</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/rio.jpg"/>                                
+                                        <h1>Rio de Janeiro</h1>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Panel end -->
+
+                <button class = "accordion-button">
+                    <h1>South America</h1>
+                    <img src="images/arrow.svg"/>
+                </button>
+                <div class = "panel">
+                    <div class='recents-container'>
+                        <div class='recents'>
+                            <!-- RECENTS TITLE -->
+                            <!-- <div class='recents-title'>
+                                <h1>Recent Locations</h1>
+                            </div> -->
+                            <!-- RECENTS GRID -->
+                            <div class='recents-grid'>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/skytree-square.jpg "/>
+                                        <h1>Tokyo</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/sapa.jpg"/>
+                                        <h1>Sapa</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Iceland.jpg"/>
+                                        <h1>Iceland</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Lisbon1.jpg"/>
+                                        <h1>Lisbon</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/machuPichu.jpg"/>
+                                        <h1>Machu Pichu</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/yosemite.jpg"/>
+                                        <h1>Yosemite</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/Varanasi.jpg"/>
+                                        <h1>Varanasi</h1>
+                                    </a>
+                                </div>
+                                <div class='recents-item'>
+                                    <a href='/tokyo.html'>
+                                        <img src="images/rio.jpg"/>                                
+                                        <h1>Rio de Janeiro</h1>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Panel end -->
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class='footer-container'>
+        <div class='footer'>
+            <div class='footer-item'>
+                <h2>Contact info</h2>
+                <p>Email: email@email.com</p>
+                <p>Phone: 12345678</p>
+                <p>Fax: 12345678</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascripts/all-locations.js"></script>
+</body>  
+        
+</html>
