@@ -12,7 +12,7 @@ let ejs = require('ejs');
 let qs = require("querystring");
 let sql = require("sqlite");
 let crypto = require('crypto');
-// let tls = require('tls');
+let shajs = require('sha.js');
 
 //============= END Import Modules =============//
 
@@ -23,14 +23,9 @@ let root = "./public";
 let OK = 200, NotFound = 404, BadType = 415, Error = 500;
 let types, paths;
 let address = "https://localhost:" + port;
-
 let locationPages;
-
 let db;
-
-var cookieMap = new Map();//{};
-
-let privateKey, certificate;
+var cookieMap = new Map();
 
 start();
 //============= END Run Server =============//
@@ -44,12 +39,9 @@ async function start()
     try
     {
 
-        ////CRYPTO/////
-        privateKey = await fs.readFile('./crypto/privatekey.pem');
-        certificate = await fs.readFile('./crypto/certificate.pem');
-        // var credentials = await tls.createSecureContext({key: privateKey, cert: certificate});
-        //////////////
-
+        let privateKey = await fs.readFile('./crypto/privatekey.pem');
+        let certificate = await fs.readFile('./crypto/certificate.pem');
+        const options = {key: privateKey, cert: certificate};
 
         db = await sql.open('./database/db.sqlite');
         //Access the root folder ./public
@@ -64,7 +56,7 @@ async function start()
         paths.add("/");
         //Start the server with listener handle
         // let server = http.createServer(handle);
-        const options = {key: privateKey, cert: certificate};
+        
         let server = https.createServer(options, handle);
         // let server = http.Server(handle);
         // server.setSecure(credentials);
@@ -208,6 +200,15 @@ async function handle(request, response)//incomingMessage,serverResponse
                 let name = params.name;
                 let email = params.email;
                 let password = params.password;
+
+                ///salted hash///
+                let buf = crypto.randomBytes(32);
+                let salt = toHexString(buf);
+
+                let saltedPassword = password + salt;
+                let hashedSaltedPassword = shajs('sha256').update(saltedPassword).digest('hex');
+                ////end salted hash///
+
                 //Check for email uniqueness in database
                 let checkUnique = await db.all("select * from users where email = '" + email + "'");
                 //if not unique, reload page with ejs view of "! not unique email !"
@@ -227,7 +228,7 @@ async function handle(request, response)//incomingMessage,serverResponse
                 else
                 {
                     //if unique, continue signup
-                    await db.run("insert into users (name,email,password) values ('" + name + "','" + email + "','" + password + "')");
+                    await db.run("insert into users (name,email,password,salt) values ('" + name + "','" + email + "','" + hashedSaltedPassword + "','" + salt + "')");
                     console.log(await db.all("select * from users"));
 
                     //redirect to signup container
@@ -255,9 +256,9 @@ async function handle(request, response)//incomingMessage,serverResponse
             {
                 let params = await qs.parse(body);
                 let email = params.email;
-                let password = params.password;
-                let checkUser = await db.all("select * from users where email = '" + email + "' and password = '" + password + "'");
-                if(checkUser.length == 0)
+                
+                let checkEmail = await db.all("select * from users where email = '" + email + "'");
+                if(checkEmail.length == 0)
                 {
                     //redirect invalid email or password
                     console.log("invalid email or pword");
@@ -273,33 +274,52 @@ async function handle(request, response)//incomingMessage,serverResponse
                     response.write(renderedHTML);
                     response.end()
                 }
-                //if valid email and password
                 else
                 {
-                    //login (cookies etc.)
-                    console.log("successfully logged in");
+                    let salt = (await db.all("select * from users where email = '" + email + "'"))[0].salt;
+                    let password = params.password;
+                    let saltedPassword = password + salt;
+
+                    let hashedSaltedPassword = await shajs('sha256').update(saltedPassword).digest('hex');
                     
-                    // sync
-                    var buf;
-                    try {
-                        buf = crypto.randomBytes(256);
-                        // console.log('Have %d bytes of random data: %s', buf.length, buf);
-                    } catch (ex) {
-                        // handle error
-                        // most likely, entropy sources are drained
+
+                    let checkUser = await db.all("select * from users where email = '" + email + "' and password = '" + hashedSaltedPassword + "'");
+                    if(checkUser.length == 0)
+                    {
+                        //redirect invalid email or password
+                        console.log("invalid email or pword");
+
+                        let htmlContent = await fs.readFile('./views/signup-login.ejs', 'utf8');
+                        // console.log(htmlContent);
+                        let renderedHTML = await ejs.render(htmlContent, {signuperrormessage: "",loginerrormessage:"An account does not exist with the submitted email and password."}, function(err, data) 
+                        {
+                            console.log(err || data);
+                        });
+
+                        //redirect to login container
+                        response.write(renderedHTML);
+                        response.end()
                     }
+                    //if valid email and password
+                    else
+                    {
+                        //login (cookies etc.)
+                        console.log("successfully logged in");
+                        
+                        // sync
+                        var buf = crypto.randomBytes(256);
+                        // let hexSessionID = toHexString(buf);
+                        let hexSessionID = buf.toString('hex');
+                        
+                        response.setHeader('Set-Cookie', ["session = " + hexSessionID]);
 
-                    let hexSessionID = toHexString(buf);
-                    // console.log("hex "+hexCookie);
-                    
-                    response.setHeader('Set-Cookie', ["session = " + hexSessionID]);
+                        cookieMap.set(hexSessionID, email);
 
-                    cookieMap.set(hexSessionID, email);
+                        // console.log(cookieMap);
 
-                    // console.log(cookieMap);
-
-                    response.writeHead(302,  {Location: "/index.html"});
-                    response.end();
+                        response.writeHead(302,  {Location: "/index.html"});
+                        response.end();
+                    }
                 }
             });
 

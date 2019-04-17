@@ -116,15 +116,15 @@ lang="en-GB" xml:lang="en-GB">
                             <form action="/signup-login.html?submit-signup" target="_Self" method="post">
                                 <div class="signup-form-name">
                                     <h3>name</h3>
-                                    <input type="text" name="name"/>
+                                    <input type="text" name="name" required="true" />
                                 </div>
                                 <div class="signup-form-email">
                                     <h3>email</h3>
-                                    <input type="text" name="email"/>
+                                    <input type="text" name="email" required="true" />
                                 </div>
                                 <div class="signup-form-password">
                                     <h3>password</h3>
-                                    <input type="text" name="password"/>
+                                    <input type="password" name="password" required="true" />
                                 </div>
                                 <div class='signup-form-submit'>
                                     <input type="submit" value="Sign Up"/>
@@ -147,14 +147,14 @@ lang="en-GB" xml:lang="en-GB">
                             <form action="/signup-login.html?submit-login" target="_Self" method="post">
                                 <div class="login-form-email">
                                     <h3>email</h3>
-                                    <input type="text" name="email"/>
+                                    <input type="text" name="email" required="true" />
                                 </div>
                                 <div class="login-form-password">
                                     <h3>password</h3>
-                                    <input type="text" name="password"/>
+                                    <input type="text" name="password" required="true" />
                                 </div>
                                 <div class='login-form-submit'>
-                                    <input type="submit" value="Log In"/>
+                                    <input type="password" value="Log In"/>
                                 </div>
                                 <div class='login-form-error'>
                                     <h3> <%= loginerrormessage %></h3>
@@ -180,7 +180,7 @@ lang="en-GB" xml:lang="en-GB">
 
     </div>
 
-    <script src="javascripts/index.js"></script>
+    <script src="javascripts/signup-login.js"></script>
     
 
 </body>
