@@ -142,7 +142,7 @@ async function handle(request, response)//incomingMessage,serverResponse
             {
     
                 let params = await qs.parse(body);
-                let name = params.name;
+                let name = sessionUsername;
                 let text = params.text;
                 let date = new Date().toUTCString();
 
@@ -156,14 +156,14 @@ async function handle(request, response)//incomingMessage,serverResponse
                 var renderedHTML;
                 if(cookieMap.has(currentSessionID))
                 {
-                    renderedHTML = await ejs.render(htmlContent, { signuplogin: "Signed in as: " +sessionUsername,comments:comments }, function(err, data) 
+                    renderedHTML = await ejs.render(htmlContent, { signuplogin: "Signed in as: " +sessionUsername,username: "Posting as: " + sessionUsername,comments:comments,isdisabled:"" }, function(err, data) 
                     {
                         console.log(err || data)
                     });
                 }
                 else
                 {
-                    renderedHTML = await ejs.render(htmlContent, {signuplogin: "Signup/Login",comments:comments}, function(err, data) 
+                    renderedHTML = await ejs.render(htmlContent, {signuplogin: "Signup/Login",comments:comments,username:"You must be logged in to comment",isdisabled:"disabled"}, function(err, data) 
                     {
                         console.log(err || data)
                     });
@@ -335,14 +335,14 @@ async function handle(request, response)//incomingMessage,serverResponse
                 var renderedHTML;
                 if(cookieMap.has(currentSessionID))
                 {
-                    renderedHTML = await ejs.render(htmlContent, { signuplogin: "Signed in as: " +sessionUsername,comments:comments }, function(err, data) 
+                    renderedHTML = await ejs.render(htmlContent, { signuplogin: "Signed in as: " +sessionUsername,comments:comments,username:"Posting as: " +sessionUsername,isdisabled:"" }, function(err, data) 
                     {
                         console.log(err || data)
                     });
                 }
                 else
                 {
-                    renderedHTML = await ejs.render(htmlContent, {signuplogin: "Signup/Login",comments:comments}, function(err, data) 
+                    renderedHTML = await ejs.render(htmlContent, {signuplogin: "Signup/Login",comments:comments,username: "You must be logged in to comment", isdisabled:"disabled"}, function(err, data) 
                     {
                         console.log(err || data)
                     });

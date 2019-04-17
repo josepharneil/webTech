@@ -297,16 +297,16 @@ lang="en-GB" xml:lang="en-GB">
                             when submitting the from data.
                     -->
                     <form action="/tokyo.html?submit-comment" target="_Self" method="post">
-                        <div class="comment-form-name">
-                            <h3>enter name here</h3>
-                            <input type="text" name="name"/>
+                        <div class="comment-form-name<%=isdisabled%>">
+                            <h3><%= username %></h3>
+                            <!-- <input type="text" name="name"/> -->
                         </div>
                         <div class="comment-form-text">
-                            <h3>enter comment here</h3>
-                            <textarea type="text" name="text"></textarea>
+                            <!-- <h3>enter comment here</h3> -->
+                            <textarea type="text" name="text" placeholder='enter comment here' required <%=isdisabled%>></textarea>
                         </div>
                         <div class='comment-form-submit'>
-                            <input type="submit" value="Post Comment"/>
+                            <input type="submit" value="Post Comment" <%=isdisabled%> />
                         </div>
                     </form>
                 </div>
