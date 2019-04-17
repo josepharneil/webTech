@@ -90,12 +90,8 @@ async function handle(request, response)//incomingMessage,serverResponse
         // console.log("Headers:", request.headers);
 
         
-        // let requestedURL = request.node.url;
         let requestedURL = request.url;
-        // console.log("original request URL:" + requestedURL);
-        //remove http://localhost:+port from URL
-        // requestedURL = requestedURL.substring(address.length);
-        // console.log("req url"+requestedURL);
+
 
         //if requested URL is / then direct to homepage
         if(requestedURL == "/" )
@@ -108,18 +104,13 @@ async function handle(request, response)//incomingMessage,serverResponse
         if(await checkIfComment(requestedURL))
         {
             //handle comment
-            // console.log("made comment");
 
             //parse the page we want
             // ?submit-comment has 15 characters
             let pageToCommentOn = requestedURL.substring(1,requestedURL.length-20);
 
-
             //Callback-style read body
             var body = '';
-            var params;
-            var name;
-            var text;
             request.on('data', async function (data) 
             {
                 body += data;
@@ -127,37 +118,32 @@ async function handle(request, response)//incomingMessage,serverResponse
             request.on('end', async function () 
             {
     
-                params = await qs.parse(body);
-                name = params.name;
-                text = params.text;
+                let params = await qs.parse(body);
+                let name = params.name;
+                let text = params.text;
                 let date = new Date().toUTCString();
 
                 //add comment to database
                 await db.run("insert into comments (name,text,date,page) values ('" + name + "','" + text + "','" + date + "','" + pageToCommentOn + "')");
-        
+
+                //reload page
+                let comments = await db.all("select * from comments where page = '" + pageToCommentOn + "'")
+                let htmlContent = await fs.readFile('./views/'+pageToCommentOn+'.ejs', 'utf8');
+                let renderedHTML = ejs.render(htmlContent, {comments:comments}, function(err, data) 
+                {
+                    console.log(err || data)
+                }); 
+                //Redirect to the footer (the bottom of the page)
+                response.writeHead(302,  {Location: "/"+pageToCommentOn+".html#footer-container"});
+
+                
+                response.write(renderedHTML);
+                response.end();
             });
 
-            //reload page
-            let comments = await db.all("select * from comments where page = '" + pageToCommentOn + "'")
-            let htmlContent = await fs.readFile('./views/'+pageToCommentOn+'.ejs', 'utf8');
-            let renderedHTML = ejs.render(htmlContent, {comments:comments}, function(err, data) 
-            {
-                console.log(err || data)
-            }); 
-
-            // console.log(requestedURL);
-
-            //Redirect to the footer (the bottom of the page)
-            // response.node.writeHead(302,  {Location: "/"+pageToCommentOn+".html#footer-container"});
-            response.writeHead(302,  {Location: "/"+pageToCommentOn+".html#footer-container"});
-
-            // response.node.write(renderedHTML);
-            response.write(renderedHTML);
             
-        
-            // response.node.writeHead("Location:"+ "http://" + request.node.headers['host'] + '/tokyo.html');
-            // response.node.end();
-            response.end();
+
+            
             
         }
         //============= END SUBMIT COMMENT =============//
@@ -166,52 +152,49 @@ async function handle(request, response)//incomingMessage,serverResponse
         //If URL contains ?submit-signup, then submit a signup
         else if(await checkIfSignUp(requestedURL))
         {
-            //Read the submitted post body
-            let body = await request.body.read();
-            let bodyString = body.toString();
-
-            //Extract the parameters of the signup
-            let params = qs.parse(bodyString);
-            let name = params.name;
-            let email = params.email;
-            let password = params.password;
-            
-            //Check for email uniqueness in database
-            let checkUnique = await db.all("select * from users where email = '" + email + "'");
-            //if not unique, reload page with ejs view of "! not unique email !"
-            if(checkUnique.length != 0)
+            //Callback-style read body
+            var body = '';
+            //start reading body
+            request.on('data', async function (data) 
             {
-                //non valid email
-
-                //redirect to signup container
-                //response.node.writeHead(302,  {Location: "/signup-login.html#signup-container"});
-                
-                let htmlContent = await fs.readFile('./views/signup-login.ejs', 'utf8');
-                // console.log(htmlContent);
-                let renderedHTML = await ejs.render(htmlContent, {signuperrormessage:"There is already an account associated with this email.",loginerrormessage:""}, function(err, data) 
+                body += data;
+            });
+            //when finished reading body
+            request.on('end', async function () 
+            {
+                let params = await qs.parse(body);
+                let name = params.name;
+                let email = params.email;
+                let password = params.password;
+                //Check for email uniqueness in database
+                let checkUnique = await db.all("select * from users where email = '" + email + "'");
+                //if not unique, reload page with ejs view of "! not unique email !"
+                if(checkUnique.length != 0)
                 {
-                    console.log(err || data)
-                }); 
-                // console.log(renderedHTML);
+                    //non valid email
+                    let htmlContent = await fs.readFile('./views/signup-login.ejs', 'utf8');
+                    let renderedHTML = await ejs.render(htmlContent, {signuperrormessage:"There is already an account associated with this email.",loginerrormessage:""}, function(err, data) 
+                    {
+                        console.log(err || data);
+                    });
 
-                //redirect to login container
-                // response.node.writeHead(302,  {Location: "/signup-login.html#login-container"});
-                // console.log(response.node.write(renderedHTML));
-                response.write(renderedHTML);
-                response.end()
+                    //redirect to login container
+                    response.write(renderedHTML);
+                    response.end();
+                }
+                else
+                {
+                    //if unique, continue signup
+                    await db.run("insert into users (name,email,password) values ('" + name + "','" + email + "','" + password + "')");
+                    console.log(await db.all("select * from users"));
 
-                // response.node.write(renderedHTML);
-                // response.node.end()
-            }
-            else
-            {
-                //if unique, continue signup
-                await db.run("insert into users (name,email,password) values ('" + name + "','" + email + "','" + password + "')");
-                console.log(await db.all("select * from users"));
+                    //redirect to signup container
+                    // response.node.writeHead(302,  {Location: "/signup-login.html#signup-container"});
+                }
+            });
 
-                //redirect to signup container
-                // response.node.writeHead(302,  {Location: "/signup-login.html#signup-container"});
-            }
+            
+            
         }
         //============= END SUBMIT SIGNUP =============//
 
@@ -219,46 +202,44 @@ async function handle(request, response)//incomingMessage,serverResponse
         //If URL contains ?submit-login, then submit a signup
         else if(await checkIfLogIn(requestedURL))
         {
-            // console.log(requestedURL);
-            //Read the submitted post body
-            let body = await request.body.read();
-            let bodyString = body.toString();
 
-            //Extract the parameters of the signup
-            let params = qs.parse(bodyString);
-            let email = params.email;
-            let password = params.password;
-            
-            //Check if user credentials are correct
-            let checkUser = await db.all("select * from users where email = '" + email + "' and password = '" + password + "'");
-            //if not correct, reload page with ejs view of "! incorrect credentials !"
-            if(checkUser.length == 0)
+            //Callback-style read body
+            var body = '';
+            request.on('data', async function (data) 
             {
-                //redirect invalid email or password
-                console.log("invalid email or pword");
-
-                let htmlContent = await fs.readFile('./views/signup-login.ejs', 'utf8');
-                // console.log(htmlContent);
-                let renderedHTML = await ejs.render(htmlContent, {signuperrormessage: "",loginerrormessage:"An account does not exist with the submitted email and password."}, function(err, data) 
+                body += data;
+            });
+            request.on('end', async function () 
+            {
+                let params = await qs.parse(body);
+                let email = params.email;
+                let password = params.password;
+                let checkUser = await db.all("select * from users where email = '" + email + "' and password = '" + password + "'");
+                if(checkUser.length == 0)
                 {
-                    console.log(err || data)
-                }); 
-                // console.log(renderedHTML);
+                    //redirect invalid email or password
+                    console.log("invalid email or pword");
 
-                //redirect to login container
-                // response.node.writeHead(302,  {Location: "/signup-login.html#login-container"});
-                // console.log(response.node.write(renderedHTML));
-                // response.node.write(renderedHTML);
-                // response.node.end()
-                response.write(renderedHTML);
-                response.end()
-            }
-            //if valid email and password
-            else
-            {
-                //login (cookies etc.)
-                console.log("successfully logged in");
-            }
+                    let htmlContent = await fs.readFile('./views/signup-login.ejs', 'utf8');
+                    // console.log(htmlContent);
+                    let renderedHTML = await ejs.render(htmlContent, {signuperrormessage: "",loginerrormessage:"An account does not exist with the submitted email and password."}, function(err, data) 
+                    {
+                        console.log(err || data)
+                    }); 
+
+                    //redirect to login container
+                    response.write(renderedHTML);
+                    response.end()
+                }
+                //if valid email and password
+                else
+                {
+                    //login (cookies etc.)
+                    console.log("successfully logged in");
+                }
+            });
+
+            
         }
         //============= END SUBMIT LOGIN =============//
 
@@ -281,9 +262,6 @@ async function handle(request, response)//incomingMessage,serverResponse
             
             let content = await fs.readFile(file);
 
-            //If dynamic location pages
-            
-            //'/tokyo.html'
             //============= DYNAMIC FILE DELIVERY =============//
 
 
@@ -299,8 +277,6 @@ async function handle(request, response)//incomingMessage,serverResponse
                     console.log(err || data)
                 }); 
 
-                // response.node.write(renderedHTML);
-                // response.node.end();
                 response.write(renderedHTML);
                 response.end();
             }
@@ -320,12 +296,8 @@ async function handle(request, response)//incomingMessage,serverResponse
                     console.log(err || data)
                 });
 
-                // response.node.write(renderedHTML);
-                // response.node.end();
                 response.write(renderedHTML);
                 response.end();
-                //Deliver the file as a response
-                // await deliver(response, type, content);
             }
             //============= END DYNAMIC FILE DELIVERY =============//
 
@@ -348,9 +320,6 @@ async function handle(request, response)//incomingMessage,serverResponse
         console.log(error);
         //Exit
         return fail(response, errorCode, error.toString());
-
-
-        // process.exit(1);
     }
 }
 
@@ -361,12 +330,10 @@ async function checkIfComment(url)
     let n = url.lastIndexOf("?");
     if(url.substring(n+1) == "submit-comment")
     {
-        // console.log(url.substring(n));
         return true;
     }
     else
     {
-        // console.log(url.substring(n));
         return false;
     }
 }
@@ -376,12 +343,10 @@ async function checkIfLogIn(url)
     let n = url.lastIndexOf("?");
     if(url.substring(n+1) == "submit-login")
     {
-        // console.log(url.substring(n));
         return true;
     }
     else
     {
-        // console.log(url.substring(n));
         return false;
     }
 }
@@ -391,12 +356,10 @@ async function checkIfSignUp(url)
     let n = url.lastIndexOf("?");
     if(url.substring(n+1) == "submit-signup")
     {
-        // console.log(url.substring(n));
         return true;
     }
     else
     {
-        // console.log(url.substring(n));
         return false;
     }
 }
@@ -444,9 +407,6 @@ async function deliver(response, type, content)
 {
     let typeHeader = { "Content-Type": type };
 
-    // response.node.writeHead(OK, typeHeader);
-    // response.node.write(content);
-    // response.node.end();
     response.writeHead(OK, typeHeader);
     response.write(content);
     response.end();
