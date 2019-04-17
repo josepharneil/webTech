@@ -682,7 +682,7 @@ recents-item h2
 }
 
 /* Hamburger */
-@media only screen and (max-width: 668px) 
+@media only screen and (max-width: 850px)
 {
     .menu-container
     {

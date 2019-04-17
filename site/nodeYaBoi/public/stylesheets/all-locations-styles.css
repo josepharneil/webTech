@@ -617,7 +617,7 @@ a:active
 
 
 /* Hamburger */
-@media only screen and (max-width: 668px) 
+@media only screen and (max-width: 850px)
 {
     .menu-container
     {

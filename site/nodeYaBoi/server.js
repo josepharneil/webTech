@@ -10,7 +10,7 @@ let fs = require("fs").promises;
 let ejs = require('ejs');
 let qs = require("querystring");
 let sql = require("sqlite");
-// let crypto = require('crypto');
+let crypto = require('crypto');
 // let tls = require('tls');
 
 //============= END Import Modules =============//
@@ -26,6 +26,8 @@ let address = "http://localhost:" + port;
 let locationPages;
 
 let db;
+
+var cookieMap = new Map();//{};
 
 start();
 //============= END Run Server =============//
@@ -88,10 +90,24 @@ async function handle(request, response)//incomingMessage,serverResponse
         // console.log("Method:", request.method);
         // console.log("URL:", request.url);
         // console.log("Headers:", request.headers);
-
         
         let requestedURL = request.url;
 
+        if(requestedURL == '/favicon.ico')
+        {
+            return;
+        }
+
+        let cookie = request.headers.cookie;
+        var currentSessionID;
+        if(typeof cookie !== 'undefined')
+        {
+            let parts = cookie.split("=");
+            currentSessionID = parts[1];
+            // console.log(currentSessionID);
+        }
+        
+        // console.log(cookie);
 
         //if requested URL is / then direct to homepage
         if(requestedURL == "/" )
@@ -236,6 +252,28 @@ async function handle(request, response)//incomingMessage,serverResponse
                 {
                     //login (cookies etc.)
                     console.log("successfully logged in");
+                    
+                    // sync
+                    var buf;
+                    try {
+                        buf = crypto.randomBytes(256);
+                        // console.log('Have %d bytes of random data: %s', buf.length, buf);
+                    } catch (ex) {
+                        // handle error
+                        // most likely, entropy sources are drained
+                    }
+
+                    let hexSessionID = toHexString(buf);
+                    // console.log("hex "+hexCookie);
+                    
+                    response.setHeader('Set-Cookie', ["session = " + hexSessionID]);
+
+                    cookieMap.set(hexSessionID, email);
+
+                    // console.log(cookieMap);
+
+                    response.writeHead(302,  {Location: "/index.html"});
+                    response.end();
                 }
             });
 
@@ -288,16 +326,32 @@ async function handle(request, response)//incomingMessage,serverResponse
                 let pageName = requestedURL.substring(1,requestedURL.length-5);
                 let htmlContent = await fs.readFile('./views/'+pageName+'.ejs', 'utf8');
 
-                //if logged in (using cookies)
-                //  render with name in place of signup/login
-                //else:
-                let renderedHTML = ejs.render(htmlContent, {signuplogin:"Signup/Login"}, function(err, data) 
+                //if logged in
+                if(cookieMap.has(currentSessionID))
                 {
-                    console.log(err || data)
-                });
+                    // console.log("found coookie");
 
-                response.write(renderedHTML);
-                response.end();
+                    let email = cookieMap.get(currentSessionID);
+                    let username = (await db.all("select * from users where email = '" + email + "'"))[0].name;
+                    let renderedHTML = ejs.render(htmlContent, {signuplogin: "Signed in as: " +username }, function(err, data) 
+                    {
+                        console.log(err || data)
+                    });
+
+                    response.write(renderedHTML);
+                    response.end();
+                }
+                else
+                {
+                    //else:
+                    let renderedHTML = ejs.render(htmlContent, {signuplogin:"Signup/Login"}, function(err, data) 
+                    {
+                        console.log(err || data)
+                    });
+
+                    response.write(renderedHTML);
+                    response.end();
+                }
             }
             //============= END DYNAMIC FILE DELIVERY =============//
 
@@ -435,6 +489,13 @@ function defineLocationPages()
         "tokyo.html"
     ];
     return locationPages;
+}
+
+function toHexString(byteArray) 
+{
+    return Array.from(byteArray, function(byte) {
+      return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+    }).join('')
 }
 
 
