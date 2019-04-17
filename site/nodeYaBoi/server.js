@@ -214,9 +214,9 @@ async function handle(request, response)//incomingMessage,serverResponse
             let email = params.email;
             let password = params.password;
             
-            //Check for email uniqueness in database
+            //Check if user credentials are correct
             let checkUser = await db.all("select * from users where email = '" + email + "' and password = '" + password + "'");
-            //if not unique, reload page with ejs view of "! not unique email !"
+            //if not correct, reload page with ejs view of "! incorrect credentials !"
             if(checkUser.length == 0)
             {
                 //redirect invalid email or password
