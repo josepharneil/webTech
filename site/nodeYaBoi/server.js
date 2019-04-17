@@ -107,7 +107,11 @@ async function handle(request, response)//incomingMessage,serverResponse
             sessionEmail = cookieMap.get(currentSessionID);
             if (typeof sessionEmail !== 'undefined')
             {
-                sessionUsername = (await db.all("select * from users where email = '" + sessionEmail + "'"))[0].name;
+                var ps = await db.prepare("select * from users where email = ?");
+                // sessionUsername = (await db.all("select * from users where email = '" + sessionEmail + "'"))[0].name;
+
+                sessionUsername = (await ps.all(sessionEmail))[0].name;
+                await ps.finalize();
             }
         }
         
@@ -144,10 +148,14 @@ async function handle(request, response)//incomingMessage,serverResponse
                 let date = new Date().toUTCString();
 
                 //add comment to database
-                await db.run("insert into comments (name,text,date,page) values ('" + name + "','" + text + "','" + date + "','" + pageToCommentOn + "')");
+                var ps = await db.prepare("insert into comments (name,text,date,page) values (?,?,?,?)");
+                await ps.run(name,text,date,pageToCommentOn);
+                await ps.finalize();
 
                 //reload page
-                let comments = await db.all("select * from comments where page = '" + pageToCommentOn + "'")
+                var ps = await db.prepare("select * from comments where page = ?");
+                let comments = await ps.all(pageToCommentOn);
+                await ps.finalize()
                 let htmlContent = await fs.readFile('./views/'+pageToCommentOn+'.ejs', 'utf8');
 
                 var renderedHTML;
@@ -210,7 +218,10 @@ async function handle(request, response)//incomingMessage,serverResponse
                 ////end salted hash///
 
                 //Check for email uniqueness in database
-                let checkUnique = await db.all("select * from users where email = '" + email + "'");
+                var ps = await db.prepare("select * from users where email = ?");
+                let checkUnique = await ps.all(email);
+                await ps.finalize();
+
                 //if not unique, reload page with ejs view of "! not unique email !"
                 if(checkUnique.length != 0)
                 {
@@ -228,11 +239,21 @@ async function handle(request, response)//incomingMessage,serverResponse
                 else
                 {
                     //if unique, continue signup
-                    await db.run("insert into users (name,email,password,salt) values ('" + name + "','" + email + "','" + hashedSaltedPassword + "','" + salt + "')");
-                    console.log(await db.all("select * from users"));
+                    var ps = await db.prepare("insert into users (name,email,password,salt) values (?,?,?,?)");
+                    await ps.run(name,email,hashedSaltedPassword,salt);
 
-                    //redirect to signup container
-                    // response.node.writeHead(302,  {Location: "/signup-login.html#signup-container"});
+                    await ps.finalize();
+                    // console.log(await db.all("select * from users"));
+
+                    let htmlContent = await fs.readFile('./views/signup-login.ejs', 'utf8');
+                    let renderedHTML = await ejs.render(htmlContent, {signuperrormessage:"Account created successfully; please log in.",loginerrormessage:""}, function(err, data) 
+                    {
+                        console.log(err || data);
+                    });
+
+                    //redirect to login container
+                    response.write(renderedHTML);
+                    response.end();
                 }
             });
 
@@ -257,7 +278,11 @@ async function handle(request, response)//incomingMessage,serverResponse
                 let params = await qs.parse(body);
                 let email = params.email;
                 
-                let checkEmail = await db.all("select * from users where email = '" + email + "'");
+                // let checkEmail = await db.all("select * from users where email = '" + email + "'");
+                var ps = await db.prepare("select * from users where email = ?");
+                let checkEmail = await ps.all(email);
+                await ps.finalize();
+
                 if(checkEmail.length == 0)
                 {
                     //redirect invalid email or password
@@ -276,14 +301,19 @@ async function handle(request, response)//incomingMessage,serverResponse
                 }
                 else
                 {
-                    let salt = (await db.all("select * from users where email = '" + email + "'"))[0].salt;
+                    var ps = await db.prepare("select * from users where email = ?");
+                    // let salt = (await db.all("select * from users where email = '" + email + "'"))[0].salt;
+                    let salt = (await ps.all(email))[0].salt;
+                    await ps.finalize();
                     let password = params.password;
                     let saltedPassword = password + salt;
 
                     let hashedSaltedPassword = await shajs('sha256').update(saltedPassword).digest('hex');
                     
-
-                    let checkUser = await db.all("select * from users where email = '" + email + "' and password = '" + hashedSaltedPassword + "'");
+                    var ps = await db.prepare("select * from users where email = ? and password = ?");
+                    // let checkUser = await db.all("select * from users where email = '" + email + "' and password = '" + hashedSaltedPassword + "'");
+                    let checkUser = await ps.all(email, hashedSaltedPassword);
+                    await ps.finalize();
                     if(checkUser.length == 0)
                     {
                         //redirect invalid email or password
@@ -354,7 +384,10 @@ async function handle(request, response)//incomingMessage,serverResponse
             {
                 let pageName = requestedURL.substring(1,requestedURL.length-5);
                 // await render()
-                let comments = await db.all("select * from comments where page = '"+pageName+"'")
+                var ps = await db.prepare("select * from comments where page = ?");
+                // let comments = await db.all("select * from comments where page = '"+pageName+"'")
+                let comments = await ps.all(pageName);
+                await ps.finalize();
                 let htmlContent = await fs.readFile('./views/'+pageName+'.ejs', 'utf8');
 
                 var renderedHTML;
