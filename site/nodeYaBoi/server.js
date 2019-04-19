@@ -81,8 +81,8 @@ async function start()
 async function validate(URL)
 {
     var result = true;
-    console.log(URL);
-    console.log(URL.match(/\/\./g));
+
+    ///////REJECT OUTRIGHT THESE THINGS/////
     // reject occurences of /.
     if(await URL.match(/\/\./g) !== null)
     {
@@ -108,12 +108,16 @@ async function validate(URL)
         result = false;
     }
     //reject if any non ascii characters, or non meaningful ascii characters
-    var ascii = /^[ -~]+$/;
-    if(!ascii.test(URL))
+    var asciiREX = /^[ -~]+$/;
+    if(!asciiREX.test(URL))
     {
         console.log("rejection 5");
         result = false; 
     }
+
+    //////MAKE SURE THAT THE STRING CONFORMS TO FOLLOWING REGEX//////
+    var myREX = /^\/?(images\/|javascripts\/|stylesheets\/)[a-zA-Z|.]*$/
+    
     return result;
 }
 
@@ -139,11 +143,6 @@ async function handle(request, response)//incomingMessage,serverResponse
         if(!isValid)
         {
             console.log("URL REJECTED!");
-            return;
-        }
-
-        if(requestedURL == '/favicon.ico')
-        {
             return;
         }
 
