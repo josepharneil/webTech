@@ -78,6 +78,45 @@ async function start()
     }
 }
 
+async function validate(URL)
+{
+    var result = true;
+    console.log(URL);
+    console.log(URL.match(/\/\./g));
+    // reject occurences of /.
+    if(await URL.match(/\/\./g) !== null)
+    {
+        console.log("rejection 1");
+        result = false;
+    }
+    //reject occurences of //
+    if(await URL.match(/\/\//g) !== null)
+    {
+        console.log("rejection 2");
+        result = false;
+    }
+    //reject URLs not starting with /
+    if(!URL.startsWith("/"))
+    {
+        console.log("rejection 3");
+        result = false;
+    }
+    //reject URL if ends in /
+    if(URL[URL.length -1] == "/")
+    {
+        console.log("rejection 4");
+        result = false;
+    }
+    //reject if any non ascii characters, or non meaningful ascii characters
+    var ascii = /^[ -~]+$/;
+    if(!ascii.test(URL))
+    {
+        console.log("rejection 5");
+        result = false; 
+    }
+    return result;
+}
+
 //Request listener
 async function handle(request, response)//incomingMessage,serverResponse
 {
@@ -89,6 +128,19 @@ async function handle(request, response)//incomingMessage,serverResponse
         // console.log("Headers:", request.headers);
         
         let requestedURL = request.url;
+
+        if(requestedURL == "/" )
+        {
+            requestedURL = "/index.html";
+        }
+
+        let isValid = await validate(requestedURL);
+        //let isValid = true;
+        if(!isValid)
+        {
+            console.log("URL REJECTED!");
+            return;
+        }
 
         if(requestedURL == '/favicon.ico')
         {
@@ -118,10 +170,6 @@ async function handle(request, response)//incomingMessage,serverResponse
         // console.log(cookie);
 
         //if requested URL is / then direct to homepage
-        if(requestedURL == "/" )
-        {
-            requestedURL = "/index.html";
-        }
 
         //============= Write type =============//
         let type = findType(requestedURL);
@@ -135,7 +183,7 @@ async function handle(request, response)//incomingMessage,serverResponse
             //handle comment
 
             //parse the page we want
-            // ?submit-comment has 15 characters
+            // ?submit-comment has 15 characters, .html has 5
             let pageToCommentOn = requestedURL.substring(1,requestedURL.length-20);
 
             //Callback-style read body
@@ -424,7 +472,7 @@ async function handle(request, response)//incomingMessage,serverResponse
             }
             //============= END LOCATION PAGE DYNAMIC FILE DELIVERY =============//
 
-            //dynamically deliver main page so we can show logged in user
+            //dynamically deliver main page/all locations page so we can show logged in user
             else if(requestedURL == "/index.html" || requestedURL == "/all-locations.html")
             {
                 let pageName = requestedURL.substring(1,requestedURL.length-5);
@@ -621,7 +669,8 @@ function defineTypes()
 {
     let types = 
     {
-        html : "application/xhtml+xml",
+        html : "text/html",
+        // html : "application/xhtml+xml",
         css  : "text/css",
         js   : "application/javascript",
         mjs  : "application/javascript", // for ES6 modules

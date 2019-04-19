@@ -67,7 +67,7 @@ a:active
     align-items: center;
     /* height: 80px; */
     /* padding: 10px; */
-    height: 40px;
+    height: 50px;
     position: fixed;
     z-index: 10;
 }
@@ -485,12 +485,12 @@ recents-item h2
     /* padding-bottom: 20px;    */
 }
 
-#google-map
-{
-    width: 100%;
-    max-width: 1200px;
-    height: 700px;
-}
+    #google-map
+    {
+        width: 100%;
+        max-width: 1200px;
+        height: 700px;
+    }
 
 /* .map img
 {

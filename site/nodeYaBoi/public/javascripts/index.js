@@ -1,6 +1,6 @@
 "use strict";
 
-// var db = sql.Database("../../databases/data.db");
+let map;
 
 addEventListener('load', start);
 function start() 
@@ -10,6 +10,14 @@ function start()
     recentsScroll();
     mapScroll();
     openHamburger();
+    // google.maps.event.addDomListener(window, "load", initMap);
+
+
+    //   };
+
+    // google.maps.event.addDomListener(window, "load", initMap);
+    // initMap();
+    // google.setOnLoadCallback(initMap);
 
     var eventHandler = function(event)
     {
@@ -20,40 +28,42 @@ function start()
 }
 
 //============= Create map =============//
-var mapCentre = new google.maps.LatLng(35, 0);
 
-var mapOptions = 
+function initMap()
 {
-  zoom: 2,
-  center: mapCentre,
-  mapTypeId: 'hybrid',
-  disableDefaultUI: true,
-  zoomControl: true,
-  minZoom: 2,
-  maxZoom: 5,
-};
+    var mapCentre = new google.maps.LatLng(35, 0);
 
-var map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
+    var mapOptions = 
+    {
+    zoom: 2,
+    center: mapCentre,
+    mapTypeId: 'hybrid',
+    disableDefaultUI: true,
+    zoomControl: true,
+    minZoom: 2,
+    maxZoom: 5,
+    };
 
-// const sql = require("sqlite3").verbose();
-// Place markers
-// db = 
-// db.all("select * from mapPins", show);
-
-CreateMarker(new google.maps.LatLng(36, 140),"tokyo","Tokyo");
-CreateMarker(new google.maps.LatLng(22, 104),"tokyo","Sapa");
-CreateMarker(new google.maps.LatLng(25, 83),"tokyo","Varanasi");
-CreateMarker(new google.maps.LatLng(65, -18),"tokyo","Iceland");
-CreateMarker(new google.maps.LatLng(39, -9),"tokyo","Lisbon");
-CreateMarker(new google.maps.LatLng(-23, -43),"tokyo","Rio de Janeiro");
-CreateMarker(new google.maps.LatLng(37, -120),"tokyo","Yosemite");
-CreateMarker(new google.maps.LatLng(-13, -73),"tokyo","Machu Pichu");
+    map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
 
 
-CreateMarker(new google.maps.LatLng(7, 30),"","Boi's location");
+    // const sql = require("sqlite3").verbose();
+    // Place markers
+    // db = 
+    // db.all("select * from mapPins", show);
+
+    CreateMarker(new google.maps.LatLng(36, 140),"tokyo","Tokyo");
+    CreateMarker(new google.maps.LatLng(22, 104),"tokyo","Sapa");
+    CreateMarker(new google.maps.LatLng(25, 83),"tokyo","Varanasi");
+    CreateMarker(new google.maps.LatLng(65, -18),"tokyo","Iceland");
+    CreateMarker(new google.maps.LatLng(39, -9),"tokyo","Lisbon");
+    CreateMarker(new google.maps.LatLng(-23, -43),"tokyo","Rio de Janeiro");
+    CreateMarker(new google.maps.LatLng(37, -120),"tokyo","Yosemite");
+    CreateMarker(new google.maps.LatLng(-13, -73),"tokyo","Machu Pichu");
 
 
-
+    CreateMarker(new google.maps.LatLng(7, 30),"","Boi's location");
+}
 
 
 //============= Functions =============//
