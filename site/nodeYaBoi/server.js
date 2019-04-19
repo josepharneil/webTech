@@ -122,7 +122,12 @@ async function handle(request, response)//incomingMessage,serverResponse
         {
             requestedURL = "/index.html";
         }
-        
+
+        //============= Write type =============//
+        let type = findType(requestedURL);
+        //============= END Write type =============//
+
+
         //============= SUBMIT COMMENT =============//
         //If URL contains ?submit-comment then submit a comment
         if(await checkIfComment(requestedURL))
@@ -176,9 +181,7 @@ async function handle(request, response)//incomingMessage,serverResponse
 
 
                 //Redirect to the footer (the bottom of the page)
-                response.writeHead(302,  {Location: "/"+pageToCommentOn+".html#footer-container"});
-
-                
+                response.writeHead(302,  {Location: "/"+pageToCommentOn+".html#footer-container", "Content-Type": types['html'] });
                 response.write(renderedHTML);
                 response.end();
             });
@@ -233,6 +236,7 @@ async function handle(request, response)//incomingMessage,serverResponse
                     });
 
                     //redirect to login container
+                    response.writeHead(OK, {"Content-Type": types['html']})
                     response.write(renderedHTML);
                     response.end();
                 }
@@ -252,6 +256,7 @@ async function handle(request, response)//incomingMessage,serverResponse
                     });
 
                     //redirect to login container
+                    response.writeHead(OK, {"Content-Type": types['html']})
                     response.write(renderedHTML);
                     response.end();
                 }
@@ -296,6 +301,7 @@ async function handle(request, response)//incomingMessage,serverResponse
                     });
 
                     //redirect to login container
+                    response.writeHead(OK, {"Content-Type": types['html']})
                     response.write(renderedHTML);
                     response.end()
                 }
@@ -327,6 +333,7 @@ async function handle(request, response)//incomingMessage,serverResponse
                         });
 
                         //redirect to login container
+                        response.writeHead(OK, {"Content-Type": types['html']})
                         response.write(renderedHTML);
                         response.end()
                     }
@@ -411,6 +418,7 @@ async function handle(request, response)//incomingMessage,serverResponse
                 //     console.log(err || data)
                 // }); 
 
+                response.writeHead(OK, {"Content-Type": types['html']})
                 response.write(renderedHTML);
                 response.end();
             }
@@ -430,6 +438,7 @@ async function handle(request, response)//incomingMessage,serverResponse
                         console.log(err || data)
                     });
 
+                    response.writeHead(OK, {"Content-Type": types['html']})
                     response.write(renderedHTML);
                     response.end();
                 }
@@ -441,6 +450,7 @@ async function handle(request, response)//incomingMessage,serverResponse
                         console.log(err || data)
                     });
 
+                    response.writeHead(OK, {"Content-Type": types['html']})
                     response.write(renderedHTML);
                     response.end();
                 }
@@ -451,7 +461,7 @@ async function handle(request, response)//incomingMessage,serverResponse
                 //If logged in, redirect
                 if(cookieMap.has(currentSessionID))
                 {
-                    response.writeHead(302,  {Location: "/index.html"});
+                    response.writeHead(302, {Location: "/index.html","Content-Type": types['html']});
                     response.end();
                 }
                 else
