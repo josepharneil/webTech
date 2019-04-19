@@ -107,7 +107,7 @@ async function validate(URL)
         console.log("rejection 4");
         result = false;
     }
-    //reject if any non ascii characters, or non meaningful ascii characters
+    //reject if any non-ascii characters, or non meaningful ascii characters
     var asciiREX = /^[ -~]+$/;
     if(!asciiREX.test(URL))
     {
@@ -115,8 +115,6 @@ async function validate(URL)
         result = false; 
     }
 
-    //////MAKE SURE THAT THE STRING CONFORMS TO FOLLOWING REGEX//////
-    var myREX = /^\/?(images\/|javascripts\/|stylesheets\/)[a-zA-Z|.]*$/
     
     return result;
 }
