@@ -61,8 +61,12 @@ function initMap()
     CreateMarker(new google.maps.LatLng(37, -120),"tokyo","Yosemite");
     CreateMarker(new google.maps.LatLng(-13, -73),"tokyo","Machu Pichu");
 
-
-    CreateMarker(new google.maps.LatLng(7, 30),"","Boi's location",'./images/boihappy.svg');
+    var boiIcon = 
+    {
+        url: './images/boihappy.svg', 
+        scaledSize: new google.maps.Size(60, 60),
+    };
+    CreateMarker(new google.maps.LatLng(6, 40),"","Boi's location",boiIcon);
 }
 
 
