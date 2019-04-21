@@ -514,24 +514,24 @@ recents-item h2
     padding-bottom: 21px;
 }
 
-.footer
-{
-    width: 30%;
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
-}
+    .footer
+    {
+        width: 30%;
+        display: flex;
+        justify-content: center;
+        /* align-items: center; */
+    }
 
-.footer-item
-{
-    width: 50%;
-}
+        .footer-item
+        {
+            width: 50%;
+        }
 
-.footer-item img
-{
-    width: 12%;
-    /* height: 10%; */
-}
+            .footer-item img
+            {
+                width: 25%;
+                /* height: 10%; */
+            }
 
 
 .mobile-menu-container

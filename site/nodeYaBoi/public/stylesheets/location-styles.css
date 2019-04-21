@@ -711,11 +711,9 @@ a:active
 
 
 
-
 /* FOOTER */
 .footer-container
 {
-    /* padding-top: 40px; */
     background-color: rgb(170, 170,  170);
 
     display: flex;
@@ -727,16 +725,24 @@ a:active
     padding-bottom: 21px;
 }
 
-/* .footer
-{
+    .footer
+    {
+        width: 30%;
+        display: flex;
+        justify-content: center;
+        /* align-items: center; */
+    }
 
-} */
+        .footer-item
+        {
+            width: 50%;
+        }
 
-/* .footer-item
-{
-    
-} */
-
+            .footer-item img
+            {
+                width: 25%;
+                /* height: 10%; */
+            }
 
 
 .mobile-menu-container

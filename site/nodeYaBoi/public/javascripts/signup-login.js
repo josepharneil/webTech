@@ -6,8 +6,6 @@ addEventListener('load', start);
 function start() 
 {
     openHamburger();
-
-    window.addEventListener('resize', eventHandler, false);
 }
 
 
