@@ -52,14 +52,14 @@ function initMap()
     // db = 
     // db.all("select * from mapPins", show);
 
-    CreateMarker(new google.maps.LatLng(36, 140),"tokyo","Tokyo");
-    CreateMarker(new google.maps.LatLng(22, 104),"tokyo","Sapa");
-    CreateMarker(new google.maps.LatLng(25, 83),"tokyo","Varanasi");
-    CreateMarker(new google.maps.LatLng(65, -18),"tokyo","Iceland");
-    CreateMarker(new google.maps.LatLng(39, -9),"tokyo","Lisbon");
-    CreateMarker(new google.maps.LatLng(-23, -43),"tokyo","Rio de Janeiro");
-    CreateMarker(new google.maps.LatLng(37, -120),"tokyo","Yosemite");
-    CreateMarker(new google.maps.LatLng(-13, -73),"tokyo","Machu Pichu");
+    CreateMarker(new google.maps.LatLng(36, 140),"tokyo.html","Tokyo");
+    CreateMarker(new google.maps.LatLng(22, 104),"tokyo.html","Sapa");
+    CreateMarker(new google.maps.LatLng(25, 83),"tokyo.html","Varanasi");
+    CreateMarker(new google.maps.LatLng(65, -18),"tokyo.html","Iceland");
+    CreateMarker(new google.maps.LatLng(39, -9),"tokyo.html","Lisbon");
+    CreateMarker(new google.maps.LatLng(-23, -43),"tokyo.html","Rio de Janeiro");
+    CreateMarker(new google.maps.LatLng(37, -120),"tokyo.html","Yosemite");
+    CreateMarker(new google.maps.LatLng(-13, -73),"tokyo.html","Machu Pichu");
 
     var boiIcon = 
     {
