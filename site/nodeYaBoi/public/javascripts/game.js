@@ -109,7 +109,7 @@ function brickCollisionDetection()
 
                     if(playerScore == bRow*bCol) 
                     {
-                        alert("YOU WIN, CONGRATULATIONS!");
+                        alert("You win!");
                         document.location.reload();
                     }
                 }
@@ -155,7 +155,7 @@ function draw()
             playerLives--;
             if(playerLives == 0)
             {
-                alert("GAME OVER");
+                alert("You lose!");
                 document.location.reload();
             }
             else 
