@@ -470,7 +470,7 @@ async function handle(request, response)//incomingMessage,serverResponse
             //============= END LOCATION PAGE DYNAMIC FILE DELIVERY =============//
 
             //dynamically deliver main page/all locations page so we can show logged in user
-            else if(requestedURL == "/index.html" || requestedURL == "/all-locations.html")
+            else if(requestedURL == "/index.html" || requestedURL == "/all-locations.html" || requestedURL == "/game.html")
             {
                 let pageName = requestedURL.substring(1,requestedURL.length-5);
                 let htmlContent = await fs.readFile('./views/'+pageName+'.ejs', 'utf8');
