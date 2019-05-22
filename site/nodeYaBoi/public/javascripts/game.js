@@ -44,11 +44,22 @@ var playerScore = 0;
 var playerLives = 3;
 
 //Sound
-var bounceSound;
+var paddleBounceSound;
+var wallBounceSound;
+var brickBounceSound;
+var brickKillSound;
+var winSound;
+var loseSound;
 
 function start()
 {
-    bounceSound = new sound("./sounds/bounceSound.mp3");
+    paddleBounceSound = new sound("./sounds/bounceSound.mp3");
+    wallBounceSound = new sound("./sounds/wall-bounce.mp3");
+    brickBounceSound = new sound("./sounds/brick-bounce.mp3");
+    brickKillSound = new sound("./sounds/brick-kill.mp3");
+    winSound = new sound("./sounds/win-applause.mp3");
+    loseSound = new sound("./sounds/lose-crowd-booing.mp3");
+
 
     //Initialise all bricks
     for(var col = 0; col < bCol; col++)
@@ -60,7 +71,7 @@ function start()
             { 
                 brickPosX : 0, 
                 brickPosY : 0,
-                isAlive: 1
+                brickLives: 3
             };
         }
     }
@@ -103,17 +114,29 @@ function brickCollisionDetection()
         for(var row = 0; row < bRow; row++) 
         {
             var currentBrick = allBricks[col][row];
-            if(currentBrick.isAlive == 1) 
+            if(currentBrick.brickLives > 0) 
             {
                 if(x > currentBrick.brickPosX && x < currentBrick.brickPosX + brickW && y > currentBrick.brickPosY && y < currentBrick.brickPosY + brickH) 
                 {
                     deltaY = -deltaY;
-                    currentBrick.isAlive  = 0;
-                    playerScore++;
-
-                    if(playerScore == bRow*bCol) 
+                    currentBrick.brickLives--;//= 0;
+                    if(currentBrick.brickLives == 0)
                     {
+                        brickKillSound.play();
+                        playerScore++;
+                    }
+                    else
+                    {
+                        brickBounceSound.play();
+                    }
+                    // playerScore++;
+
+                    if(playerScore == (bRow*bCol - 6))
+                    {
+                        winSound.play();
+                        
                         alert("You win!");
+
                         document.location.reload();
                     }
                 }
@@ -141,10 +164,12 @@ function draw()
     if(x + deltaX > gameCanvas.width-ballRad || x + deltaX < ballRad) 
     {
         deltaX = -deltaX;
+        wallBounceSound.play();
     }
     if(y + deltaY < ballRad) 
     {
         deltaY = -deltaY;
+        wallBounceSound.play();
     }
     else if(y + deltaY > gameCanvas.height - ballRad) 
     {
@@ -152,13 +177,14 @@ function draw()
         if(x > paddleX && x < paddleX + paddleW) 
         {
             deltaY = -deltaY;
-            bounceSound.play();
+            paddleBounceSound.play();
         }
         else 
         {
             playerLives--;
             if(playerLives == 0)
             {
+                loseSound.play();
                 alert("You lose!");
                 document.location.reload();
             }
@@ -207,7 +233,7 @@ function drawPaddle()
     }
 
     context.rect(paddleX, gameCanvas.height-paddleH, paddleW, paddleH);
-    context.fillStyle = "#0095DD";
+    context.fillStyle = "black";
     context.fill();
     context.closePath();
 }
@@ -220,14 +246,14 @@ function drawBricks()
         {
             if(r == 3 && c !== 2)
             {
-                allBricks[c][r].isAlive = 0;
+                allBricks[c][r].brickLives = 0;
             }
             if((r == 2 && c == 0) || (r == 2 && c == 4))
             {
-                allBricks[c][r].isAlive = 0;
+                allBricks[c][r].brickLives = 0;
             }
 
-            if(allBricks[c][r].isAlive == 1)
+            if(allBricks[c][r].brickLives > 0)
             {
                 var brickX = (c * (brickW  + brickPad)) + brickOffsetL;
                 var brickY = (r * (brickH + brickPad)) + brickOffsetT;
@@ -237,7 +263,21 @@ function drawBricks()
 
                 context.beginPath();
                 context.rect(brickX, brickY, brickW, brickH);
-                context.fillStyle = "#0095DD";
+
+                //colours
+                if(allBricks[c][r].brickLives == 3)
+                {
+                    context.fillStyle = "#0033cc";
+                }
+                if(allBricks[c][r].brickLives == 2)
+                {
+                    context.fillStyle = "#668cff";
+                }
+                if(allBricks[c][r].brickLives == 1)
+                {
+                    context.fillStyle = "#b3c4ff";
+                }
+
                 context.fill();
                 context.closePath();
             }
