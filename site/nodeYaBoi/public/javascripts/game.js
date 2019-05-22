@@ -3,6 +3,8 @@ addEventListener('load', start);
 
 //Get html objects
 var gameCanvas = document.getElementById("game-canvas");
+gameCanvas.width = 480;
+gameCanvas.height = 320;
 var context = gameCanvas.getContext("2d");
 
 //Images
@@ -343,10 +345,17 @@ function sound(src)
     document.body.appendChild(this.sound);
     this.play = function()
     {
-      this.sound.play();
+        try
+        {
+            this.sound.play();
+        }
+        catch
+        {
+            
+        }
     }
-    this.stop = function()
-    {
-      this.sound.pause();
-    }
+    // this.stop = function()
+    // {
+    //   this.sound.pause();
+    // }
 }
