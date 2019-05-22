@@ -22,6 +22,9 @@ var ballRad = 14;
 var paddleH = 10;
 var paddleW = 75;
 var paddleX = (gameCanvas.width-paddleW) / 2;
+var paddleVelocity = 0;
+var keyAcceleration = 0.2;
+var passiveDeceleration = 0.2;
 
 //User input
 var isRightKeyDown = false;
@@ -225,12 +228,38 @@ function drawPaddle()
 
     if(isRightKeyDown && paddleX < gameCanvas.width - paddleW) 
     {
-        paddleX += 7;
+        paddleVelocity += keyAcceleration;
     }
     else if(isLeftKeyDown && paddleX > 0) 
     {
-        paddleX -= 7;
+        paddleVelocity -= keyAcceleration;
     }
+    else
+    {
+        if(paddleVelocity > -passiveDeceleration && paddleVelocity < passiveDeceleration)
+        {
+            paddleVelocity = 0;
+        }
+        else if(paddleVelocity > 0)
+        {
+            paddleVelocity -= passiveDeceleration;
+        }
+        else if(paddleVelocity < 0)
+        {
+            paddleVelocity += passiveDeceleration;
+        }
+    }
+
+    paddleX += paddleVelocity;
+    if(paddleX > gameCanvas.width - paddleW)
+    {
+        paddleX = gameCanvas.width - paddleW;
+    }
+    if(paddleX < 0)
+    {
+        paddleX = 0;
+    }
+
 
     context.rect(paddleX, gameCanvas.height-paddleH, paddleW, paddleH);
     context.fillStyle = "black";
