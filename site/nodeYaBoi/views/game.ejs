@@ -15,6 +15,94 @@ lang="en-GB" xml:lang="en-GB">
 <body>
     <div class='page'>
 
+        <!-- HEADER -->
+        <!-- MOBILE-HEADER -->
+        <div class='mobile-header-container'>
+            <div class ='mobile-header'>
+                <img src='images/wheresyaboi.svg'/>
+            </div>
+        </div>
+
+        <!-- TABLET/DESKTOP HEADER -->
+        <div class='header-container' id='header-container'>
+            <div class ='header'>
+                <!-- Logo image -->
+                <div class='header-image'>
+                    <a href='/'>
+                        <img src='images/wheresyaboi.svg'/>
+                    </a>
+                </div>
+                
+                <!-- Menu -->
+                <div class='menu-container'>
+                    <a href='/#about'>
+                        <div class='menu-item'>
+                            <h4>About</h4>
+                        </div>
+                    </a>
+                    <a href='/#recents'>
+                        <div class='menu-item'>
+                            <h4>Recents</h4>
+                        </div>
+                    </a>
+                    <a href='/all-locations.html'>
+                        <div class='menu-item'>
+                            <h4>All Locations</h4>
+                        </div>
+                    </a>
+                    <a href='/#map'>
+                        <div class='menu-item'>
+                            <h4>Map</h4>
+                        </div>
+                    </a>
+                    <a href='/signup-login.html'>
+                        <div class='menu-item'>
+                            <h4> <%= signuplogin %></h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Hamburger -->
+                <div class='hamburger-container'>
+                    <div class='hamburger'>
+                        <!-- Icon -->
+                        <div class='hamburger-icon-container'>
+                            <div class='hamburger-bar1'></div>
+                            <div class='hamburger-bar2'></div>
+                            <div class='hamburger-bar3'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENU -->
+        <!-- MOBILE MENU -->
+        <div class='mobile-menu-container' id='mobile-menu-container'>
+            <div class='mobile-menu'>
+                <a href='/#about'>
+                    <div class='mobile-menu-item'>
+                        <h4>About</h4>
+                    </div>
+                </a>
+                <a href='/#recents'>
+                    <div class='mobile-menu-item'>
+                        <h4>Recents</h4>
+                    </div>
+                </a>
+                <a href='/all-locations.html'>
+                    <div class='mobile-menu-item'>
+                        <h4>All Locations</h4>
+                    </div>
+                </a>
+                <a href='signup-login.html'>
+                    <div class='mobile-menu-item'>
+                        <h4> <%= signuplogin %></h4>
+                    </div>
+                </a>
+            </div>
+        </div>
+
         <div class='game-container'>
             <div class='game'>
                 <canvas id="game-canvas"></canvas>
@@ -22,7 +110,30 @@ lang="en-GB" xml:lang="en-GB">
         </div>
 
         
-  
+        <!-- FOOTER -->
+        <div class='footer-container'>
+            <div class='footer'>
+                <div class='footer-item'>
+                    <h2>Contact info</h2>
+                    <p>Email: email@email.com</p>
+                    <p>Phone: 12345678</p>
+                    <p>Fax: 12345678</p>
+                </div>
+                <div class='footer-item'>
+                    <h2>Social Media</h2>
+                    <a href=''>
+                        <img src='images/facebooklogo.svg'/>
+                    </a>
+                    <a href=''>
+                        <img src='images/twitterlogo.svg'/>
+                    </a>
+                    <a href=''>
+                        <img src='images/instalogo.svg'/>
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script src="javascripts/game.js"></script>

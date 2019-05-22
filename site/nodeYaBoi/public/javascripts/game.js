@@ -56,8 +56,33 @@ var brickKillSound;
 var winSound;
 var loseSound;
 
+function openHamburger()
+{
+    var ham = document.getElementsByClassName("hamburger-icon-container");
+
+    ham[0].addEventListener("click",
+    function()
+    {
+        this.classList.toggle("change");
+
+        //Find header
+        var mobileMenuContainer = document.getElementById("mobile-menu-container");
+
+        if(mobileMenuContainer.style.maxHeight != "800px")
+        {
+            mobileMenuContainer.style.maxHeight = "800px";
+        }
+        else
+        {
+            mobileMenuContainer.style.maxHeight = null;
+        }
+    });
+}
+
 function start()
 {
+    openHamburger();
+
     paddleBounceSound = new sound("./sounds/bounceSound.mp3");
     wallBounceSound = new sound("./sounds/wall-bounce.mp3");
     brickBounceSound = new sound("./sounds/brick-bounce.mp3");
