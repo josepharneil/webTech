@@ -66,7 +66,7 @@ function initMap()
         url: './images/boihappy.svg', 
         scaledSize: new google.maps.Size(60, 60),
     };
-    CreateMarker(new google.maps.LatLng(6, 40),"","Boi's location",boiIcon);
+    CreateMarker(new google.maps.LatLng(6, 40),"game.html","Boi's location",boiIcon);
 }
 
 
