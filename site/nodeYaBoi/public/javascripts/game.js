@@ -5,6 +5,10 @@ addEventListener('load', start);
 var gameCanvas = document.getElementById("game-canvas");
 var context = gameCanvas.getContext("2d");
 
+//Images
+var playerImage = document.createElement("img");
+playerImage.src = "./images/boisurprised.png";
+
 //Define canvas
 var x = gameCanvas.width/2;
 var y = gameCanvas.height-30;
@@ -12,7 +16,7 @@ var deltaX = 2;
 var deltaY = -2;
 
 //Define ball
-var ballRad = 10;
+var ballRad = 14;
 
 //Define paddle
 var paddleH = 10;
@@ -174,11 +178,19 @@ function draw()
 
 function drawBall()
 {
-    context.beginPath();
-    context.arc(x, y, ballRad, 0, Math.PI*2);
-    context.fillStyle = "#0095DD";
-    context.fill();
-    context.closePath();
+    // context.save();
+    // context.translate(x,y);
+    // context.rotate(45 * Math.PI/180);
+    context.drawImage(playerImage, x-ballRad-3, y-ballRad-3, 30, 30);
+    // context.translate(-200, -200);
+    // context.restore();
+
+
+    // context.beginPath();
+    // context.arc(x, y, ballRad, 0, Math.PI*2);
+    // context.fillStyle = "#0095DD";
+    // context.fill();
+    // context.closePath();
 }
 
 function drawPaddle()
