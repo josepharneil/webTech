@@ -258,7 +258,7 @@ a:active
 
     .footer
     {
-        width: 30%;
+        width: 80%;
         display: flex;
         justify-content: center;
         /* align-items: center; */
@@ -271,7 +271,7 @@ a:active
 
             .footer-item img
             {
-                width: 25%;
+                width: 10%;
                 /* height: 10%; */
             }
 

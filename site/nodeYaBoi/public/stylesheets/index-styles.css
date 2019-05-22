@@ -516,7 +516,7 @@ recents-item h2
 
     .footer
     {
-        width: 30%;
+        width: 80%;
         display: flex;
         justify-content: center;
         /* align-items: center; */
@@ -529,7 +529,7 @@ recents-item h2
 
             .footer-item img
             {
-                width: 25%;
+                width: 10%;
                 /* height: 10%; */
             }
 
