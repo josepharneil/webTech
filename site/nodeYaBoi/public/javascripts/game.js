@@ -252,14 +252,25 @@ function drawPaddle()
         }
     }
 
+    if(paddleVelocity > 6)
+    {
+        paddleVelocity  = 6;
+    }
+    if(paddleVelocity < -6)
+    {
+        paddleVelocity = -6;
+    }
+
     paddleX += paddleVelocity;
     if(paddleX > gameCanvas.width - paddleW)
     {
         paddleX = gameCanvas.width - paddleW;
+        paddleVelocity = 0;
     }
     if(paddleX < 0)
     {
         paddleX = 0;
+        paddleVelocity = 0;
     }
 
 
@@ -351,7 +362,7 @@ function sound(src)
         }
         catch
         {
-            
+
         }
     }
     // this.stop = function()
